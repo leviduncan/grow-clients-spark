@@ -55,7 +55,7 @@ const About = () => {
                 <img
                   src={teamCollaboration}
                   alt="Our Team"
-                  className="w-full rounded-lg shadow-2xl"
+                  className="w-full rounded-2xl shadow-2xl"
                 />
               </div>
               <div className="space-y-6">

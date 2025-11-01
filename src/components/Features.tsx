@@ -44,7 +44,7 @@ const Features = () => {
               <img
                 src={phoneMockupDashboard}
                 alt="Dashboard Analytics Mockup"
-                className="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl"
+                className="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl rounded-2xl"
               />
             </div>
           </div>
@@ -58,7 +58,7 @@ const Features = () => {
               <img
                 src={aiAutomation}
                 alt="AI Automation"
-                className="relative z-10 w-full rounded-lg shadow-2xl"
+                className="relative z-10 w-full rounded-2xl shadow-2xl"
               />
             </div>
             <div className="space-y-6 order-1 md:order-2">
@@ -111,7 +111,7 @@ const Features = () => {
               <img
                 src={phoneMockupSocial}
                 alt="Social Media Mockup"
-                className="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl"
+                className="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl rounded-2xl"
               />
             </div>
           </div>
