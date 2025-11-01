@@ -13,7 +13,7 @@ const CTA = () => {
             <span className="block mt-2">LET'S TALK</span>
           </h2>
           
-          <p className="font-inter text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed opacity-95">
+          <p className="font-inter text-[30px] mb-8 max-w-2xl mx-auto leading-relaxed opacity-95">
             Book a free 30-minute consultation. We'll analyze your business and 
             show you exactly how we can bring in more clients.
           </p>
