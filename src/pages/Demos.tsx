@@ -115,22 +115,24 @@ const Demos = () => {
       </section>
 
       {/* CTA Section */}
-      <ScrollAnimation>
-        <section className="py-20 md:py-32 bg-gradient-to-b from-background to-black">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="font-bebas text-4xl md:text-6xl lg:text-7xl text-white mb-8 tracking-wide">
-              READY TO BUILD AN AGENT FOR <span className="text-primary">YOUR BUSINESS?</span>
-            </h2>
-            <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10">
-              Let's create a custom AI voice agent tailored to your industry and business needs.
-            </p>
-            <Button variant="hero" size="lg" className="gap-3">
-              <Calendar className="w-5 h-5" />
-              BOOK YOUR STRATEGY CALL
-            </Button>
-          </div>
-        </section>
-      </ScrollAnimation>
+      <section className="py-20 bg-black text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollAnimation>
+            <div className="max-w-3xl mx-auto text-center space-y-8">
+              <h2 className="font-bebas text-4xl md:text-6xl lg:text-7xl text-white mb-8 tracking-wide">
+                READY TO BUILD AN AGENT FOR <span className="text-primary">YOUR BUSINESS?</span>
+              </h2>
+              <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10">
+                Let's create a custom AI voice agent tailored to your industry and business needs.
+              </p>
+              <Button variant="hero" size="lg" className="gap-3">
+                <Calendar className="w-5 h-5" />
+                BOOK YOUR STRATEGY CALL
+              </Button>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
 
       <Footer />
     </div>
