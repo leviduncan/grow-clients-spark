@@ -128,7 +128,7 @@ const Pricing = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-muted/60">
+      <section className="py-20 bg-muted/80">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation>
             <div className="max-w-3xl mx-auto">
