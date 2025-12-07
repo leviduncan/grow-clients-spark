@@ -64,7 +64,7 @@ const Pricing = () => {
   return (
     <div className="min-h-screen font-inter">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-black text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,37 +100,23 @@ const Pricing = () => {
                     </div>
                   )}
                   <CardHeader className="text-center pb-8">
-                    <CardTitle className="font-bebas text-3xl text-foreground mb-2">
-                      {plan.name}
-                    </CardTitle>
+                    <CardTitle className="font-bebas text-3xl text-foreground mb-2">{plan.name}</CardTitle>
                     <div className="mb-4">
-                      <span className="font-bebas text-5xl text-primary">
-                        {plan.price}
-                      </span>
-                      <span className="font-inter text-muted-foreground">
-                        {plan.period}
-                      </span>
+                      <span className="font-bebas text-5xl text-primary">{plan.price}</span>
+                      <span className="font-inter text-muted-foreground">{plan.period}</span>
                     </div>
-                    <p className="font-inter text-sm text-muted-foreground">
-                      {plan.description}
-                    </p>
+                    <p className="font-inter text-sm text-muted-foreground">{plan.description}</p>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <ul className="space-y-3">
                       {plan.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-3">
                           <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="font-inter text-sm text-muted-foreground">
-                            {feature}
-                          </span>
+                          <span className="font-inter text-sm text-muted-foreground">{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    <Button
-                      variant={plan.popular ? "hero" : "outline"}
-                      className="w-full font-bebas"
-                      size="lg"
-                    >
+                    <Button variant={plan.popular ? "hero" : "outline"} className="w-full font-bebas" size="lg">
                       {plan.price === "Custom" ? "Contact Us" : "Get Started"}
                     </Button>
                   </CardContent>
@@ -142,13 +128,11 @@ const Pricing = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-muted/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation>
             <div className="max-w-3xl mx-auto">
-              <h2 className="font-bebas text-5xl text-center text-foreground mb-12">
-                FREQUENTLY ASKED QUESTIONS
-              </h2>
+              <h2 className="font-bebas text-5xl text-center text-foreground mb-12">FREQUENTLY ASKED QUESTIONS</h2>
               <div className="space-y-6">
                 {[
                   {
@@ -170,12 +154,8 @@ const Pricing = () => {
                 ].map((faq, index) => (
                   <Card key={index} className="border-border/50">
                     <CardContent className="p-6">
-                      <h3 className="font-bebas text-xl text-foreground mb-2">
-                        {faq.q}
-                      </h3>
-                      <p className="font-inter text-muted-foreground">
-                        {faq.a}
-                      </p>
+                      <h3 className="font-bebas text-xl text-foreground mb-2">{faq.q}</h3>
+                      <p className="font-inter text-muted-foreground">{faq.a}</p>
                     </CardContent>
                   </Card>
                 ))}
