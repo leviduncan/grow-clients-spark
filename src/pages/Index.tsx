@@ -8,19 +8,36 @@ import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import ScrollAnimation from "@/components/ScrollAnimation";
 
 const Index = () => {
   return (
     <div className="min-h-screen font-inter">
       <Header />
-      <Hero />
-      <Stats />
-      <Problem />
-      <Solution />
-      <Features />
-      <Services />
-      <Testimonials />
-      <CTA />
+      <ScrollAnimation>
+        <Hero />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Stats />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Problem />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Solution />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Features />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Services />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Testimonials />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <CTA />
+      </ScrollAnimation>
       <Footer />
     </div>
   );
