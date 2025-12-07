@@ -19,7 +19,7 @@ interface DemoCardProps {
 const DemoCard = ({ name, industry, description, cta, image, imageOnRight }: DemoCardProps) => {
   return (
     <div
-      className={`flex flex-col ${imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-8 lg:gap-16`}
+      className={`flex flex-col ${imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-8 lg:gap-16 py-20 bg-muted/80`}
     >
       {/* Content */}
       <div className="flex-1 text-center lg:text-left">
