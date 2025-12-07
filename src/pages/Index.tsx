@@ -5,6 +5,7 @@ import Problem from "@/components/Problem";
 import Solution from "@/components/Solution";
 import Features from "@/components/Features";
 import Services from "@/components/Services";
+import Video from "@/components/Video";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -31,6 +32,9 @@ const Index = () => {
       </ScrollAnimation>
       <ScrollAnimation>
         <Services />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Video />
       </ScrollAnimation>
       <ScrollAnimation>
         <Testimonials />
