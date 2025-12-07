@@ -19,15 +19,15 @@ interface DemoCardProps {
 const DemoCard = ({ name, industry, description, cta, image, imageOnRight }: DemoCardProps) => {
   return (
     <div
-      className={`flex flex-col ${imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-8 lg:gap-16 py-20 bg-muted/80`}
+      className={`flex flex-col ${imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-8 lg:gap-16 p-8 md:p-12 lg:p-16 bg-muted/80 rounded-2xl`}
     >
       {/* Content */}
       <div className="flex-1 text-center lg:text-left">
         <span className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
           {industry}
         </span>
-        <h3 className="font-bebas text-4xl md:text-5xl text-white mb-4">{name}</h3>
-        <p className="text-white/70 text-lg leading-relaxed mb-6">{description}</p>
+        <h3 className="font-bebas text-4xl md:text-5xl text-foreground mb-4">{name}</h3>
+        <p className="text-muted-foreground text-lg leading-relaxed mb-6">{description}</p>
         <p className="text-primary font-bebas text-xl tracking-wide mb-6">{cta}</p>
         <Button variant="hero" size="lg">
           START TODAY!
