@@ -8,7 +8,7 @@ const About = () => {
   const values = [
     {
       title: "Client-First",
-      description: "Your success is our success. We're only happy when you're getting results.",
+      description: "Your success is our success. We're only happy when you're getting expected results.",
     },
     {
       title: "Innovation",
