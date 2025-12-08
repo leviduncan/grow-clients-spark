@@ -28,7 +28,7 @@ const Hero = () => {
             
             <div className="space-y-3">
               {[
-                "AI-powered campaigns that run 24/7",
+                "AI-powered campaigns that run 24/7/365",
                 "Lead generation tailored to your business",
                 "Results in 30 days, guaranteed"
               ].map((feature, idx) => (
