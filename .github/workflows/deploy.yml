@@ -31,8 +31,8 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
-          source: dist
-          target: "/srv/growclientsai/vite-dist"
+          source: "dist/*"
+          target: "/srv/growclientsai"
 
       - name: Reload Caddy
         uses: appleboy/ssh-action@v0.1.10
