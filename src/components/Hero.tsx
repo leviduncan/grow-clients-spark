@@ -66,7 +66,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 variant="default"
-                className="group text-lg px-8"
+                className="group"
               >
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -74,7 +74,6 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="text-lg px-8"
               >
                 See If You're Eligible
               </Button>
@@ -112,12 +111,15 @@ const Hero = () => {
                 
                 {/* Play Demo Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-transparent to-transparent">
-                  <button className="group flex items-center gap-3 bg-purple hover:bg-purple/90 text-purple-foreground px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg glow-purple-sm">
-                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                      <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
+                  <Button 
+                    size="default"
+                    className="bg-purple hover:bg-purple/90 text-purple-foreground gap-3 glow-purple-sm hover:scale-105"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                      <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
                     </div>
-                    <span className="font-bebas text-lg tracking-wide">PLAY DEMO</span>
-                  </button>
+                    PLAY DEMO
+                  </Button>
                 </div>
               </div>
 

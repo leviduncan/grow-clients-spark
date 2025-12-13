@@ -131,7 +131,7 @@ const Pricing = () => {
                           </li>
                         ))}
                       </ul>
-                      <Button variant={plan.popular ? "hero" : "outline"} className="w-full font-bebas" size="lg">
+                      <Button variant={plan.popular ? "hero" : "outline"} className="w-full" size="lg">
                         {plan.price === "Custom" ? "Contact Us" : "Get Started"}
                       </Button>
                     </CardContent>
