@@ -59,8 +59,11 @@ const ServicesPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-hero">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 gradient-purple-green relative overflow-hidden">
+        <div className="absolute top-20 left-10 w-80 h-80 bg-purple/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollAnimation>
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <h1 className="font-bebas text-5xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
@@ -68,7 +71,7 @@ const ServicesPage = () => {
                 <span className="block text-primary">GROW FASTER</span>
               </h1>
               <p className="font-inter text-xl text-muted-foreground max-w-2xl mx-auto">
-                Through AI automation that captures leads, books appointments, and closes deals while you sleep.
+                Through <span className="text-purple font-medium">AI automation</span> that captures leads, books appointments, and closes deals while you sleep.
               </p>
             </div>
           </ScrollAnimation>
@@ -95,9 +98,9 @@ const ServicesPage = () => {
                 <div className={`grid lg:grid-cols-2 gap-12 items-center ${!solution.imageOnRight ? 'lg:flex-row-reverse' : ''}`}>
                   {/* Content */}
                   <div className={`space-y-6 ${!solution.imageOnRight ? 'lg:order-2' : ''}`}>
-                    <div className="inline-flex items-center gap-3 bg-primary/10 px-4 py-2 rounded-full">
-                      <solution.icon className="w-5 h-5 text-primary" />
-                      <span className="font-inter text-sm font-medium text-primary">Solution {idx + 1}</span>
+                    <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full ${idx === 0 ? 'bg-purple/10' : 'bg-primary/10'}`}>
+                      <solution.icon className={`w-5 h-5 ${idx === 0 ? 'text-purple' : 'text-primary'}`} />
+                      <span className={`font-inter text-sm font-medium ${idx === 0 ? 'text-purple' : 'text-primary'}`}>Solution {idx + 1}</span>
                     </div>
                     
                     <h3 className="font-bebas text-4xl md:text-5xl text-foreground">
@@ -125,11 +128,11 @@ const ServicesPage = () => {
                   
                   {/* Image */}
                   <div className={`relative ${!solution.imageOnRight ? 'lg:order-1' : ''}`}>
-                    <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full" />
+                    <div className={`absolute inset-0 blur-3xl rounded-full ${idx === 0 ? 'bg-purple/15' : 'bg-primary/10'}`} />
                     <img
                       src={solution.image}
                       alt={solution.title}
-                      className="relative z-10 w-full rounded-2xl shadow-2xl border border-border/50"
+                      className={`relative z-10 w-full rounded-2xl shadow-2xl border ${idx === 0 ? 'border-purple/30' : 'border-border/50'}`}
                     />
                   </div>
                 </div>
