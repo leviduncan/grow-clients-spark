@@ -11,7 +11,7 @@ import ScrollAnimation from "@/components/ScrollAnimation";
 
 const Index = () => {
   return (
-    <div className="min-h-screen font-inter bg-purple">
+    <div className="min-h-screen font-inter bg-background">
       <Header />
       <Hero />
       <ScrollAnimation>
