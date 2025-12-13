@@ -78,7 +78,7 @@ const Pricing = () => {
                 SIMPLE
                 <span className="block text-primary">TRANSPARENT PRICING</span>
               </h1>
-              <p className="font-inter text-xl text-white/70 max-w-2xl mx-auto">
+              <p className="font-inter text-xl max-w-2xl mx-auto">
                 No hidden fees. No long-term contracts. Cancel anytime.
               </p>
             </div>
