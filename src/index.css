@@ -2,30 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Ultra-Modern SaaS Design System - GrowClientsAI Green Theme */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --foreground: 220 20% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 220 20% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 220 20% 10%;
 
+    /* GrowClientsAI Signature Green */
     --primary: 120 58% 50%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 120 58% 65%;
+    --primary-dark: 120 58% 40%;
 
-    --secondary: 0 0% 98%;
-    --secondary-foreground: 0 0% 0%;
+    /* Navy accent for dark sections */
+    --navy: 220 60% 12%;
+    --navy-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 40%;
+    --secondary: 120 20% 96%;
+    --secondary-foreground: 220 20% 10%;
+
+    --muted: 120 10% 96%;
+    --muted-foreground: 220 10% 45%;
 
     --accent: 120 58% 50%;
     --accent-foreground: 0 0% 100%;
@@ -33,51 +37,48 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
+    --border: 220 10% 90%;
+    --input: 220 10% 90%;
     --ring: 120 58% 50%;
 
-    --dark-bg: 0 0% 5%;
-    --dark-section: 0 0% 8%;
+    --dark-bg: 220 60% 8%;
+    --dark-section: 220 60% 12%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 120 58% 50%;
   }
 
   .dark {
-    --background: 0 0% 5%;
+    --background: 220 60% 8%;
     --foreground: 0 0% 100%;
 
-    --card: 0 0% 8%;
+    --card: 220 60% 12%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 8%;
+    --popover: 220 60% 12%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 120 58% 50%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 120 58% 65%;
+    --primary-dark: 120 58% 40%;
 
-    --secondary: 0 0% 12%;
+    --navy: 220 60% 12%;
+    --navy-foreground: 0 0% 100%;
+
+    --secondary: 220 50% 15%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 220 40% 18%;
+    --muted-foreground: 220 10% 65%;
 
     --accent: 120 58% 50%;
     --accent-foreground: 0 0% 100%;
@@ -85,17 +86,18 @@ All colors MUST be HSL.
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 220 40% 20%;
+    --input: 220 40% 20%;
     --ring: 120 58% 50%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 120 58% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 120 58% 50%;
   }
 }
 
@@ -105,10 +107,132 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-inter antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bebas;
+    @apply font-bebas tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* Gradient utilities */
+  .gradient-hero {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(120 30% 97%) 100%);
+  }
+
+  .gradient-green {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+  }
+
+  .gradient-navy {
+    background: linear-gradient(180deg, hsl(var(--navy)) 0%, hsl(220 60% 6%) 100%);
+  }
+
+  /* Green glow effect */
+  .glow-green {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.4), 0 0 80px hsl(var(--primary) / 0.2);
+  }
+
+  .glow-green-sm {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  /* Text gradient */
+  .text-gradient-green {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Floating animation for nodes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  /* Pulse glow animation */
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Line draw animation */
+  .animate-line-draw {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: line-draw 2s ease-out forwards;
+  }
+
+  /* Rotate text animation */
+  .animate-text-rotate {
+    animation: text-rotate 8s ease-in-out infinite;
+  }
+
+  /* Strikethrough animation */
+  .animate-strikethrough::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--primary));
+    transition: width 0.5s ease;
+  }
+
+  .animate-strikethrough:hover::after {
+    width: 100%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4), 0 0 40px hsl(var(--primary) / 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6), 0 0 80px hsl(var(--primary) / 0.3);
+  }
+}
+
+@keyframes line-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes text-rotate {
+  0%, 20% {
+    content: "Automate";
+  }
+  25%, 45% {
+    content: "Grow";
+  }
+  50%, 70% {
+    content: "Scale";
+  }
+  75%, 95% {
+    content: "Transform";
+  }
+  100% {
+    content: "Automate";
   }
 }

@@ -9,20 +9,20 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 font-inter font-medium text-sm",
+        default: "bg-primary text-primary-foreground hover:bg-primary-dark hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/30 font-inter font-medium text-sm transition-all duration-300",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 font-inter font-medium text-sm",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground font-inter font-medium text-sm",
+        outline: "border-2 border-border bg-transparent text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary font-inter font-medium text-sm transition-all duration-300",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 font-inter font-medium text-sm",
         ghost: "hover:bg-accent hover:text-accent-foreground font-inter font-medium text-sm",
         link: "text-primary underline-offset-4 hover:underline font-inter font-medium text-sm",
-        hero: "bg-primary text-white font-bebas text-2xl tracking-wide hover:bg-primary-glow hover:scale-105 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300",
-        heroOutline: "border-2 border-white text-white font-bebas text-2xl tracking-wide hover:bg-white hover:text-foreground hover:scale-105 transition-all duration-300",
-        ctaWhite: "bg-white text-primary font-bebas text-2xl tracking-wide hover:bg-white/90 hover:scale-105 hover:shadow-xl transition-all duration-300",
+        hero: "bg-primary text-primary-foreground font-inter font-semibold hover:bg-primary-dark hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/40 transition-all duration-300",
+        heroOutline: "border-2 border-foreground text-foreground bg-transparent font-inter font-semibold hover:bg-foreground hover:text-background hover:scale-[1.02] transition-all duration-300",
+        ctaWhite: "bg-background text-primary font-inter font-semibold hover:bg-background/90 hover:scale-[1.02] hover:shadow-xl transition-all duration-300",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 px-3",
-        lg: "h-14 px-12 py-4",
+        default: "h-11 px-6 py-2",
+        sm: "h-9 px-4",
+        lg: "h-14 px-10 py-4",
         icon: "h-10 w-10",
       },
     },
