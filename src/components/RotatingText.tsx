@@ -35,8 +35,8 @@ const RotatingText = () => {
           {/* Rotating headline */}
           <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-tight">
             The Smartest Way to{" "}
-            <span className="relative inline-block min-w-[200px] sm:min-w-[280px]">
-              <span 
+            <span className="flex items-center gap-4 bg-primary/10 px-6 py-4 rounded-xl">
+              <span
                 className={`text-primary transition-all duration-300 ${
                   isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
                 }`}
@@ -50,8 +50,8 @@ const RotatingText = () => {
 
           {/* Description */}
           <p className="font-inter text-lg sm:text-xl text-muted-foreground mt-8 max-w-2xl mx-auto leading-relaxed">
-            Our AI voice agents handle calls, book appointments, qualify leads, and support customers — 
-            all while you focus on what matters most.
+            Our AI voice agents handle calls, book appointments, qualify leads, and support customers — all while you
+            focus on what matters most.
           </p>
         </div>
       </div>
