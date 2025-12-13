@@ -18,31 +18,33 @@ interface DemoCardProps {
 
 const DemoCard = ({ name, industry, description, cta, image, imageOnRight }: DemoCardProps) => {
   return (
-    <div
-      className={`flex flex-col ${imageOnRight ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-8 lg:gap-16 p-8 md:p-12 lg:p-16 bg-muted/80 rounded-2xl`}
-    >
+    <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center`}>
       {/* Content */}
-      <div className="flex-1 text-center lg:text-left">
-        <span className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
+      <div className={`space-y-6 ${!imageOnRight ? 'lg:order-2' : ''}`}>
+        <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
           {industry}
         </span>
-        <h3 className="font-bebas text-4xl md:text-5xl text-foreground mb-4">{name}</h3>
-        <p className="text-muted-foreground text-lg leading-relaxed mb-6">{description}</p>
-        <p className="text-primary font-bebas text-xl tracking-wide mb-6">{cta}</p>
-        <Button variant="hero" size="lg">
+        <h3 className="font-bebas text-5xl md:text-6xl text-foreground">{name}</h3>
+        <p className="font-inter text-lg text-muted-foreground leading-relaxed">{description}</p>
+        <p className="font-bebas text-xl text-primary tracking-wide">{cta}</p>
+        <Button variant="default" size="lg" className="group">
           START TODAY!
         </Button>
       </div>
 
       {/* Image with Play Button */}
-      <div className="flex-1 w-full max-w-md">
-        <div className="relative aspect-square rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20">
-          <img src={image} alt={name} className="w-full h-full object-cover" />
+      <div className={`relative ${!imageOnRight ? 'lg:order-1' : ''}`}>
+        <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full" />
+        <div className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl">
+          <img src={image} alt={name} className="w-full h-auto object-cover" />
           {/* Play Button Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-colors cursor-pointer group">
-            <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-primary/50">
-              <Play className="w-8 h-8 text-white ml-1" fill="white" />
-            </div>
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/30 via-transparent to-transparent">
+            <button className="group flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
+              </div>
+              <span className="font-bebas text-lg tracking-wide">PLAY DEMO</span>
+            </button>
           </div>
         </div>
       </div>
@@ -86,15 +88,15 @@ const Demos = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-black text-white">
+      <section className="pt-32 pb-20 gradient-hero">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation>
             <div className="max-w-4xl mx-auto text-center space-y-6">
-              <h1 className="font-bebas text-6xl md:text-8xl leading-none">
+              <h1 className="font-bebas text-5xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
                 HEAR OUR AI VOICE AGENTS
                 <span className="block text-primary">IN ACTION</span>
               </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto">
+              <p className="font-inter text-xl text-muted-foreground max-w-3xl mx-auto">
                 Experience the future of customer service. Listen to our AI agents handle real conversations with
                 natural, human-like responses.
               </p>
@@ -104,9 +106,9 @@ const Demos = () => {
       </section>
 
       {/* Demo Cards */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 space-y-24 md:space-y-32">
-          {demos.map((demo, index) => (
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
+          {demos.map((demo) => (
             <ScrollAnimation key={demo.name}>
               <DemoCard {...demo} />
             </ScrollAnimation>
@@ -115,14 +117,14 @@ const Demos = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-black text-white">
+      <section className="py-20 bg-navy text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation>
             <div className="max-w-3xl mx-auto text-center space-y-8">
-              <h2 className="font-bebas text-4xl md:text-6xl lg:text-7xl text-white mb-8 tracking-wide">
+              <h2 className="font-bebas text-4xl md:text-6xl lg:text-7xl">
                 READY TO BUILD AN AGENT FOR <span className="text-primary">YOUR BUSINESS?</span>
               </h2>
-              <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10">
+              <p className="font-inter text-xl text-white/70 max-w-2xl mx-auto">
                 Let's create a custom AI voice agent tailored to your industry and business needs.
               </p>
               <Button variant="hero" size="lg" className="gap-3">
