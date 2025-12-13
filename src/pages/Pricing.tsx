@@ -66,11 +66,11 @@ const Pricing = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-dark-purple-green text-white relative overflow-hidden">
+      <section className="pt-32 pb-20 gradient-purple-green relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollAnimation>
             <div className="max-w-4xl mx-auto text-center space-y-6">
@@ -92,12 +92,12 @@ const Pricing = () => {
           <ScrollAnimation>
             <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {plans.map((plan, index) => {
-                const isAIFeature = (feature: string) => 
-                  feature.toLowerCase().includes('automation') || 
-                  feature.toLowerCase().includes('api') || 
-                  feature.toLowerCase().includes('24/7') ||
-                  feature.toLowerCase().includes('priority');
-                
+                const isAIFeature = (feature: string) =>
+                  feature.toLowerCase().includes("automation") ||
+                  feature.toLowerCase().includes("api") ||
+                  feature.toLowerCase().includes("24/7") ||
+                  feature.toLowerCase().includes("priority");
+
                 return (
                   <Card
                     key={index}
@@ -113,7 +113,7 @@ const Pricing = () => {
                     <CardHeader className="text-center pb-8">
                       <CardTitle className="font-bebas text-3xl text-foreground mb-2">{plan.name}</CardTitle>
                       <div className="mb-4">
-                        <span className={`font-bebas text-5xl ${plan.popular ? 'text-gradient-gold' : 'text-primary'}`}>
+                        <span className={`font-bebas text-5xl ${plan.popular ? "text-gradient-gold" : "text-primary"}`}>
                           {plan.price}
                         </span>
                         <span className="font-inter text-muted-foreground">{plan.period}</span>
@@ -124,7 +124,9 @@ const Pricing = () => {
                       <ul className="space-y-3">
                         {plan.features.map((feature, idx) => (
                           <li key={idx} className="flex items-start gap-3">
-                            <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isAIFeature(feature) ? 'text-purple' : 'text-primary'}`} />
+                            <Check
+                              className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isAIFeature(feature) ? "text-purple" : "text-primary"}`}
+                            />
                             <span className="font-inter text-sm text-muted-foreground">{feature}</span>
                           </li>
                         ))}
@@ -145,7 +147,7 @@ const Pricing = () => {
       <section className="py-20 bg-muted/80 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-purple/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollAnimation>
             <div className="max-w-3xl mx-auto">
