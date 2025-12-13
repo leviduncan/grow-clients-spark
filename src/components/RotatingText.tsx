@@ -37,7 +37,7 @@ const RotatingText = () => {
             The Smartest Way to{" "}
             <span className="relative inline-flex items-center justify-center bg-primary/10 px-4 py-2 rounded-xl overflow-hidden align-middle">
               <span
-                className={`inline-block text-primary transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                className={`inline-block text-primary transition-all duration-500 ease-in-out ${
                   isAnimating ? "opacity-0 -translate-y-6 scale-95" : "opacity-100 translate-y-0 scale-100"
                 }`}
               >
