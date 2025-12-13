@@ -1,8 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Star } from "lucide-react";
-import ConnectedDiagram from "./ConnectedDiagram";
+import { ArrowRight, Check, Star, Play, Calendar, Phone, Users, DollarSign, Headphones } from "lucide-react";
+import demoMax from "@/assets/demo-max.png";
 
 const Hero = () => {
+  const floatingBadges = [
+    { icon: Calendar, label: "Appointments", position: "top-0 left-0 -translate-x-4" },
+    { icon: Users, label: "Leads", position: "top-0 right-0 translate-x-4" },
+    { icon: DollarSign, label: "Sales", position: "bottom-16 left-0 -translate-x-8" },
+    { icon: Headphones, label: "Support", position: "bottom-16 right-0 translate-x-8" },
+  ];
+
   return (
     <section className="relative min-h-screen flex items-center justify-center gradient-hero overflow-hidden pt-20 pb-12">
       {/* Subtle background pattern */}
@@ -74,9 +81,52 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right - Connected Diagram */}
-          <div className="hidden lg:block animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <ConnectedDiagram />
+          {/* Right - Max AI Agent Image */}
+          <div className="relative animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            {/* Floating Badges */}
+            {floatingBadges.map((badge, idx) => (
+              <div
+                key={badge.label}
+                className={`absolute ${badge.position} z-20 hidden lg:flex items-center gap-2 bg-card px-4 py-2 rounded-full border border-border shadow-lg animate-float`}
+                style={{ animationDelay: `${idx * 0.2}s` }}
+              >
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <badge.icon className="w-4 h-4 text-primary" />
+                </div>
+                <span className="font-inter text-sm font-medium text-foreground">{badge.label}</span>
+              </div>
+            ))}
+
+            {/* Max Image Container */}
+            <div className="relative max-w-lg mx-auto">
+              {/* Green Glow Effect */}
+              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-90" />
+              
+              {/* Image */}
+              <div className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl glow-green">
+                <img
+                  src={demoMax}
+                  alt="Max - AI Voice Agent for HVAC & Trades"
+                  className="w-full h-auto object-cover"
+                />
+                
+                {/* Play Demo Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-transparent to-transparent">
+                  <button className="group flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
+                    </div>
+                    <span className="font-bebas text-lg tracking-wide">PLAY DEMO</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Agent Name Badge */}
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-card px-6 py-2 rounded-full border border-border shadow-lg">
+                <span className="font-bebas text-xl text-primary">MEET MAX</span>
+                <span className="font-inter text-sm text-muted-foreground ml-2">HVAC & Trades</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
