@@ -1,11 +1,9 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-import Problem from "@/components/Problem";
-import Solution from "@/components/Solution";
+import ClientLogos from "@/components/ClientLogos";
+import RotatingText from "@/components/RotatingText";
+import PainPoints from "@/components/PainPoints";
 import Features from "@/components/Features";
-import Services from "@/components/Services";
-import Video from "@/components/Video";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -13,28 +11,20 @@ import ScrollAnimation from "@/components/ScrollAnimation";
 
 const Index = () => {
   return (
-    <div className="min-h-screen font-inter">
+    <div className="min-h-screen font-inter bg-background">
       <Header />
+      <Hero />
       <ScrollAnimation>
-        <Hero />
+        <ClientLogos />
       </ScrollAnimation>
       <ScrollAnimation>
-        <Stats />
+        <RotatingText />
       </ScrollAnimation>
       <ScrollAnimation>
-        <Problem />
-      </ScrollAnimation>
-      <ScrollAnimation>
-        <Solution />
+        <PainPoints />
       </ScrollAnimation>
       <ScrollAnimation>
         <Features />
-      </ScrollAnimation>
-      <ScrollAnimation>
-        <Services />
-      </ScrollAnimation>
-      <ScrollAnimation>
-        <Video />
       </ScrollAnimation>
       <ScrollAnimation>
         <Testimonials />

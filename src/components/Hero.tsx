@@ -1,31 +1,44 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import heroPortrait1 from "@/assets/hero-portrait-1.png";
-import heroPortrait2 from "@/assets/hero-portrait-2.png";
-import heroProduct from "@/assets/hero-product.png";
+import { ArrowRight, Check, Star } from "lucide-react";
+import ConnectedDiagram from "./ConnectedDiagram";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden py-20">
+    <section className="relative min-h-screen flex items-center justify-center gradient-hero overflow-hidden pt-20 pb-12">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.05)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.08)_0%,transparent_50%)]" />
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-6 h-6 rounded-full bg-primary/30 border-2 border-black" />
+            {/* Rating Badge */}
+            <div className="inline-flex items-center gap-3 bg-card px-5 py-2.5 rounded-full border border-border shadow-sm">
+              <div className="flex gap-0.5">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
                 ))}
               </div>
-              <span className="text-sm font-inter text-gray-300">5.0 Rating • 85+ Reviews</span>
+              <span className="text-sm font-inter text-muted-foreground">5.0 Rating • 85+ Reviews</span>
             </div>
 
-            <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none tracking-tight">
-              GET MORE CLIENTS
-              <span className="block text-primary mt-2">WITHOUT THE HASSLE</span>
-            </h1>
+            {/* Main Headline */}
+            <div>
+              <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
+                AI VOICE AGENTS
+              </h1>
+              <p className="font-inter text-xl sm:text-2xl md:text-3xl text-muted-foreground mt-3 italic">
+                That Handle Your Business 24/7
+              </p>
+            </div>
+
+            {/* Description */}
+            <p className="font-inter text-lg text-muted-foreground max-w-lg leading-relaxed">
+              Automate appointments, leads, sales & support with intelligent AI that never sleeps. Get more clients without the hassle.
+            </p>
             
+            {/* Feature List */}
             <div className="space-y-3">
               {[
                 "AI-powered campaigns that run 24/7/365",
@@ -33,77 +46,37 @@ const Hero = () => {
                 "Results in 30 days, guaranteed"
               ].map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-primary" />
                   </div>
-                  <span className="font-inter text-base sm:text-lg text-gray-300">{feature}</span>
+                  <span className="font-inter text-base text-foreground/80">{feature}</span>
                 </div>
               ))}
             </div>
             
+            {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button 
                 size="lg" 
-                variant="hero"
-                className="group"
+                variant="default"
+                className="group text-lg px-8"
               >
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button 
                 size="lg" 
-                variant="heroOutline"
+                variant="outline"
+                className="text-lg px-8"
               >
                 See If You're Eligible
               </Button>
             </div>
           </div>
 
-          {/* Right Image Grid */}
-          <div className="relative hidden lg:block animate-fade-in">
-            <div className="grid grid-cols-2 gap-4">
-              {/* Product Image */}
-              <div className="col-span-1">
-                <img
-                  src={heroProduct}
-                  alt="Marketing Dashboard"
-                  className="w-full h-64 object-cover rounded-2xl shadow-2xl"
-                />
-              </div>
-              
-              {/* Portrait 1 */}
-              <div className="col-span-1 row-span-2">
-                <img
-                  src={heroPortrait1}
-                  alt="Happy Business Owner"
-                  className="w-full h-full object-cover rounded-2xl shadow-2xl"
-                />
-              </div>
-              
-              {/* Portrait 2 */}
-              <div className="col-span-1">
-                <img
-                  src={heroPortrait2}
-                  alt="Successful Entrepreneur"
-                  className="w-full h-48 object-cover rounded-2xl shadow-2xl"
-                />
-              </div>
-              
-              {/* Stats Card */}
-              <div className="col-span-1">
-                <Card className="h-full bg-white border-0">
-                  <CardContent className="p-6 flex flex-col justify-center h-full">
-                    <div className="flex -space-x-3 mb-3">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-glow border-2 border-white" />
-                      ))}
-                    </div>
-                    <div className="font-bebas text-4xl text-foreground">500+</div>
-                    <div className="font-inter text-sm text-muted-foreground">Satisfied Clients</div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+          {/* Right - Connected Diagram */}
+          <div className="hidden lg:block animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <ConnectedDiagram />
           </div>
         </div>
       </div>
