@@ -25,7 +25,7 @@ const CTA = () => {
             <Button 
               size="lg" 
               variant="default"
-              className="group text-lg px-10 py-6 h-auto"
+              className="group"
             >
               Book a Demo
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
