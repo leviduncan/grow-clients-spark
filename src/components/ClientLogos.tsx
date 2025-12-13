@@ -1,6 +1,15 @@
 const ClientLogos = () => {
   // Placeholder company names - these would be replaced with actual logos
-  const companies = ["TechFlow", "GrowthCo", "ScalePro", "AutomateX", "LeadGen", "VoiceAI", "SmartBiz", "ClientHub"];
+  const companies = [
+    "Plumbers",
+    "HVAC",
+    "Electricians",
+    "Roofers",
+    "Med Spas / Aesthetic Clinics",
+    "Dentists",
+    "Law Firms",
+    "Property Management",
+  ];
 
   return (
     <section className="py-12 bg-purple">
