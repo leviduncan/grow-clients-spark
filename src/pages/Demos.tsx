@@ -34,8 +34,8 @@ const DemoCard = ({ name, industry, description, cta, image, imageOnRight }: Dem
 
       {/* Image with Play Button */}
       <div className={`relative ${!imageOnRight ? 'lg:order-1' : ''}`}>
-        <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full" />
-        <div className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl">
+        <div className="absolute inset-0 bg-purple/15 blur-3xl rounded-full" />
+        <div className="relative rounded-2xl overflow-hidden border-2 border-purple/30 shadow-2xl glow-purple-sm">
           <img src={image} alt={name} className="w-full h-auto object-cover" />
           {/* Play Button Overlay */}
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/30 via-transparent to-transparent">
@@ -88,16 +88,19 @@ const Demos = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-hero">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 gradient-purple-green relative overflow-hidden">
+        <div className="absolute top-10 right-20 w-80 h-80 bg-purple/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollAnimation>
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <h1 className="font-bebas text-5xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
-                HEAR OUR AI VOICE AGENTS
+                HEAR OUR <span className="text-purple">AI VOICE AGENTS</span>
                 <span className="block text-primary">IN ACTION</span>
               </h1>
               <p className="font-inter text-xl text-muted-foreground max-w-3xl mx-auto">
-                Experience the future of customer service. Listen to our AI agents handle real conversations with
+                Experience the future of customer service. Listen to our <span className="text-purple font-medium">AI agents</span> handle real conversations with
                 natural, human-like responses.
               </p>
             </div>

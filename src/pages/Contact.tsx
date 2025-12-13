@@ -13,8 +13,11 @@ const Contact = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-hero">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 gradient-purple-green relative overflow-hidden">
+        <div className="absolute top-10 left-20 w-72 h-72 bg-purple/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollAnimation>
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl leading-[0.85] text-foreground">

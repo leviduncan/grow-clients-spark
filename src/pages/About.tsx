@@ -52,8 +52,11 @@ const About = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 gradient-hero">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 gradient-purple-green relative overflow-hidden">
+        <div className="absolute top-10 right-20 w-64 h-64 bg-purple/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollAnimation>
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <h1 className="font-bebas text-5xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
@@ -61,7 +64,7 @@ const About = () => {
                 <span className="block text-primary">LOCAL BUSINESSES GROW</span>
               </h1>
               <p className="font-inter text-xl text-muted-foreground max-w-2xl mx-auto">
-                Using AI and automation to level the playing field for small service businesses.
+                Using <span className="text-purple font-medium">AI and automation</span> to level the playing field for small service businesses.
               </p>
             </div>
           </ScrollAnimation>
@@ -139,12 +142,15 @@ const About = () => {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-background relative overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollAnimation>
             <div className="text-center mb-12">
               <h2 className="font-bebas text-5xl md:text-6xl text-foreground mb-4">
-                OUR <span className="text-primary">PHILOSOPHY</span>
+                OUR <span className="text-purple">PHILOSOPHY</span>
               </h2>
             </div>
           </ScrollAnimation>
@@ -152,10 +158,10 @@ const About = () => {
           <ScrollAnimation>
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {philosophy.map((item, idx) => (
-                <Card key={idx} className="border-border/50 hover:shadow-lg transition-all duration-300">
+                <Card key={idx} className="border-border/50 hover:shadow-lg hover:border-purple/30 transition-all duration-300">
                   <CardContent className="p-8">
-                    <div className="font-bebas text-6xl text-primary/20 mb-4">0{idx + 1}</div>
-                    <h3 className="font-bebas text-2xl text-foreground mb-3">{item.title}</h3>
+                    <div className="font-bebas text-6xl text-purple/20 mb-4">0{idx + 1}</div>
+                    <h3 className="font-bebas text-2xl text-gold mb-3">{item.title}</h3>
                     <p className="font-inter text-muted-foreground leading-relaxed">{item.description}</p>
                   </CardContent>
                 </Card>
