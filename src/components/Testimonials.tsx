@@ -79,7 +79,7 @@ const Testimonials = () => {
             {/* Main testimonial card */}
             <div className="bg-card rounded-3xl p-8 sm:p-12 shadow-2xl border border-border relative overflow-hidden">
               {/* Quote icon */}
-              <Quote className="absolute top-6 right-6 w-12 h-12 text-primary/20" />
+              <Quote className="absolute top-6 right-6 w-12 h-12 text-gold/30" />
 
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 {/* Avatar */}
@@ -94,7 +94,7 @@ const Testimonials = () => {
                   {/* Stars */}
                   <div className="flex gap-1 justify-center md:justify-start mb-4">
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                      <Star key={i} className="w-5 h-5 fill-gold text-gold" />
                     ))}
                   </div>
 

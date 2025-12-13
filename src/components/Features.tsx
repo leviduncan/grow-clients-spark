@@ -101,7 +101,7 @@ const Features = () => {
               <div key={idx} className="relative">
                 <Card className="border-border/50 hover:shadow-lg transition-all duration-300 h-full">
                   <CardContent className="p-8">
-                    <div className="font-bebas text-7xl text-primary/20 mb-4">{item.step}</div>
+                    <div className="font-bebas text-7xl text-purple/20 mb-4">{item.step}</div>
                     <h3 className="font-bebas text-3xl text-foreground mb-4">{item.title}</h3>
                     <p className="font-inter text-muted-foreground leading-relaxed">{item.description}</p>
                   </CardContent>
@@ -143,8 +143,8 @@ const Features = () => {
 
               <div className="flex items-center gap-4 pt-4">
                 <div className="flex items-center gap-2">
-                  <Zap className="w-6 h-6 text-primary" />
-                  <span className="font-bebas text-2xl text-primary">24/7</span>
+                  <Zap className="w-6 h-6 text-purple" />
+                  <span className="font-bebas text-2xl text-purple">24/7</span>
                 </div>
                 <span className="font-inter text-muted-foreground">Always on, always ready</span>
               </div>

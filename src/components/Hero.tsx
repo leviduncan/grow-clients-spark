@@ -24,7 +24,7 @@ const Hero = () => {
             <div className="inline-flex items-center gap-3 bg-card px-5 py-2.5 rounded-full border border-border shadow-sm">
               <div className="flex gap-0.5">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                  <Star key={i} className="w-4 h-4 fill-gold text-gold" />
                 ))}
               </div>
               <span className="text-sm font-inter text-muted-foreground">5.0 Rating • 85+ Reviews</span>
@@ -112,7 +112,7 @@ const Hero = () => {
                 
                 {/* Play Demo Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-transparent to-transparent">
-                  <button className="group flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg">
+                  <button className="group flex items-center gap-3 bg-purple hover:bg-purple/90 text-purple-foreground px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg glow-purple-sm">
                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                       <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
                     </div>
