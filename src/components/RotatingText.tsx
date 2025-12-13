@@ -35,12 +35,10 @@ const RotatingText = () => {
           {/* Rotating headline */}
           <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-tight">
             The Smartest Way to{" "}
-            <span className="relative inline-flex items-center justify-center bg-primary/10 px-6 py-2 rounded-xl overflow-hidden min-w-[200px] sm:min-w-[280px] md:min-w-[340px] lg:min-w-[420px] align-middle">
+            <span className="relative inline-flex items-center justify-center bg-primary/10 px-4 py-2 rounded-xl overflow-hidden align-middle">
               <span
                 className={`inline-block text-primary transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                  isAnimating 
-                    ? "opacity-0 -translate-y-6 scale-95" 
-                    : "opacity-100 translate-y-0 scale-100"
+                  isAnimating ? "opacity-0 -translate-y-6 scale-95" : "opacity-100 translate-y-0 scale-100"
                 }`}
               >
                 {words[currentIndex]}
