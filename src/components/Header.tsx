@@ -47,7 +47,7 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-inter text-sm font-medium transition-colors relative group ${
+                className={`font-inter text-base font-medium transition-colors relative group ${
                   isActive(link.path)
                     ? "text-primary"
                     : "text-foreground/80 hover:text-primary"
