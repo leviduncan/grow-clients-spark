@@ -35,7 +35,7 @@ const RotatingText = () => {
           {/* Rotating headline */}
           <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-tight">
             The Smartest Way to{" "}
-            <span className="flex items-center gap-4 bg-primary/10 px-6 py-4 rounded-xl">
+            <span className="relative inline-block gap-4 bg-primary/10 px-6 py-4 rounded-xl">
               <span
                 className={`text-primary transition-all duration-300 ${
                   isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
