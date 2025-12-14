@@ -128,7 +128,7 @@ const CaseStudies = () => {
           </div>
           {/* Modal overlay for details */}
           {modalIndex !== null && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
               <div
                 className="fixed inset-0 bg-black/50"
                 onClick={() => setModalIndex(null)}
@@ -137,7 +137,7 @@ const CaseStudies = () => {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="case-study-title"
-                className="relative bg-white dark:bg-navy-900 rounded-lg max-w-2xl w-full mx-4 p-6 z-10 shadow-xl"
+                className="relative bg-white dark:bg-navy-900 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10 shadow-xl p-4 sm:p-6"
               >
                 <button
                   className="absolute top-3 right-3 text-navy-foreground hover:text-primary"
@@ -146,17 +146,17 @@ const CaseStudies = () => {
                 >
                   <X />
                 </button>
-                <h3 id="case-study-title" className="text-6xl text-primary">
+                <h3 id="case-study-title" className="text-4xl sm:text-6xl text-primary">
                   {case_studies[modalIndex].heading}
                 </h3>
-                <h3 className="text-3xl pt-5">The Problem:</h3>
-                <p className="mt-2">
+                <h3 className="text-xl sm:text-3xl pt-5">The Problem:</h3>
+                <p className="mt-2 text-sm sm:text-base">
                   {case_studies[modalIndex].problem}
                 </p>
-                <h3 className="text-3xl pt-5">The GrowClientsAI Solution:</h3>
-                <p className="mt-4">{case_studies[modalIndex].solution}</p>
-                <h3 className="text-3xl pt-5">The Result:</h3>
-                <ul className="mt-4 list-disc ml-5 space-y-2">
+                <h3 className="text-xl sm:text-3xl pt-5">The GrowClientsAI Solution:</h3>
+                <p className="mt-4 text-sm sm:text-base">{case_studies[modalIndex].solution}</p>
+                <h3 className="text-xl sm:text-3xl pt-5">The Result:</h3>
+                <ul className="mt-4 list-disc ml-5 space-y-2 text-sm sm:text-base">
                   {case_studies[modalIndex].results.map((r, i) => (
                     <li key={i}>{r.label}</li>
                   ))}

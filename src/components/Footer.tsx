@@ -42,9 +42,9 @@ const Footer = () => {
             
             {/* Contact Info */}
             <div className="mt-6 space-y-3">
-              <a href="mailto:hello@growclientsai.com" className="flex items-center gap-3 text-navy-foreground/70 hover:text-primary transition-colors">
+              <a href="mailto:info@growclientsai.com" className="flex items-center gap-3 text-navy-foreground/70 hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />
-                <span className="font-inter text-sm">hello@growclientsai.com</span>
+                <span className="font-inter text-sm">info@growclientsai.com</span>
               </a>
               <a href="tel:+1234567890" className="flex items-center gap-3 text-navy-foreground/70 hover:text-primary transition-colors">
                 <Phone className="w-4 h-4" />
