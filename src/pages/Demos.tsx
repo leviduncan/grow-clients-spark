@@ -70,7 +70,7 @@ const Demos = () => {
       cta: "CALL MAX NOW TO SEE HOW HE CAN HELP YOUR TRADES BUSINESS",
       image: demoMax,
       imageOnRight: true,
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+      videoUrl: "https://growclientsai.com/assets/hvac-demo.mp4",
     },
     {
       name: "CHLOE",
@@ -80,7 +80,7 @@ const Demos = () => {
       cta: "GIVE CHLOE A CALL AND HEAR THE DIFFERENCE",
       image: demoChloe,
       imageOnRight: false,
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+      videoUrl: "https://growclientsai.com/assets/cafe-demo.mp4",
     },
     {
       name: "SHELLEY",
@@ -90,7 +90,7 @@ const Demos = () => {
       cta: "CALL SHELLEY TO EXPERIENCE WHITE-GLOVE SERVICE",
       image: demoShelley,
       imageOnRight: true,
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+      videoUrl: "https://growclientsai.com/assets/med-spa-demo.mp4",
     },
   ];
 

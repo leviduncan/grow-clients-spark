@@ -140,7 +140,7 @@ const Hero = () => {
         >
           <div className="relative w-full max-w-4xl mx-4 aspect-video">
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+              src="https://growclientsai.com/assets/hvac-demo.mp4"
               className="w-full h-full rounded-lg"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
