@@ -1,8 +1,9 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import { Button } from "@/components/ui/button";
-import { Calendar, Play } from "lucide-react";
+import { Calendar, Play, X } from "lucide-react";
 import demoMax from "@/assets/demo-max.png";
 import demoChloe from "@/assets/demo-chloe.png";
 import demoShelley from "@/assets/demo-shelley.png";
@@ -14,9 +15,10 @@ interface DemoCardProps {
   cta: string;
   image: string;
   imageOnRight: boolean;
+  onPlayClick: () => void;
 }
 
-const DemoCard = ({ name, industry, description, cta, image, imageOnRight }: DemoCardProps) => {
+const DemoCard = ({ name, industry, description, cta, image, imageOnRight, onPlayClick }: DemoCardProps) => {
   return (
     <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center`}>
       {/* Content */}
@@ -42,6 +44,7 @@ const DemoCard = ({ name, industry, description, cta, image, imageOnRight }: Dem
             <Button 
               size="default"
               className="bg-purple hover:bg-purple/90 text-purple-foreground gap-3 glow-purple-sm hover:scale-105"
+              onClick={onPlayClick}
             >
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
@@ -56,6 +59,8 @@ const DemoCard = ({ name, industry, description, cta, image, imageOnRight }: Dem
 };
 
 const Demos = () => {
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
   const demos = [
     {
       name: "MAX",
@@ -65,6 +70,7 @@ const Demos = () => {
       cta: "CALL MAX NOW TO SEE HOW HE CAN HELP YOUR TRADES BUSINESS",
       image: demoMax,
       imageOnRight: true,
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
     },
     {
       name: "CHLOE",
@@ -74,6 +80,7 @@ const Demos = () => {
       cta: "GIVE CHLOE A CALL AND HEAR THE DIFFERENCE",
       image: demoChloe,
       imageOnRight: false,
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
     },
     {
       name: "SHELLEY",
@@ -83,6 +90,7 @@ const Demos = () => {
       cta: "CALL SHELLEY TO EXPERIENCE WHITE-GLOVE SERVICE",
       image: demoShelley,
       imageOnRight: true,
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
     },
   ];
 
@@ -116,7 +124,7 @@ const Demos = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
           {demos.map((demo) => (
             <ScrollAnimation key={demo.name}>
-              <DemoCard {...demo} />
+              <DemoCard {...demo} onPlayClick={() => setActiveVideo(demo.videoUrl)} />
             </ScrollAnimation>
           ))}
         </div>
@@ -143,6 +151,29 @@ const Demos = () => {
       </section>
 
       <Footer />
+
+      {/* Video Overlay */}
+      {activeVideo && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center cursor-pointer animate-fade-in"
+          onClick={() => setActiveVideo(null)}
+        >
+          <div className="relative w-full max-w-4xl mx-4 aspect-video">
+            <iframe
+              src={activeVideo}
+              className="w-full h-full rounded-lg"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <button 
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+            onClick={() => setActiveVideo(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
