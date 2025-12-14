@@ -39,7 +39,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/">
-            <img src={logo} className="sm:w-1/2 md:w-1/3 lg:w-60 w-60" />
+            <img src={logo} className="sm:w-1/2 md:w-1/3 lg:w-60 w-60" alt="GrowClientsAI Brand Logo" />
           </Link>
 
           {/* Desktop Navigation */}

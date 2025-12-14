@@ -34,7 +34,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link to="/">
-              <img src={logo} className="sm:w-1/2 w-60" />
+              <img src={logo} className="sm:w-1/2 w-60" alt="GrowClientsAI Brand Logo" />
             </Link>
             <p className="font-inter text-navy-foreground/70 mt-4 max-w-sm leading-relaxed">
               AI-powered voice agents that handle your business 24/7. Get more clients, save time, and grow faster.
