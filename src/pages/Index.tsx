@@ -4,7 +4,7 @@ import ClientLogos from "@/components/ClientLogos";
 import RotatingText from "@/components/RotatingText";
 import PainPoints from "@/components/PainPoints";
 import Features from "@/components/Features";
-import Testimonials from "@/components/Testimonials";
+import CaseStudies from "@/components/CaseStudies";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
@@ -27,7 +27,7 @@ const Index = () => {
         <Features />
       </ScrollAnimation>
       <ScrollAnimation>
-        <Testimonials />
+        <CaseStudies />
       </ScrollAnimation>
       <ScrollAnimation>
         <CTA />
