@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Star, Play, Calendar, Phone, Users, DollarSign, Headphones } from "lucide-react";
+import { ArrowRight, Check, Star, Play, Calendar, Phone, Users, DollarSign, Headphones, X } from "lucide-react";
 import demoMax from "@/assets/demo-max.png";
 
 const Hero = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const floatingBadges = [
     { icon: Calendar, label: "Appointments", position: "top-0 left-0 -translate-x-4" },
     { icon: Users, label: "Leads", position: "top-0 right-0 translate-x-4" },
@@ -110,6 +112,7 @@ const Hero = () => {
                   <Button 
                     size="default"
                     className="bg-purple hover:bg-purple/90 text-purple-foreground gap-3 glow-purple-sm hover:scale-105"
+                    onClick={() => setIsVideoOpen(true)}
                   >
                     <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                       <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
@@ -128,6 +131,29 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Video Overlay */}
+      {isVideoOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center cursor-pointer animate-fade-in"
+          onClick={() => setIsVideoOpen(false)}
+        >
+          <div className="relative w-full max-w-4xl mx-4 aspect-video">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+              className="w-full h-full rounded-lg"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <button 
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+            onClick={() => setIsVideoOpen(false)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+        </div>
+      )}
     </section>
   );
 };
