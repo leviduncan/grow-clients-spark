@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo-blk.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,8 +38,8 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 border-b border-border/30">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="font-bebas text-2xl text-foreground hover:text-primary transition-colors">
-            GrowClients<span className="text-primary">AI</span>
+          <Link to="/">
+            <img src={logo} className="sm:w-1/2 md:w-1/3 lg:w-60 w-60" />
           </Link>
 
           {/* Desktop Navigation */}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
+import logo from "@/assets/logo-wht.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -32,8 +33,8 @@ const Footer = () => {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="font-bebas text-3xl text-navy-foreground hover:text-primary transition-colors">
-              GrowClients<span className="text-primary">AI</span>
+            <Link to="/">
+              <img src={logo} className="sm:w-1/2 w-60" />
             </Link>
             <p className="font-inter text-navy-foreground/70 mt-4 max-w-sm leading-relaxed">
               AI-powered voice agents that handle your business 24/7. Get more clients, save time, and grow faster.
