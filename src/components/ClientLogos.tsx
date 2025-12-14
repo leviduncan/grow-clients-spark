@@ -14,9 +14,9 @@ const ClientLogos = () => {
   return (
     <section className="py-12 bg-purple">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center font-inter text-sm text-primary-foreground/80 mb-8">
+        <h2 className="text-center font-inter text-4xl text-primary-foreground/80 mb-8">
           GrowClientsAI powers the world's leading businesses
-        </p>
+        </h2>
 
         <div className="relative overflow-hidden">
           {/* Gradient masks */}
