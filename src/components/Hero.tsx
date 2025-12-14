@@ -20,7 +20,7 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8 animate-fade-in-up">
-            {/* Rating Badge */}
+            {/* Rating Badge 
             <div className="inline-flex items-center gap-3 bg-card px-5 py-2.5 rounded-full border border-border shadow-sm">
               <div className="flex gap-0.5">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -28,22 +28,18 @@ const Hero = () => {
                 ))}
               </div>
               <span className="text-sm font-inter text-muted-foreground">5.0 Rating • 85+ Reviews</span>
-            </div>
+            </div>*/}
 
             {/* Main Headline */}
             <div>
               <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
-                AI VOICE AGENTS
+                Get 10+ Qualified Leads <span className="text-primary">Every Month</span>
               </h1>
-              <p className="font-inter text-xl sm:text-2xl md:text-3xl text-muted-foreground mt-3 italic">
-                That Handle Your Business 24/7
+            {/* Description */}
+              <p className="font-inter text-xl sm:text-2xl md:text-3xl mt-3">
+                lead capture system + AI voice assistant to handle inquiries 24/7
               </p>
             </div>
-
-            {/* Description */}
-            <p className="font-inter text-lg text-muted-foreground max-w-lg leading-relaxed">
-              Automate appointments, leads, sales & support with intelligent AI that never sleeps. Get more clients without the hassle.
-            </p>
             
             {/* Feature List */}
             <div className="space-y-3">
