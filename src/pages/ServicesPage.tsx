@@ -7,6 +7,7 @@ import { Phone, Target, Zap, CheckCircle, ArrowRight } from "lucide-react";
 import aiAutomation from "@/assets/ai-automation.png";
 import teamCollaboration from "@/assets/team-collaboration.png";
 import phoneMockupDashboard from "@/assets/phone-mockup-dashboard.png";
+import { Link, useLocation } from "react-router-dom";
 
 const ServicesPage = () => {
   const solutions = [
@@ -155,8 +156,10 @@ const ServicesPage = () => {
                 Ready to automate your business and get more clients? Book a free consultation today.
               </p>
               <Button variant="hero" size="lg" className="group">
+                <Link to="/bookademo#bookademo" className="flex align-middle">
                 Book Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="my-1 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
             </div>
           </ScrollAnimation>

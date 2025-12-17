@@ -4,6 +4,7 @@ import ScrollAnimation from "@/components/ScrollAnimation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Users, ShoppingBag, Briefcase, ArrowRight } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const About = () => {
   const whoWeWorkWith = [
@@ -184,8 +185,10 @@ const About = () => {
                 Ready to see how AI can transform your business? Book a free consultation today.
               </p>
               <Button variant="hero" size="lg" className="group">
+                <Link to="/bookademo#bookademo" className="flex align-middle">
                 Book Free Consultation
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
             </div>
           </ScrollAnimation>

@@ -19,9 +19,9 @@ const Header = () => {
 
   const navLinks = [
     { name: "Solutions", path: "/services" },
-    { name: "Demos", path: "/demos" },
-    { name: "Pricing", path: "/pricing" },
     { name: "About", path: "/about" },
+    { name: "Demos", path: "/demos" },
+    // { name: "Pricing", path: "/pricing" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -62,9 +62,11 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="default" size="default" className="group">
-              Book a Demo
-              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <Button variant="default" size="default" className="group" asChild>
+              <Link to="/bookademo#bookademo">
+                Book a Demo
+                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
           </div>
 
@@ -94,9 +96,11 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
-            <Button variant="default" size="lg" className="w-full mt-4 group">
-              Book a Demo
-              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <Button variant="default" size="lg" className="w-full mt-4 group" asChild>
+              <Link to="/bookademo#bookademo">
+                Book a Demo
+                <ArrowRight className="my-1 ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
           </nav>
         )}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
@@ -5,159 +6,134 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { LeadForm } from "@/components/LeadForm";
+
+const WEBHOOK_URL = "https://n8n.growclientsai.com/webhook/email-submission";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: "",
+    sms: false,
+    emailConsent: false,
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString(),
+          source: "gca_contact_page",
+        }),
+      });
+
+      if (!response.ok) throw new Error("Submission failed");
+
+      toast({
+        title: "Message Sent",
+        description: "We’ll get back to you within 24 hours.",
+      });
+
+      setFormData({
+        firstname: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        subject: "",
+        message: "",
+        sms: false,
+        emailConsent: false,
+      });
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Error",
+        description:
+          "Could not send message. Email darrin@darrinduncan.com instead.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen font-inter">
       <Header />
-      
-      {/* Hero Section */}
+
+      {/* Hero */}
       <section className="pt-32 pb-20 gradient-purple-green relative overflow-hidden">
-        <div className="absolute top-10 left-20 w-72 h-72 bg-purple/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-4 text-center">
           <ScrollAnimation>
-            <div className="max-w-4xl mx-auto text-center space-y-6">
-              <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl leading-[0.85] text-foreground">
-                SIMPLE,
-                <span className="block text-primary">NO FLUFF</span>
-              </h1>
-              <p className="font-inter text-xl text-muted-foreground max-w-2xl mx-auto">
-                Get in touch and let's discuss how we can help grow your business.
-              </p>
-            </div>
+            <h1 className="font-bebas text-6xl md:text-8xl leading-[0.85]">
+              SIMPLE,
+              <span className="block text-primary">NO FLUFF</span>
+            </h1>
+            <p className="text-xl text-muted-foreground mt-6">
+              Get in touch and let’s grow your business.
+            </p>
           </ScrollAnimation>
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Content */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Left Side - Message */}
+
+            {/* Left */}
             <ScrollAnimation>
               <div className="space-y-8">
-                <div>
-                  <h2 className="font-bebas text-4xl md:text-5xl text-foreground mb-6">
-                    LEARN HOW WE CAN HELP YOU
-                    <span className="block text-primary">GROW YOUR BUSINESS</span>
-                  </h2>
-                  <p className="font-inter text-lg text-muted-foreground leading-relaxed">
-                    We're here to help you automate your business and get more clients. 
-                    Fill out the form or give us a call, and we'll get back to you within 24 hours.
-                  </p>
-                </div>
+                <h2 className="font-bebas text-4xl md:text-5xl">
+                  LET’S TALK ABOUT
+                  <span className="block text-primary">GROWTH</span>
+                </h2>
 
                 <div className="flex items-center gap-4 bg-primary/10 px-6 py-4 rounded-xl">
-                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-inter text-sm text-muted-foreground">Call us directly</div>
-                    <a href="tel:5551234567" className="font-bebas text-2xl text-foreground hover:text-primary transition-colors">
-                      (555) 123-4567
-                    </a>
-                  </div>
+                  <Phone className="text-primary" />
+                  <a
+                    href="tel:5551234567"
+                    className="font-bebas text-2xl hover:text-primary"
+                  >
+                    (555) 123-4567
+                  </a>
                 </div>
-
-                <Card className="border-primary/30 bg-primary/5">
-                  <CardContent className="p-6">
-                    <h3 className="font-bebas text-2xl text-foreground mb-3">
-                      PREFER TO SCHEDULE A CALL?
-                    </h3>
-                    <p className="font-inter text-muted-foreground mb-4">
-                      Book a free 30-minute consultation and let's discuss your business goals.
-                    </p>
-                    <Button variant="default" className="group">
-                      Book Consultation
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </CardContent>
-                </Card>
               </div>
             </ScrollAnimation>
 
-            {/* Right Side - Form */}
+            {/* Form */}
             <ScrollAnimation>
-              <Card className="border-border/50">
-                <CardContent className="p-8">
-                  <h3 className="font-bebas text-3xl text-foreground mb-6">
-                    SEND US A MESSAGE
-                  </h3>
-                  <form className="space-y-6">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="font-inter text-sm text-foreground">
-                          First Name *
-                        </label>
-                        <Input
-                          placeholder="John"
-                          className="font-inter focus:border-primary focus:ring-primary"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="font-inter text-sm text-foreground">
-                          Last Name *
-                        </label>
-                        <Input
-                          placeholder="Doe"
-                          className="font-inter focus:border-primary focus:ring-primary"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="font-inter text-sm text-foreground">
-                        Phone Number *
-                      </label>
-                      <Input
-                        type="tel"
-                        placeholder="(555) 123-4567"
-                        className="font-inter focus:border-primary focus:ring-primary"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="font-inter text-sm text-foreground">
-                        Email Address *
-                      </label>
-                      <Input
-                        type="email"
-                        placeholder="john@example.com"
-                        className="font-inter focus:border-primary focus:ring-primary"
-                      />
-                    </div>
-
-                    <div className="space-y-4 pt-2">
-                      <div className="flex items-start gap-3">
-                        <Checkbox id="sms" className="mt-1" />
-                        <label htmlFor="sms" className="font-inter text-sm text-muted-foreground leading-relaxed">
-                          I consent to receiving SMS messages from GrowClientsAI. Message and data rates may apply.
-                        </label>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <Checkbox id="email" className="mt-1" />
-                        <label htmlFor="email" className="font-inter text-sm text-muted-foreground leading-relaxed">
-                          I consent to receiving email communications from GrowClientsAI.
-                        </label>
-                      </div>
-                    </div>
-                    
-                    <Button
-                      type="submit"
-                      variant="default"
-                      size="lg"
-                      className="w-full group"
-                    >
-                      Send Message
-                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </form>
-                </CardContent>
+              <Card className="sm:p-5 p-4">
+                <LeadForm />
               </Card>
             </ScrollAnimation>
+
           </div>
         </div>
       </section>

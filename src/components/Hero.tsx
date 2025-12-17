@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Star, Play, Calendar, Phone, Users, DollarSign, Headphones, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import demoMax from "@/assets/demo-max.png";
 
 const Hero = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const location = useLocation();
   const floatingBadges = [
     { icon: Calendar, label: "Appointments", position: "top-0 left-0 -translate-x-4" },
     { icon: Users, label: "Leads", position: "top-0 right-0 translate-x-4" },
@@ -17,7 +19,7 @@ const Hero = () => {
       {/* Subtle background pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.05)_0%,transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.08)_0%,transparent_50%)]" />
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
@@ -37,12 +39,12 @@ const Hero = () => {
               <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
                 Get 10+ Qualified Leads <span className="text-primary">Every Month</span>
               </h1>
-            {/* Description */}
+              {/* Description */}
               <p className="font-inter text-xl sm:text-2xl md:text-3xl mt-3">
                 lead capture system + AI voice assistant to handle inquiries 24/7
               </p>
             </div>
-            
+
             {/* Feature List */}
             <div className="space-y-3">
               {[
@@ -58,23 +60,25 @@ const Hero = () => {
                 </div>
               ))}
             </div>
-            
+
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="default"
                 className="group"
               >
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <Link to="/bookademo#bookademo" className="flex align-middle">
+                  Get Started
+                  <ArrowRight className="my-1 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
-              <Button 
+              {/* <Button 
                 size="lg" 
                 variant="outline"
               >
                 See If You're Eligible
-              </Button>
+              </Button> */}
             </div>
           </div>
 
@@ -98,7 +102,7 @@ const Hero = () => {
             <div className="relative max-w-lg mx-auto">
               {/* Green Glow Effect */}
               <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-90" />
-              
+
               {/* Image */}
               <div className="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl glow-green">
                 <img
@@ -106,10 +110,10 @@ const Hero = () => {
                   alt="Max - AI Voice Agent for HVAC & Trades"
                   className="w-full h-auto object-cover"
                 />
-                
+
                 {/* Play Demo Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-transparent to-transparent">
-                  <Button 
+                  <Button
                     size="default"
                     className="bg-purple hover:bg-purple/90 text-purple-foreground gap-3 glow-purple-sm hover:scale-105"
                     onClick={() => setIsVideoOpen(true)}
@@ -134,7 +138,7 @@ const Hero = () => {
 
       {/* Video Overlay */}
       {isVideoOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center cursor-pointer animate-fade-in"
           onClick={() => setIsVideoOpen(false)}
         >
@@ -146,7 +150,7 @@ const Hero = () => {
               allowFullScreen
             />
           </div>
-          <button 
+          <button
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
             onClick={() => setIsVideoOpen(false)}
           >

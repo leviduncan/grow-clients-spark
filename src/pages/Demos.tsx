@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { Calendar, Play, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import demoMax from "@/assets/demo-max.png";
 import demoChloe from "@/assets/demo-chloe.png";
 import demoShelley from "@/assets/demo-shelley.png";
@@ -30,7 +31,9 @@ const DemoCard = ({ name, industry, description, cta, image, imageOnRight, onPla
         <p className="font-inter text-lg text-muted-foreground leading-relaxed">{description}</p>
         <p className="font-bebas text-xl text-primary tracking-wide">{cta}</p>
         <Button variant="default" size="lg" className="group">
+          <Link to="/bookademo#bookademo" className="flex align-middle">
           START TODAY!
+          </Link>
         </Button>
       </div>
 
