@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Star, Play, Calendar, Phone, Users, DollarSign, Headphones, X } from "lucide-react";
+import { ArrowRight, Check, Calendar, Users, DollarSign, Headphones } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import demoMax from "@/assets/demo-max.png";
 import VideoOverlay from "./VideoOverlay";
@@ -36,20 +36,20 @@ const Hero = () => {
             {/* Main Headline */}
             <div>
               <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.9] text-foreground">
-                Never Lose a <span className="text-primary">$10,000 Emergency Call</span> Again
+                You're <span className="text-primary">Answering Calls at 11 PM </span>That Should Be <span className="text-primary">Automated</span>
               </h1>
               {/* Description */}
               <p className="font-inter text-l sm:text-xl  mt-3">
-                You're losing thousands every week because emergency HVAC calls go to competitors while you're busy, asleep, or your phone goes unanswered.
+                Every hour you spend texting "What's your address?" and "When are you available?" is an hour you're not running service calls.
               </p>
             </div>
 
             {/* Feature List */}
             <div className="space-y-3">
               {[
-                "Automated systems that respond to every lead in under 60 seconds",
-                "Route emergencies to your on-call tech instantly",
-                "Book routine calls into your calendar, 24/7/365"
+                "I build AI systems that respond to HVAC leads in 45 seconds,",
+                "Route emergencies to your on-call tech automatically, and",
+                "Book appointments while you sleep, 24/7/365"
               ].map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -58,6 +58,7 @@ const Hero = () => {
                   <span className="font-inter text-base text-foreground/80">{feature}</span>
                 </div>
               ))}
+              <p className="text-sm pt-2">For contractors getting 20+ leads/month who are tired of playing receptionist.</p>
             </div>
 
             {/* CTAs */}

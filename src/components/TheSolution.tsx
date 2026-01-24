@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import ScrollAnimation from "./ScrollAnimation";
-import { Play, Zap, CheckCircle, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import demoMax from "@/assets/demo-max.png";
+import { CheckCircle, ArrowRight } from "lucide-react";
 import VideoOverlay from "./VideoOverlay";
 
 const TheSolution = () => {
@@ -12,38 +10,26 @@ const TheSolution = () => {
   const howItWorks = [
     {
       step: "01",
-      title: "Lead Comes In (Any Time, Any Source)",
+      title: "Lead Arrives (Any Source)",
       description: [
         "Website form, phone call, Facebook message, doesn't matter",
-        "System receives it instantly via automation"
+        "System captures it instantly"
       ],
     },
     {
       step: "02",
-      title: "AI Qualifies in Seconds",
+      title: "AI Triages in 45 Seconds",
       description: [
-        "Emergency? (No cooling, no heat, gas leak) → Routes immediately",
-        "Routine? (Annual service, quote request) → Schedules for next business day",
-        "Tire-kicker? (Just browsing, collecting quotes) → Goes into nurture sequence"
+        "Emergency? (No heat, no cooling, gas leak) → Your on-call tech gets an SMS: 'Emergency - No heat - Call Sarah at 610-555-1234 NOW'",
+        "Routine? (Maintenance, quote) → Books into your calendar automatically",
+        "Tire-kicker? (Just pricing out 6 companies) → Goes into follow-up sequence"
       ],
     },
     {
       step: "03",
-      title: "Emergency Calls Get Instant Action",
+      title: "You Wake Up to Confirmed Appointments",
       description: [
-        "On-call tech gets SMS with customer info: 'Emergency AC out, call [Name] at [Phone] NOW'",
-        "Customer gets immediate response: '[Your company] received your emergency request. [Tech name] will call within 15 minutes.'",
-        "Logged to your CRM/dispatch system automatically"
-      ],
-    },
-    {
-      step: "04",
-      title: "Routine Calls Get Scheduled",
-      description: [
-        "AI asks qualifying questions (system type, age, issue)",
-        "Books them into your calendar for estimate",
-        "Sends confirmation email + SMS reminders",
-        "No manual work required"
+        "Customer already got a response. Appointment already booked. You just show up and run the call",
       ],
     },
   ];
@@ -72,7 +58,7 @@ const TheSolution = () => {
         </ScrollAnimation>
 
         <ScrollAnimation>
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
             {howItWorks.map((item, idx) => (
               <div key={idx} className="relative">
                 <Card className="border-border/50 hover:shadow-lg transition-all duration-300 h-full">
@@ -97,6 +83,11 @@ const TheSolution = () => {
                 )}
               </div>
             ))}
+          </div>
+          <div className="text-center mb-10">
+            <h3 className="font-bebas text-3xl text-foreground mb-4">
+              No app to check. No texts to send. No calendar Tetris.
+            </h3>
           </div>
           <VideoOverlay position="relative" bg="" content="SEE IT RUNNING LIVE" />
         </ScrollAnimation>

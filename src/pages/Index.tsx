@@ -7,7 +7,8 @@ import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import TheProblem from "@/components/TheProblem";
 import TheSolution from "@/components/TheSolution";
-import RealResults from "@/components/RealResults";
+import IsThisYou from "@/components/IsThisYou";
+import PriceCards from "@/components/PriceCards";
 
 const Index = () => {
   return (
@@ -27,7 +28,10 @@ const Index = () => {
         <WhyThisWorks />
       </ScrollAnimation>
       <ScrollAnimation>
-        <RealResults />
+        <IsThisYou />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <PriceCards />
       </ScrollAnimation>
       <ScrollAnimation>
         <CTA />

@@ -22,24 +22,29 @@ const WhyThisWorks = () => {
 
   const stats = [
     {
-      value: "60-70%",
-      label: "of after-hours calls lost to faster competitors",
-      icon: Phone,
-    },
-    {
-      value: "$18-35K",
-      label: "per month in emergency revenue lost",
+      value: "$600-$1,200",
+      label: "Average emergency call value",
       icon: DollarSign,
     },
     {
-      value: "12-15 hrs",
-      label: "per week on manual lead qualification",
+      value: "8-15 hrs",
+      label: "Average after-hours calls per month",
       icon: Clock,
+    },
+    {
+      value: "30%",
+      label: "Current capture rate (voicemail)",
+      icon: Phone,
+    },
+    {
+      value: "85%",
+      label: "Capture rate with instant response",
+      icon: Phone,
     },
   ];
 
   return (
-    <section className="py-20 sm:py-32  bg-background">
+    <section className="py-10 sm:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -48,17 +53,17 @@ const WhyThisWorks = () => {
           </h2>
           <div className="mt-6 max-w-3xl mx-auto">
             <p className="font-bebas text-2xl sm:text-3xl text-foreground/90">
-              The Emergency Call Window Is Only 90 Seconds
+              The Math on Lost Emergency Calls
             </p>
             <p className="mt-4 text-muted-foreground text-lg">
-              Here's what happens when someone has a furnace breakdown at 11 PM:
+              <strong>Industry data shows:</strong> HVAC companies lose 60-70% of after-hours calls to whoever answers first. (Source: ServiceTitan 2024 Industry Report)
             </p>
           </div>
         </div>
 
         {/* Comparison Cards */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-16">
-          {/* Without AI */}
+        {/*<div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-16">
+           Without AI
           <Card className="border-destructive/30 bg-destructive/5 hover:border-destructive/50 transition-colors">
             <CardContent className="p-6 sm:p-8">
               <h3 className="font-bebas text-2xl sm:text-3xl text-destructive mb-6">
@@ -75,9 +80,9 @@ const WhyThisWorks = () => {
                 ))}
               </ul>
             </CardContent>
-          </Card>
+          </Card> */}
 
-          {/* With AI */}
+          {/* With AI
           <Card className="border-primary/30 bg-primary/5 hover:border-primary/50 transition-colors">
             <CardContent className="p-6 sm:p-8">
               <h3 className="font-bebas text-2xl sm:text-3xl text-primary mb-6">
@@ -94,18 +99,15 @@ const WhyThisWorks = () => {
                 ))}
               </ul>
             </CardContent>
-          </Card>
-        </div>
+          </Card> 
+        </div>*/}
 
         {/* Stats Section */}
         <div className="mb-16">
-          <h3 className="font-bebas text-2xl sm:text-3xl text-center mb-8">
-            The Math on Emergency Calls
-          </h3>
-          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            According to industry data, HVAC companies lose an average of:
+          <p className="text-center mb-8 max-w-2xl mx-auto">
+            Here's what that costs you:
           </p>
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-4 gap-6">
             {stats.map((stat, idx) => (
               <Card key={idx} className="text-center hover:border-primary/30 transition-colors">
                 <CardContent className="p-6">
@@ -122,9 +124,12 @@ const WhyThisWorks = () => {
               </Card>
             ))}
           </div>
+          <p className="sm:text-lg text-center mb-8 max-w-2xl mx-auto mt-12">
+            <strong>The gap:</strong> 4-8 additional emergency calls per month = <strong>$18,000-$36,000/year in revenue you're already paying to generate</strong> (through your Google Ads, truck wraps, SEO), just not capturing.
+          </p>
         </div>
 
-        {/* Revenue Impact */}
+        {/* Revenue Impact
         <Card className="border-primary bg-gradient-to-br from-primary/10 to-primary/5">
           <CardContent className="p-8 sm:p-10 text-center">
             <h3 className="font-bebas text-2xl sm:text-3xl mb-6">
@@ -145,7 +150,7 @@ const WhyThisWorks = () => {
             </h2>
             <p>We're offering a 60-day pilot at 50% off to document these exact results.</p>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </section>
   );
