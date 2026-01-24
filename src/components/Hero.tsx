@@ -36,21 +36,21 @@ const Hero = () => {
 
             {/* Main Headline */}
             <div>
-              <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] text-foreground">
-                Get 10+ Qualified Leads <span className="text-primary">Every Month</span>
+              <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.9] text-foreground">
+                Never Lose a <span className="text-primary">$10,000 Emergency Call</span> Again
               </h1>
               {/* Description */}
-              <p className="font-inter text-xl sm:text-2xl md:text-3xl mt-3">
-                lead capture system + AI voice assistant to handle inquiries 24/7
+              <p className="font-inter text-l sm:text-xl  mt-3">
+                You're losing thousands every week because emergency HVAC calls go to competitors while you're busy, asleep, or your phone goes unanswered.
               </p>
             </div>
 
             {/* Feature List */}
             <div className="space-y-3">
               {[
-                "AI-powered campaigns that run 24/7/365",
-                "Lead generation tailored to your business",
-                "Results in 30 days, guaranteed"
+                "Automated systems that respond to every lead in under 60 seconds",
+                "Route emergencies to your on-call tech instantly",
+                "Book routine calls into your calendar, 24/7/365"
               ].map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -69,7 +69,7 @@ const Hero = () => {
                 className="group"
               >
                 <Link to="/bookademo#bookademo" className="flex align-middle">
-                  Get Started
+                  GET FREE AUDIT
                   <ArrowRight className="my-1 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -121,7 +121,7 @@ const Hero = () => {
                     <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                       <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
                     </div>
-                    PLAY DEMO
+                    WATCH 2-MIN DEMO
                   </Button>
                 </div>
               </div>
