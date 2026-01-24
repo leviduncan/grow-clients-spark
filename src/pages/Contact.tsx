@@ -130,7 +130,7 @@ const Contact = () => {
             {/* Form */}
             <ScrollAnimation>
               <Card className="sm:p-5 p-4">
-                <LeadForm />
+                <LeadForm source="contact" />
               </Card>
             </ScrollAnimation>
 
