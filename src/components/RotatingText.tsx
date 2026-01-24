@@ -50,7 +50,7 @@ const RotatingText = () => {
 
           {/* Description */}
           <p className="font-inter text-lg sm:text-xl text-muted-foreground mt-8 max-w-2xl mx-auto leading-relaxed">
-            Our AI voice agents handle calls, book appointments, qualify leads, and support customers — all while you
+            Our AI voice agents handle calls, book appointments, qualify leads, and support customers, all while you
             focus on what matters most.
           </p>
         </div>

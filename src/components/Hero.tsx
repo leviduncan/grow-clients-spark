@@ -1,17 +1,16 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Star, Play, Calendar, Phone, Users, DollarSign, Headphones, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import demoMax from "@/assets/demo-max.png";
+import VideoOverlay from "./VideoOverlay";
 
 const Hero = () => {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const location = useLocation();
   const floatingBadges = [
-    { icon: Calendar, label: "Appointments", position: "top-0 left-0 -translate-x-4" },
-    { icon: Users, label: "Leads", position: "top-0 right-0 translate-x-4" },
+    { icon: Calendar, label: "Book Appointments", position: "top-7 left-0 -translate-x-4" },
+    { icon: Users, label: "Secure Leads", position: "top-8 right-0 translate-x-4" },
     { icon: DollarSign, label: "Sales", position: "bottom-16 left-0 -translate-x-8" },
-    { icon: Headphones, label: "Support", position: "bottom-16 right-0 translate-x-8" },
+    { icon: Headphones, label: "24/7 Support", position: "bottom-14 right-0 translate-x-8" },
   ];
 
   return (
@@ -112,18 +111,7 @@ const Hero = () => {
                 />
 
                 {/* Play Demo Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-transparent to-transparent">
-                  <Button
-                    size="default"
-                    className="bg-purple hover:bg-purple/90 text-purple-foreground gap-3 glow-purple-sm hover:scale-105"
-                    onClick={() => setIsVideoOpen(true)}
-                  >
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                      <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
-                    </div>
-                    WATCH 2-MIN DEMO
-                  </Button>
-                </div>
+                <VideoOverlay position="absolute" bg="bg-gradient-to-t" content="WATCH 2-MIN DEMO" />
               </div>
 
               {/* Agent Name Badge */}
@@ -136,28 +124,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Video Overlay */}
-      {isVideoOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center cursor-pointer animate-fade-in"
-          onClick={() => setIsVideoOpen(false)}
-        >
-          <div className="relative w-full max-w-4xl mx-4 aspect-video">
-            <iframe
-              src="https://growclientsai.com/assets/hvac-demo.mp4"
-              className="w-full h-full rounded-lg"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-          <button
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
-            onClick={() => setIsVideoOpen(false)}
-          >
-            <X className="w-8 h-8" />
-          </button>
-        </div>
-      )}
+
     </section>
   );
 };
