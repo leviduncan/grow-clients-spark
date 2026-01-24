@@ -39,7 +39,7 @@ const WhyThisWorks = () => {
   ];
 
   return (
-    <section className="py-20 sm:py-32 bg-secondary/50">
+    <section className="py-20 sm:py-32  bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -136,6 +136,14 @@ const WhyThisWorks = () => {
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               Just capturing the calls already coming to you — not generating new ones.
             </p>
+          </CardContent>
+        </Card>
+        <Card className="text-center border-primary hover:border-primary/30 transition-colors mt-12">
+          <CardContent className="p-6 sm:p-8">
+            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl text-primary mb-4">
+              Ready to be our first case study in Allentown?
+            </h2>
+            <p>We're offering a 60-day pilot at 50% off to document these exact results.</p>
           </CardContent>
         </Card>
       </div>
