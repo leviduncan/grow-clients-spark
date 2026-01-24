@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ClientLogos from "@/components/ClientLogos";
 import RotatingText from "@/components/RotatingText";
 import PainPoints from "@/components/PainPoints";
+import WhyThisWorks from "@/components/WhyThisWorks";
 import Features from "@/components/Features";
 import CaseStudies from "@/components/CaseStudies";
 import CTA from "@/components/CTA";
@@ -22,6 +23,9 @@ const Index = () => {
       </ScrollAnimation>
       <ScrollAnimation>
         <PainPoints />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <WhyThisWorks />
       </ScrollAnimation>
       <ScrollAnimation>
         <Features />
