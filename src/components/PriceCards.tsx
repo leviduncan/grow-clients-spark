@@ -145,7 +145,7 @@ function PriceCards() {
                 </div>
 
                 {/* Timeline */}
-                <div className="flex items-center justify-center gap-2 bg-secondary/50 rounded-lg py-3 px-4">
+                <div className="flex items-center justify-center gap-2 bg-primary/20 rounded-full py-3 px-4">
                   <Clock className="w-5 h-5 text-primary" />
                   <span className="font-inter text-sm font-medium text-foreground">
                     {emergencyPlan.timeline}
