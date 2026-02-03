@@ -1,14 +1,15 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ClientLogos from "@/components/ClientLogos";
-import WhyThisWorks from "@/components/WhyThisWorks";
 import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
+import Footer2 from "@/components/Footer2";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import TheProblem from "@/components/TheProblem";
 import TheSolution from "@/components/TheSolution";
-import IsThisYou from "@/components/IsThisYou";
-import PriceCards from "@/components/PriceCards";
+import FAQs from "@/components/FAQs";
+import HowItWorks from "@/components/HowItWorks";
+import Demo from "@/components/Demo";
+import PricingPreview from "@/components/PricingPreview";
 
 const Index = () => {
   return (
@@ -25,18 +26,21 @@ const Index = () => {
         <TheSolution />
       </ScrollAnimation>
       <ScrollAnimation>
-        <WhyThisWorks />
+        <HowItWorks />
       </ScrollAnimation>
       <ScrollAnimation>
-        <IsThisYou />
+        <Demo />
       </ScrollAnimation>
       <ScrollAnimation>
-        <PriceCards />
+        <PricingPreview />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <FAQs />
       </ScrollAnimation>
       <ScrollAnimation>
         <CTA />
       </ScrollAnimation>
-      <Footer />
+      <Footer2 />
     </div>
   );
 };

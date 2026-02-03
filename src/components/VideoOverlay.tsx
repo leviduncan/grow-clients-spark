@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, X } from "lucide-react";
 
-function VideoOverlay({position, bg, content}) {
+function VideoOverlay({position, bg, content, align = "center", className = ""}) {
     const [isVideoOpen, setIsVideoOpen] = useState(false);
+    const alignmentClass = align === "bottom" ? "items-end pb-6" : "items-center";
     return (
         <>
-            <div className={`${position} inset-0 flex items-center justify-center ${bg} from-black/40 via-transparent to-transparent`}>
+            <div className={`${position} inset-0 flex ${alignmentClass} justify-center ${bg} from-black/40 via-transparent to-transparent ${className}`}>
                 <Button
                     size="default"
                     className="bg-purple hover:bg-purple/90 text-purple-foreground gap-3 glow-purple-sm hover:scale-105"

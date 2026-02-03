@@ -18,11 +18,8 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: "Solutions", path: "/services" },
-    { name: "About", path: "/about" },
-    { name: "Demos", path: "/demos" },
-     { name: "Pricing", path: "/pricing" },
-    { name: "Contact", path: "/contact" },
+    { name: "How It Works", path: "/how-it-works" },
+    { name: "Pricing", path: "/pricing" },
   ];
 
   const isActive = (path: string) => location.pathname === path;

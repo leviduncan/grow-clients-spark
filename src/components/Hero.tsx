@@ -36,12 +36,11 @@ const Hero = () => {
             {/* Main Headline */}
             <div>
               <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.9] text-foreground">
-                You're <span className="text-primary">Answering Calls at 11 PM </span>That Should Be <span className="text-primary">Automated</span>
+                Never  <span className="text-primary">Miss </span>Another <br/><span className="text-primary">HVAC Call </span>Again
               </h1>
               {/* Description */}
               <p className="font-inter text-l sm:text-xl  mt-3">
-                Every hour you spend texting "What's your address?" and "When are you available?" is an hour you're not running service calls.
-              </p>
+Your AI receptionist answers every call 24/7, books appointments, and handles emergencies while you focus on the work. No more missed revenue from after-hours calls.              </p>
             </div>
 
             {/* Feature List */}
@@ -58,7 +57,6 @@ const Hero = () => {
                   <span className="font-inter text-base text-foreground/80">{feature}</span>
                 </div>
               ))}
-              <p className="text-sm pt-2">For contractors getting 20+ leads/month who are tired of playing receptionist.</p>
             </div>
 
             {/* CTAs */}
@@ -69,7 +67,7 @@ const Hero = () => {
                 className="group"
               >
                 <Link to="/bookademo#bookademo" className="flex align-middle">
-                  GET FREE AUDIT
+                  SEE IT IN ACTION (FREE DEMO CALL)
                   <ArrowRight className="my-1 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -80,6 +78,7 @@ const Hero = () => {
                 See If You're Eligible
               </Button> */}
             </div>
+              <p className="text-sm">Set up in 48 hours • No long-term contract • Cancel anytime</p>
           </div>
 
           {/* Right - Max AI Agent Image */}
@@ -112,7 +111,7 @@ const Hero = () => {
                 />
 
                 {/* Play Demo Button Overlay */}
-                <VideoOverlay position="absolute" bg="bg-gradient-to-t" content="WATCH 2-MIN DEMO" />
+                <VideoOverlay position="absolute" bg="bg-gradient-to-t" content="WATCH DEMO" align="bottom" className="!pb-11" />
               </div>
 
               {/* Agent Name Badge */}

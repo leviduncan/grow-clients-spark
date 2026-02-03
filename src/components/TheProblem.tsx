@@ -3,20 +3,16 @@ import { X, Check } from "lucide-react";
 const TheProblem = () => {
   const theProblem = [
     {
-      title: "Emergency calls come in at night/weekends",
-      description: "They sit until Monday → Customer called 3 other companies → You lost a $5,000-$15,000 job",
+      title: "After-Hours Emergencies",
+      description: "Someone's furnace dies at 11pm. They call you. No answer. They call your competitor. You lose $800-1,200.",
     },
     {
-      title: "Your schedule fills with $200 maintenance calls",
-      description: "$10,000 AC replacement request comes in → No techs available → Another lost opportunity",
+      title: "Busy Season Overload",
+      description: "Your phone rings while you're under a boiler. By the time you call back, they've already booked someone else.",
     },
     {
-      title: "Leads from your website take 4-6 hours to respond to",
-      description: "They've already booked estimates with faster competitors",
-    },
-    {
-      title: "You manually qualify every inquiry",
-      description: "Wasting 10+ hours/week on tire-kickers instead of real customers",
+      title: "The Real Cost",
+      description: "HVAC contractors lose an average of $4,000-7,000 per month in missed calls. That's $50,000-84,000 per year in lost revenue.",
     },
   ];
 
@@ -30,12 +26,12 @@ const TheProblem = () => {
               THE <span className="text-primary">PROBLEM</span>
             </h2>
             <p className="font-inter text-lg text-muted-foreground max-w-2xl mx-auto">
-              You're Leaving $50,000+ on the Table Every Year
+              How Many Calls Are You Missing Right Now?
             </p>
           </div>
 
           {/* Pain Points Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-3 lg:grid-cols-3 gap-6">
             {theProblem.map((point, index) => (
               <div
                 key={index}
