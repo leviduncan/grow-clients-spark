@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import ClientLogos from "@/components/ClientLogos";
 import CTA from "@/components/CTA";
 import Footer2 from "@/components/Footer2";
 import ScrollAnimation from "@/components/ScrollAnimation";
@@ -16,9 +15,6 @@ const Index = () => {
     <div className="min-h-screen font-inter bg-background">
       <Header />
       <Hero />
-      <ScrollAnimation>
-        <ClientLogos />
-      </ScrollAnimation>
       <ScrollAnimation>
         <TheProblem />
       </ScrollAnimation>

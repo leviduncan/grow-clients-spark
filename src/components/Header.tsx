@@ -18,6 +18,7 @@ const Header = () => {
   }, []);
 
   const navLinks = [
+    { name: "Home", path: "/" },
     { name: "How It Works", path: "/how-it-works" },
     { name: "Pricing", path: "/pricing" },
   ];
@@ -45,7 +46,7 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-inter text-base font-medium transition-colors relative group ${
+                className={`font-inter text-lg font-medium transition-colors relative group ${
                   isActive(link.path)
                     ? "text-primary"
                     : "text-foreground/80 hover:text-primary"
@@ -84,7 +85,7 @@ const Header = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMenuOpen(false)}
-                className={`block font-inter text-base font-medium transition-colors py-2 ${
+                className={`block font-inter text-lg font-medium transition-colors py-2 ${
                   isActive(link.path)
                     ? "text-primary"
                     : "text-foreground/80 hover:text-primary"

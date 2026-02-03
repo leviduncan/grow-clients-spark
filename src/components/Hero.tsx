@@ -36,19 +36,19 @@ const Hero = () => {
             {/* Main Headline */}
             <div>
               <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.9] text-foreground">
-                Never  <span className="text-primary">Miss </span>Another <br/><span className="text-primary">HVAC Call </span>Again
+                Never  <span className="text-primary">Miss </span>Another <br /><span className="text-primary">HVAC Call </span>Again
               </h1>
               {/* Description */}
               <p className="font-inter text-l sm:text-xl  mt-3">
-Your AI receptionist answers every call 24/7, books appointments, and handles emergencies while you focus on the work. No more missed revenue from after-hours calls.              </p>
+                Your AI receptionist answers every call 24/7, books appointments, and handles emergencies while you focus on the work. No more missed revenue from after-hours calls.              </p>
             </div>
 
             {/* Feature List */}
             <div className="space-y-3">
               {[
-                "I build AI systems that respond to HVAC leads in 45 seconds,",
-                "Route emergencies to your on-call tech automatically, and",
-                "Book appointments while you sleep, 24/7/365"
+                "Responds to leads in under 60 seconds (before they call your competitor)",
+                "Routes emergencies to your on-call tech automatically",
+                "Books appointments 24/7, even at 2 AM on Sunday"
               ].map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -78,7 +78,7 @@ Your AI receptionist answers every call 24/7, books appointments, and handles em
                 See If You're Eligible
               </Button> */}
             </div>
-              <p className="text-sm">Set up in 48 hours • No long-term contract • Cancel anytime</p>
+            <p className="text-sm">Set up in 48 hours • No long-term contract • Cancel anytime</p>
           </div>
 
           {/* Right - Max AI Agent Image */}

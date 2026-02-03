@@ -38,7 +38,7 @@ const PricingPreview = () => {
                   </h3>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="font-bebas text-5xl sm:text-6xl text-primary">
-                      $1,497
+                      $397
                     </span>
                     <span className="font-inter text-muted-foreground">/month</span>
                   </div>

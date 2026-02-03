@@ -253,6 +253,10 @@
     background-clip: text;
   }
 
+  .text-muted-foreground {
+    color: #939e91;
+  }
+
   /* Floating animation for nodes */
   .animate-float {
     animation: float 6s ease-in-out infinite;

@@ -72,7 +72,7 @@ const TheProblem = () => {
           </div>
           <div className="text-center mt-16">
             <p className="font-inter text-lg max-w-2xl mx-auto">
-              <strong>The cost?</strong> If you're getting 50 leads per month and losing 40% to slow response, that's <strong>$3,000-$8,000 in lost revenue monthly.</strong>
+              <strong>How much is this costing you?</strong> If you're missing just <strong>10 calls</strong> per month at <strong>$400-800 per job</strong>, that's <strong>$48,000-$96,000 per year</strong> walking out the door.
             </p>
           </div>
         </div>
