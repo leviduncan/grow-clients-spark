@@ -1,41 +1,47 @@
 
-## Plan: Create Privacy Policy Page
+
+## Plan: Create Terms of Service Page
 
 ### Overview
-Create a new Privacy Policy page at `/privacy` using the uploaded markdown content, following the existing page design patterns and updating all email addresses to `info@growclientsai.com`.
+Create a new Terms of Service page at `/terms` following the exact same structure and styling as the Privacy Policy page, with all content from the uploaded markdown and emails updated to `info@growclientsai.com`.
 
 ---
 
-### 1. Create New Page: `src/pages/Privacy.tsx`
+### 1. Create New Page: `src/pages/Terms.tsx`
 
-**Structure (following About.tsx pattern):**
-- Import Header, Footer2, and ScrollAnimation components
+**Structure (following Privacy.tsx pattern):**
+- Import Header, Footer2, ScrollAnimation, Card, Separator, Mail icon
 - Use consistent styling: `font-bebas` for headings, `font-inter` for body text
 
 **Page Sections:**
-- **Hero Section**: "PRIVACY POLICY" heading with gradient background
+- **Hero Section**: "TERMS OF SERVICE" heading with gradient background
 - **Last Updated**: February 5, 2025 subtitle
-- **Content Sections** (each in a ScrollAnimation wrapper):
-  - Introduction
-  - Who We Are
-  - Information We Collect (3 subsections with bullet lists)
-  - How We Use Your Information (2 subsections)
-  - SMS and Communication Services (4 subsections)
-  - How We Share Your Information (4 subsections)
-  - Data Retention (bullet list)
-  - Data Security (bullet list)
-  - Your Rights and Choices (bullet list)
-  - Children's Privacy
-  - California Privacy Rights (bullet list)
-  - Changes to This Privacy Policy
-  - Contact Us
+- **Content Sections** (each wrapped in ScrollAnimation with Separators between):
+  1. Agreement to Terms
+  2. Description of Services (bullet list)
+  3. Eligibility (bullet list)
+  4. Account Registration and Security (2 subsections)
+  5. Acceptable Use Policy (3 subsections with bullet lists)
+  6. Fees and Payment (4 subsections)
+  7. Intellectual Property (3 subsections)
+  8. Third-Party Services
+  9. Data and Privacy (3 subsections)
+  10. Disclaimer of Warranties (uppercase emphasis styling)
+  11. Limitation of Liability (uppercase emphasis styling)
+  12. Indemnification (bullet list)
+  13. Term and Termination (4 subsections)
+  14. Dispute Resolution (5 subsections)
+  15. General Provisions (6 subsections)
+  16. Changes to These Terms
+  17. Contact Us (Card component with Mail icon)
 
 **Design Elements:**
-- Use Card components for important sections like Contact Us
-- Style bullet lists with proper spacing and muted text
-- Use dividers/separators between major sections
-- Email links styled with `text-primary` and hover effects
-- All email references updated from `privacy@growclientsai.com` to `info@growclientsai.com`
+- Same gradient hero section as Privacy page
+- Card component for Contact Us section
+- Legal disclaimer sections (Warranties, Liability) with uppercase text and distinct styling
+- All bullet lists with proper spacing
+- Email link uses `text-primary` with hover effect
+- Email updated from `legal@growclientsai.com` to `info@growclientsai.com`
 
 ---
 
@@ -43,26 +49,18 @@ Create a new Privacy Policy page at `/privacy` using the uploaded markdown conte
 
 Add the new route:
 ```tsx
-import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 // In Routes:
-<Route path="/privacy" element={<Privacy />} />
+<Route path="/terms" element={<Terms />} />
 ```
 
 ---
 
-### 3. Email Updates
-
-Replace all instances of `privacy@growclientsai.com` with `info@growclientsai.com` in the content:
-- "Your Rights and Choices" section
-- "California Privacy Rights" section  
-- "Contact Us" section
-
----
-
 ### Technical Notes
-- The page will use the same layout structure as other pages (Header/Footer)
-- Content will be rendered as React components, not markdown
-- Links will use `mailto:` for email addresses
-- Proper semantic HTML with headings hierarchy (h1, h2, h3)
-- All text uses the project's typography classes
+- Follows exact same component structure as Privacy.tsx
+- Uses identical styling patterns and typography
+- Legal disclaimer sections use `bg-muted/50` cards for visual distinction
+- All 17 sections properly separated with `<Separator />` components
+- Responsive layout matches existing pages
+
