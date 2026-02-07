@@ -34,7 +34,15 @@ const Index = () => {
         <FAQs />
       </ScrollAnimation>
       <ScrollAnimation>
-        <CTA />
+        <CTA 
+        title1="STOP LOSING MONEY TO" 
+        title2="MISSED CALLS" 
+        sub="Book a 15-minute call. We'll show you exactly how this works for HVAC contractors."
+        cta="BOOK YOUR FREE DEMO CALL"
+        l1="No credit card required"
+        l2="See it in action first"
+        l3="Setup in 48 hours"
+        />
       </ScrollAnimation>
       <Footer2 />
     </div>

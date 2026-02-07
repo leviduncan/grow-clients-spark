@@ -116,10 +116,10 @@ function BookADemo() {
                       <p className="font-inter text-sm text-muted-foreground">
                         Call our demo line at{" "}
                         <a
-                          href="tel:+15551234567"
+                          href="tel:+14019928142"
                           className="text-primary font-medium hover:underline"
                         >
-                          (555) 123-4567
+                          1 (401) 992 8142
                         </a>{" "}
                         and experience it yourself.
                       </p>

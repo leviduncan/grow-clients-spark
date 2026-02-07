@@ -257,6 +257,17 @@
     color: #939e91;
   }
 
+  .bg-muted-2 {
+    background-color: hsl(var(--muted) / 0.03);
+  }
+
+  .bg-blugrn-900 {
+    background-color: hsl(174, 100%, 6%);
+  }
+  .bg-blugrn-950 {
+    background-color: hsl(174, 100%, 2%);
+  }
+
   /* Floating animation for nodes */
   .animate-float {
     animation: float 6s ease-in-out infinite;

@@ -32,7 +32,7 @@ const TheSolution = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/5 ">
+    <section className="py-20 bg-muted-2 ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* The Solution Section */}

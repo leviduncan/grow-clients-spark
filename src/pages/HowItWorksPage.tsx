@@ -16,6 +16,7 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import CTA from "@/components/CTA";
 
 const HowItWorksPage = () => {
   const steps = [
@@ -290,11 +291,10 @@ const HowItWorksPage = () => {
                             {step.options.map((option, idx) => (
                               <div
                                 key={idx}
-                                className={`rounded-lg p-4 border ${
-                                  option.recommended
-                                    ? "border-primary bg-primary/5"
-                                    : "border-border bg-muted/10"
-                                }`}
+                                className={`rounded-lg p-4 border ${option.recommended
+                                  ? "border-primary bg-primary/5"
+                                  : "border-border bg-muted/10"
+                                  }`}
                               >
                                 <div className="flex items-center gap-2 mb-2">
                                   <h5 className="font-bebas text-lg text-foreground">
@@ -353,7 +353,7 @@ const HowItWorksPage = () => {
       </section>
 
       {/* What Makes This Different */}
-      <section className="py-20 sm:py-32 bg-muted/5">
+      <section className="py-20 sm:py-32 bg-muted-2">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation>
             <div className="text-center mb-16">
@@ -448,32 +448,13 @@ const HowItWorksPage = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 sm:py-32 bg-zinc-900 relative overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-6">
-              BOOK YOUR <span className="text-primary">SETUP CALL</span>
-            </h2>
-            <p className="font-inter text-lg sm:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">
-              See exactly how this will work for your business.
-            </p>
-            <Button
-              size="lg"
-              variant="default"
-              className="group text-lg px-8 py-6 h-auto"
-            >
-              <Link to="/bookademo#bookademo" className="flex items-center">
-                BOOK YOUR FREE DEMO CALL
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CTA
+        title1="BOOK YOUR"
+        title2="SETUP CALL"
+        sub="See exactly how this will work for your business."
+        cta="BOOK YOUR FREE DEMO CALL"
+      />
 
       <Footer2 />
     </div>

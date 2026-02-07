@@ -53,7 +53,7 @@ const Features = () => {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Pain Points Section */}
         <ScrollAnimation>
           <div className="text-center mb-16">
@@ -118,7 +118,7 @@ const Features = () => {
 
         {/* Real Business Impact Section */}
         <ScrollAnimation>
-          <div className="grid lg:grid-cols-2 gap-12 items-center bg-muted/50 rounded-3xl p-8 md:p-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-center bg-muted-20 rounded-3xl p-8 md:p-12">
             {/* Content */}
             <div className="space-y-8">
               <div>

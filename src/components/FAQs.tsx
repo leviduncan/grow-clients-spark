@@ -26,7 +26,7 @@ const FAQs = () => {
   ];
 
   return (
-    <section className="py-20 sm:py-32 bg-muted/5 relative overflow-hidden">
+    <section className="py-20 sm:py-32 bg-muted-2 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
 

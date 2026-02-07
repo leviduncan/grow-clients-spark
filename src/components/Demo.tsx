@@ -9,7 +9,7 @@ const Demo = () => {
   ];
 
   return (
-    <section className="py-20 sm:py-32 bg-muted/5">
+    <section className="py-20 sm:py-32 bg-muted-2">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <ScrollAnimation>
@@ -23,14 +23,14 @@ const Demo = () => {
             {/* Phone Number Display */}
             <div className="text-center mb-10">
               <a
-                href="tel:+15551234567"
+                href="tel:+14019928142"
                 className="inline-flex items-center justify-center gap-4 bg-card border-2 border-primary/30 rounded-2xl px-8 py-6 hover:border-primary/60 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 group"
               >
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <Phone className="w-7 h-7 text-primary" />
                 </div>
                 <span className="font-bebas text-4xl sm:text-5xl md:text-6xl text-primary">
-                  (555) 123-4567
+                  (401) 992 8142
                 </span>
               </a>
             </div>
