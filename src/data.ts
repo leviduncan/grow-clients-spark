@@ -181,18 +181,26 @@ export const howItWorksSteps = [
   },
 ];
 
-
 export const howItWorksStepsCTA = [
   "BOOK YOUR SETUP CALL"
-]
+];
 // ============================================================
 // DEMO TALKING POINTS (Demo.tsx)
 // ============================================================
+export const demoTalkingPointsHeader = [
+  { title: "DON'T JUST<span class='text-primary'> TAKE OUR WORD</span> FOR IT - <span class='text-primary'>CALL RIGHT NOW</span>" },
+  { subtitle: "This is an AI answering right now. Call and ask about:" },
+  { minititle: "Experience how natural it sounds. No sales pitch - just try it." },
+];
 
-export const talkingPoints = [
+export const demoTalkingPoints = [
   "Emergency furnace repair",
   "AC maintenance appointment",
   "Pricing for new system installation",
+];
+
+export const demoTalkingPointsCTA = [
+  "401 992 8142"
 ];
 
 // ============================================================

@@ -1,6 +1,6 @@
 import { Phone } from "lucide-react";
 import ScrollAnimation from "./ScrollAnimation";
-import { talkingPoints } from "@/data";
+import { demoTalkingPoints, demoTalkingPointsHeader, demoTalkingPointsCTA } from "@/data";
 
 const Demo = () => {
 
@@ -11,22 +11,22 @@ const Demo = () => {
           <ScrollAnimation>
             {/* Header */}
             <div className="text-center mb-12">
-              <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl text-foreground mb-4">
-                DON'T JUST TAKE OUR WORD FOR IT - <span className="text-primary">CALL RIGHT NOW</span>
-              </h2>
+              <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl text-foreground mb-4"
+              dangerouslySetInnerHTML={{ __html: demoTalkingPointsHeader[0].title }}
+              />
             </div>
 
             {/* Phone Number Display */}
             <div className="text-center mb-10">
               <a
-                href="tel:+14019928142"
+                href={`tel:+1${demoTalkingPointsCTA}`}
                 className="inline-flex items-center justify-center gap-4 bg-card border-2 border-primary/30 rounded-2xl px-8 py-6 hover:border-primary/60 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 group"
               >
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <Phone className="w-7 h-7 text-primary" />
                 </div>
                 <span className="font-bebas text-4xl sm:text-5xl md:text-6xl text-primary">
-                  (401) 992 8142
+                  {demoTalkingPointsCTA}
                 </span>
               </a>
             </div>
@@ -34,12 +34,12 @@ const Demo = () => {
             {/* Subtext */}
             <div className="text-center">
               <p className="font-inter text-lg text-foreground mb-6">
-                This is an AI answering right now. Call and ask about:
+                {demoTalkingPointsHeader[1].subtitle}
               </p>
 
               {/* Talking Points */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                {talkingPoints.map((point, idx) => (
+                {demoTalkingPoints.map((point, idx) => (
                   <div
                     key={idx}
                     className="bg-card border border-border rounded-full px-5 py-2.5 shadow-sm"
@@ -51,7 +51,7 @@ const Demo = () => {
 
               {/* Final CTA */}
               <p className="font-inter text-muted-foreground max-w-xl mx-auto">
-                Experience how natural it sounds. No sales pitch - just try it.
+                {demoTalkingPointsHeader[2].minititle}
               </p>
             </div>
           </ScrollAnimation>
