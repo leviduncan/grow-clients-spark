@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import ScrollAnimation from "./ScrollAnimation";
 import { CheckCircle } from "lucide-react";
 import VideoOverlay from "./VideoOverlay";
-import { solutionSteps } from "@/data";
+import { solutionSteps, solutionStepsHeader, solutionStepsBottom, solutionStepsCTA } from "@/data";
 
 const TheSolution = () => {
 
@@ -13,13 +13,13 @@ const TheSolution = () => {
         {/* The Solution Section */}
         <ScrollAnimation>
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-5xl md:text-6xl text-foreground mb-4">
-              THE <span className="text-primary">SOLUTION</span>
-            </h2>
+            <h2 className="font-bebas text-5xl md:text-6xl text-foreground mb-4"
+              dangerouslySetInnerHTML={{ __html: solutionStepsHeader[0].title }}
+            />
             <p className="font-inter text-lg text-muted-foreground max-w-2xl mx-auto">
-              Meet Your New AI Receptionist </p>
+              {solutionStepsHeader[1].subtitle} </p>
             <p className="font-inter text-sm text-muted-foreground max-w-2xl mx-auto">
-              Sounds human. Available 24/7. Books appointments instantly.</p>
+              {solutionStepsHeader[2].minititle}</p>
           </div>
         </ScrollAnimation>
 
@@ -46,10 +46,10 @@ const TheSolution = () => {
           </div>
           <div className="text-center mb-10">
             <h3 className="font-bebas text-3xl text-foreground mb-4">
-              No app to check. No texts to send. No calendar Tetris.
+              {solutionStepsBottom}
             </h3>
           </div>
-          <VideoOverlay position="relative" bg="" content="SEE IT RUNNING LIVE" />
+          <VideoOverlay position="relative" bg="" content={solutionStepsCTA} />
         </ScrollAnimation>
       </div>
     </section>

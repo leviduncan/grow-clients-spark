@@ -109,6 +109,12 @@ export const theProblemHowMuch = [
 // THE SOLUTION STEPS (TheSolution.tsx)
 // ============================================================
 
+export const solutionStepsHeader = [
+  { title: "THE <span class='text-primary'>SOLUTION</span>" },
+  { subtitle: "Meet Your New AI Receptionist" },
+  { minititle: "Sounds human. Available 24/7. Books appointments instantly." },
+];
+
 export const solutionSteps = [
   {
     step: "01",
@@ -132,6 +138,14 @@ export const solutionSteps = [
     ],
   },
 ];
+
+export const solutionStepsBottom = [
+  "No app to check. No texts to send. No calendar Tetris."
+]
+
+export const solutionStepsCTA = [
+  "SEE IT RUNNING LIVE"
+]
 
 // ============================================================
 // HOW IT WORKS COMPONENT (HowItWorks.tsx)
