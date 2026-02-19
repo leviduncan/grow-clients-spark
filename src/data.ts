@@ -151,6 +151,12 @@ export const solutionStepsCTA = [
 // HOW IT WORKS COMPONENT (HowItWorks.tsx)
 // ============================================================
 
+export const howItWorksStepsHeader = [
+  { title: "HOW <span class='text-primary'>IT WORKS</span>" },
+  { subtitle: "From Setup to Booked Appointments in 48 Hours" },
+  { minititle: "Sounds human. Available 24/7. Books appointments instantly." },
+];
+
 export const howItWorksSteps = [
   {
     step: "01",
@@ -175,6 +181,10 @@ export const howItWorksSteps = [
   },
 ];
 
+
+export const howItWorksStepsCTA = [
+  "BOOK YOUR SETUP CALL"
+]
 // ============================================================
 // DEMO TALKING POINTS (Demo.tsx)
 // ============================================================

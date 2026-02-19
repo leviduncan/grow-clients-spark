@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
 import { CheckCircle, ArrowRight } from "lucide-react";
-import { howItWorksSteps } from "@/data";
+import { howItWorksSteps, howItWorksStepsHeader, howItWorksStepsCTA } from "@/data";
 
 const HowItWorks = () => {
 
@@ -14,13 +14,13 @@ const HowItWorks = () => {
         {/* The Solution Section */}
         <ScrollAnimation>
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-5xl md:text-6xl text-foreground mb-4">
-              HOW IT <span className="text-primary">WORKS</span>
-            </h2>
+            <h2 className="font-bebas text-5xl md:text-6xl text-foreground mb-4"
+              dangerouslySetInnerHTML={{ __html: howItWorksStepsHeader[0].title }}
+            />
             <p className="font-inter text-lg text-muted-foreground max-w-2xl mx-auto">
-              From Setup to Booked Appointments in 48 Hours </p>
+              {howItWorksStepsHeader[1].subtitle}</p>
             <p className="font-inter text-sm text-muted-foreground max-w-2xl mx-auto">
-              Sounds human. Available 24/7. Books appointments instantly.</p>
+              {howItWorksStepsHeader[2].minititle}</p>
           </div>
         </ScrollAnimation>
 
@@ -58,7 +58,7 @@ const HowItWorks = () => {
               className="group"
             >
               <Link to="/bookademo#bookademo" className="flex align-middle uppercase">
-                Book Your Setup Call
+                {howItWorksStepsCTA}
                 <ArrowRight className="my-1 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
