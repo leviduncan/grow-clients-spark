@@ -135,6 +135,7 @@ export const LeadForm = ({
             placeholder="Business Name"
             required
           />
+          
           <Input
             name="businessType"
             value={formData.businessType}
@@ -154,30 +155,35 @@ export const LeadForm = ({
       />
 
       {/* Consents */}
-      <div className="space-y-4">
-        <label className="flex gap-3 items-start">
-          <Checkbox
-            checked={formData.sms}
-            onCheckedChange={v =>
-              setFormData(p => ({ ...p, sms: !!v }))
-            }
-          />
-          <span className="text-sm text-muted-foreground">
-            I consent to receiving SMS messages.
-          </span>
-        </label>
+      <div>
+        <p className="text-sm text-muted-foreground mb-2">
+By submitting this form and checking the box below, you consent to receive SMS appointment confirmations and reminders from Grow Clients AI at the number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for assistance.
+        </p>
+        <div className="space-y-4">
+          <label className="flex gap-3 items-start">
+            <Checkbox className="rounded-none" required
+              checked={formData.sms}
+              onCheckedChange={v =>
+                setFormData(p => ({ ...p, sms: !!v }))
+              }
+            />
+            <span className="text-sm text-muted-foreground">
+              <sup className="text-red-600">*</sup>I consent to receiving SMS messages.
+            </span>
+          </label>
 
-        <label className="flex gap-3 items-start">
-          <Checkbox
-            checked={formData.emailConsent}
-            onCheckedChange={v =>
-              setFormData(p => ({ ...p, emailConsent: !!v }))
-            }
-          />
-          <span className="text-sm text-muted-foreground">
-            I consent to receiving email communications.
-          </span>
-        </label>
+          <label className="flex gap-3 items-start">
+            <Checkbox className="rounded-none"
+              checked={formData.emailConsent}
+              onCheckedChange={v =>
+                setFormData(p => ({ ...p, emailConsent: !!v }))
+              }
+            />
+            <span className="text-sm text-muted-foreground">
+              I consent to receiving email communications.
+            </span>
+          </label>
+        </div>
       </div>
 
       {/* Submit */}
