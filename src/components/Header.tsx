@@ -56,7 +56,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
             <Button variant="default" size="default" className="group" asChild>
-              <Link to="/bookademo#bookademo">
+              <Link to="/bookademo">
                 Book a Demo
                 <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
@@ -90,7 +90,7 @@ const Header = () => {
               </Link>
             ))}
             <Button variant="default" size="lg" className="w-full mt-4 group" asChild>
-              <Link to="/bookademo#bookademo">
+              <Link to="/bookademo">
                 Book a Demo
                 <ArrowRight className="my-1 ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
