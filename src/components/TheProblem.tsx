@@ -1,5 +1,5 @@
 import { X, Check } from "lucide-react";
-import { theProblem } from "@/data";
+import { theProblem, theProblemHeader, theProblemHowMuch } from "@/data";
 
 const TheProblem = () => {
 
@@ -9,11 +9,11 @@ const TheProblem = () => {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl text-foreground mb-4">
-              THE <span className="text-primary">PROBLEM</span>
-            </h2>
+            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl text-foreground mb-4" 
+            dangerouslySetInnerHTML={{ __html: theProblemHeader[0].title }}
+            />
             <p className="font-inter text-lg text-muted-foreground max-w-2xl mx-auto">
-              How Many Calls Are You Missing Right Now?
+              {theProblemHeader[1].subtitle}
             </p>
           </div>
 
@@ -58,9 +58,8 @@ const TheProblem = () => {
             ))}
           </div>
           <div className="text-center mt-16">
-            <p className="font-inter text-lg max-w-2xl mx-auto">
-              <strong>How much is this costing you?</strong> If you're missing just <strong>10 calls</strong> per month at <strong>$400-800 per job</strong>, that's <strong>$48,000-$96,000 per year</strong> walking out the door.
-            </p>
+            <p className="font-inter text-lg max-w-2xl mx-auto"
+              dangerouslySetInnerHTML={{ __html: theProblemHowMuch }} />
           </div>
         </div>
       </div>

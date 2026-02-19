@@ -78,6 +78,10 @@ export const heroBottomText = [
 // ============================================================
 // THE PROBLEM (TheProblem.tsx)
 // ============================================================
+export const theProblemHeader = [
+  { title: "THE <span class='text-primary'>PROBLEM</span>" },
+  { subtitle: "How Many Calls Are You Missing Right Now?" },
+];
 
 export const theProblem = [
   {
@@ -96,6 +100,10 @@ export const theProblem = [
       "HVAC contractors lose an average of $4,000-7,000 per month in missed calls. That's $50,000-84,000 per year in lost revenue.",
   },
 ];
+
+export const theProblemHowMuch = [
+  "<strong>How much is this costing you?</strong> If you're missing just <strong>10 calls</strong> per month at <strong>$400-800 per job</strong>, that's <strong>$48,000-$96,000 per year</strong> walking out the door."
+]
 
 // ============================================================
 // THE SOLUTION STEPS (TheSolution.tsx)
