@@ -3,57 +3,12 @@ import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Phone, Target, Zap, CheckCircle, ArrowRight } from "lucide-react";
-import aiAutomation from "@/assets/ai-automation.png";
-import teamCollaboration from "@/assets/team-collaboration.png";
-import phoneMockupDashboard from "@/assets/phone-mockup-dashboard.png";
+import { CheckCircle, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { solutionsOfferings } from "@/data";
 
 const ServicesPage = () => {
-  const solutions = [
-    {
-      icon: Phone,
-      title: "AI Voice Assistants",
-      description: "Never miss another call. Our AI agents answer 24/7, qualify leads, book appointments, and follow up automatically.",
-      features: [
-        "24/7 call answering",
-        "Intelligent lead qualification",
-        "Automatic appointment booking",
-        "Natural, human-like conversations",
-        "Custom scripts for your business",
-      ],
-      image: aiAutomation,
-      imageOnRight: true,
-    },
-    {
-      icon: Target,
-      title: "Lead Capture Systems",
-      description: "Capture every potential customer with smart forms, chatbots, and automated follow-up sequences that convert.",
-      features: [
-        "Smart lead capture forms",
-        "Website chatbots",
-        "Automated email sequences",
-        "Lead scoring & prioritization",
-        "CRM integration",
-      ],
-      image: teamCollaboration,
-      imageOnRight: false,
-    },
-    {
-      icon: Zap,
-      title: "Workflow Automation",
-      description: "Automate repetitive tasks and free up your team to focus on what matters—delivering great service.",
-      features: [
-        "Task automation",
-        "Appointment reminders",
-        "Invoice & payment automation",
-        "Review request sequences",
-        "Custom workflow builders",
-      ],
-      image: phoneMockupDashboard,
-      imageOnRight: true,
-    },
-  ];
+  const solutions = solutionsOfferings;
 
   return (
     <div className="min-h-screen font-inter">

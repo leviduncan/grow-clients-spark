@@ -1,35 +1,10 @@
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import ScrollAnimation from "./ScrollAnimation";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import VideoOverlay from "./VideoOverlay";
+import { solutionSteps } from "@/data";
 
 const TheSolution = () => {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-
-  const howItWorks = [
-    {
-      step: "01",
-      title: "Answers Every Call",
-      description: [
-        "Emergency furnace repair at 2am? Routine maintenance at 8am? Your AI picks up every single call, every time."
-      ],
-    },
-    {
-      step: "02",
-      title: "Books Appointments",
-      description: [
-        "Instantly schedules jobs directly into your calendar. Customers get confirmed without you lifting a finger."
-      ],
-    },
-    {
-      step: "03",
-      title: "Sounds Completely Human",
-      description: [
-        "Natural conversations, not robotic menus. Customers think they're talking to your best employee.",
-      ],
-    },
-  ];
 
   return (
     <section className="py-20 bg-muted-2 ">
@@ -50,7 +25,7 @@ const TheSolution = () => {
 
         <ScrollAnimation>
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {howItWorks.map((item, idx) => (
+            {solutionSteps.map((item, idx) => (
               <div key={idx} className="relative">
                 <Card className="text-center hover:border-primary/30 transition-colors">
                   <CardContent className="p-6">

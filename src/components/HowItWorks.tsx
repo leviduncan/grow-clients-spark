@@ -1,35 +1,11 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
 import { CheckCircle, ArrowRight } from "lucide-react";
+import { howItWorksSteps } from "@/data";
 
 const HowItWorks = () => {
-
-  const howItWorks = [
-    {
-      step: "01",
-      title: "Quick Setup Call (30 minutes)",
-      description: [
-        "We learn about your business, services, and pricing. You tell us how you want calls handled."
-      ],
-    },
-    {
-      step: "02",
-      title: "We Build Your AI (24-48 hours)",
-      description: [
-        "We create and train your custom AI receptionist with your business information, voice, and call scripts."
-      ],
-    },
-    {
-      step: "03",
-      title: "Go Live",
-      description: [
-        "Forward your number or use ours. Your AI starts answering calls immediately. You monitor everything from a simple dashboard.",
-      ],
-    },
-  ];
 
   return (
     <section className="py-20 bg-background ">
@@ -50,7 +26,7 @@ const HowItWorks = () => {
 
         <ScrollAnimation>
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {howItWorks.map((item, idx) => (
+            {howItWorksSteps.map((item, idx) => (
               <div key={idx} className="relative">
                 <Card className="border-border/50 hover:shadow-lg transition-all duration-300 h-full">
                   <CardContent className="p-8">
@@ -67,7 +43,7 @@ const HowItWorks = () => {
                     )}</p>
                   </CardContent>
                 </Card>
-                {idx < howItWorks.length - 1 && (
+                {idx < howItWorksSteps.length - 1 && (
                   <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
                     <ArrowRight className="w-8 h-8 text-primary/40" />
                   </div>

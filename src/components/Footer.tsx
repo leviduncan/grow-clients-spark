@@ -1,30 +1,10 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import logo from "@/assets/logo-wht.png";
+import { footerLinks, socialLinks } from "@/data";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const footerLinks = {
-    solutions: [
-      { name: "AI Voice Agents", path: "/services" },
-      { name: "Lead Generation", path: "/services" },
-      { name: "Appointment Booking", path: "/services" },
-      { name: "Customer Support", path: "/services" },
-    ],
-    company: [
-      { name: "About Us", path: "/about" },
-      { name: "Pricing", path: "/pricing" },
-      { name: "Demos", path: "/demos" },
-      { name: "Contact", path: "/contact" },
-    ],
-    resources: [
-      { name: "Blog", path: "#" },
-      { name: "Case Studies", path: "#" },
-      { name: "Documentation", path: "#" },
-      { name: "Help Center", path: "#" },
-    ],
-  };
 
   return (
     <footer className="gradient-navy text-navy-foreground">
@@ -54,11 +34,7 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="mt-6 flex gap-4">
-              {[
-                { icon: Linkedin, href: "#" },
-                { icon: Twitter, href: "#" },
-                { icon: Facebook, href: "#" },
-              ].map((social, index) => (
+              {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}

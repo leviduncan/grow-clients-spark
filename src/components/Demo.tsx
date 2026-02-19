@@ -1,12 +1,8 @@
 import { Phone } from "lucide-react";
 import ScrollAnimation from "./ScrollAnimation";
+import { talkingPoints } from "@/data";
 
 const Demo = () => {
-  const talkingPoints = [
-    "Emergency furnace repair",
-    "AC maintenance appointment",
-    "Pricing for new system installation",
-  ];
 
   return (
     <section className="py-20 sm:py-32 bg-muted-2">

@@ -5,9 +5,7 @@ import ScrollAnimation from "@/components/ScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { Calendar, Play, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import demoMax from "@/assets/demo-max.png";
-import demoChloe from "@/assets/demo-chloe.png";
-import demoShelley from "@/assets/demo-shelley.png";
+import { demos } from "@/data";
 
 interface DemoCardProps {
   name: string;
@@ -63,39 +61,6 @@ const DemoCard = ({ name, industry, description, cta, image, imageOnRight, onPla
 
 const Demos = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-
-  const demos = [
-    {
-      name: "MAX",
-      industry: "HVAC / TRADES",
-      description:
-        "Max handles everything from booking appointments to following up with leads—so your team can focus on what they do best. From HVAC to plumbing, electrical to roofing, Max keeps your phones covered 24/7.",
-      cta: "CALL MAX NOW TO SEE HOW HE CAN HELP YOUR TRADES BUSINESS",
-      image: demoMax,
-      imageOnRight: true,
-      videoUrl: "https://growclientsai.com/assets/hvac-demo.mp4",
-    },
-    {
-      name: "CHLOE",
-      industry: "CAFÉ / LOCAL BUSINESS",
-      description:
-        "Chloe is your friendly virtual receptionist, perfect for cafés, restaurants, and local shops. She takes orders, answers FAQs, and makes every customer feel welcome—even during your busiest hours.",
-      cta: "GIVE CHLOE A CALL AND HEAR THE DIFFERENCE",
-      image: demoChloe,
-      imageOnRight: false,
-      videoUrl: "https://growclientsai.com/assets/cafe-demo.mp4",
-    },
-    {
-      name: "SHELLEY",
-      industry: "MED SPA / PROFESSIONAL SERVICES",
-      description:
-        "Shelley brings elegance and professionalism to every call. Perfect for med spas, dental offices, law firms, and more. She books appointments, answers questions, and delivers a premium experience every time.",
-      cta: "CALL SHELLEY TO EXPERIENCE WHITE-GLOVE SERVICE",
-      image: demoShelley,
-      imageOnRight: true,
-      videoUrl: "https://growclientsai.com/assets/med-spa-demo.mp4",
-    },
-  ];
 
   return (
     <div className="min-h-screen font-inter">

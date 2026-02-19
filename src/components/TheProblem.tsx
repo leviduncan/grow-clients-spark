@@ -1,20 +1,7 @@
 import { X, Check } from "lucide-react";
+import { theProblem } from "@/data";
 
 const TheProblem = () => {
-  const theProblem = [
-    {
-      title: "After-Hours Emergencies",
-      description: "Someone's furnace dies at 11pm. They call you. No answer. They call your competitor. You lose $800-1,200.",
-    },
-    {
-      title: "Busy Season Overload",
-      description: "Your phone rings while you're under a boiler. By the time you call back, they've already booked someone else.",
-    },
-    {
-      title: "The Real Cost",
-      description: "HVAC contractors lose an average of $4,000-7,000 per month in missed calls. That's $50,000-84,000 per year in lost revenue.",
-    },
-  ];
 
   return (
     <section className="py-20 sm:py-32 bg-background">

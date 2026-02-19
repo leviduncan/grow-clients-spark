@@ -5,147 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   ArrowRight,
-  Phone,
-  Settings,
-  TestTube,
-  Rocket,
-  BarChart3,
   CheckCircle,
   MessageSquare,
-  Bot,
   User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { howItWorksPageSteps, howItWorksDifferences, callExamples } from "@/data";
 import CTA from "@/components/CTA";
 
 const HowItWorksPage = () => {
-  const steps = [
-    {
-      number: "01",
-      title: "Discovery Call",
-      duration: "30 Minutes",
-      icon: Phone,
-      whatWeCover: [
-        "Your current call handling process",
-        "Types of calls you receive (emergency, maintenance, sales)",
-        "Your service area and pricing",
-        "Your scheduling preferences",
-        "Integration with your existing tools (CRM, calendar, etc.)",
-      ],
-      whatYouGet:
-        "A clear picture of how your AI will handle every call type.",
-    },
-    {
-      number: "02",
-      title: "We Build Your AI",
-      duration: "24-48 Hours - We Do This",
-      icon: Settings,
-      whatHappens: [
-        "We script your AI's responses for every scenario",
-        "Train it on HVAC terminology and your specific services",
-        "Set up appointment booking with your availability",
-        "Connect to your calendar and CRM",
-        "Test it with dozens of mock calls",
-      ],
-      whatYouDo: "Nothing. We handle everything.",
-    },
-    {
-      number: "03",
-      title: "Testing & Approval",
-      duration: "1 Hour",
-      icon: TestTube,
-      whatHappens: [
-        "We send you a test number",
-        "You call it and see how it handles different scenarios",
-        "We make any adjustments you want",
-        "You approve it for launch",
-      ],
-      examples: [
-        '"My furnace isn\'t working"',
-        '"How much for a new AC unit?"',
-        '"Can you come out today?"',
-        '"I want to schedule maintenance"',
-      ],
-    },
-    {
-      number: "04",
-      title: "Go Live",
-      duration: "5 Minutes",
-      icon: Rocket,
-      options: [
-        {
-          name: "Option A - Call Forwarding",
-          recommended: true,
-          description:
-            "Forward your existing business number to your AI. When you're available, calls go to you. When you're not, they go to AI.",
-        },
-        {
-          name: "Option B - New Number",
-          recommended: false,
-          description:
-            "We give you a dedicated number for your AI. Use it on your website, Google Business, and marketing.",
-        },
-      ],
-    },
-    {
-      number: "05",
-      title: "Monitor & Optimize",
-      duration: "Ongoing",
-      icon: BarChart3,
-      dashboard: [
-        "Every call received (with recordings)",
-        "Appointments booked",
-        "Messages taken",
-        "Call transcripts",
-        "Performance metrics",
-      ],
-      weeklyCheckins:
-        "We review performance and make improvements based on real calls.",
-    },
-  ];
-
-  const differences = [
-    {
-      title: "Not a Chatbot",
-      description:
-        "This isn't a text bot that gives canned responses. It's a voice AI that has natural conversations over the phone.",
-      icon: Bot,
-    },
-    {
-      title: "Not a Call Tree",
-      description:
-        'No "Press 1 for this, Press 2 for that." It answers like a human receptionist.',
-      icon: Phone,
-    },
-    {
-      title: "Not Replacing You",
-      description:
-        "It handles the routine stuff so you can focus on the important calls and actually doing HVAC work.",
-      icon: User,
-    },
-  ];
-
-  const callExamples = [
-    {
-      scenario: "Emergency Scenario",
-      customer: "My heat's not working and it's 20 degrees outside.",
-      ai: "I'm sorry to hear that. I know how stressful that is, especially in this weather. Let me get you on the schedule right away. What's your address?",
-      result: "Books emergency slot, sends you SMS alert",
-    },
-    {
-      scenario: "Maintenance Scenario",
-      customer: "I need to schedule my annual AC checkup.",
-      ai: "Perfect timing to get that done before summer. We have openings on Tuesday the 15th or Thursday the 17th. Which works better for you?",
-      result: "Books appointment, sends confirmation",
-    },
-    {
-      scenario: "Pricing Scenario",
-      customer: "How much for a new furnace?",
-      ai: "Great question. Installation typically ranges from $3,500 to $7,000 depending on the size and model. I'd like to get one of our technicians to your home for a free assessment. Are you available this week?",
-      result: "Books estimate appointment",
-    },
-  ];
-
   return (
     <div className="min-h-screen font-inter bg-background">
       <Header />
@@ -180,7 +48,7 @@ const HowItWorksPage = () => {
           </ScrollAnimation>
 
           <div className="max-w-4xl mx-auto space-y-12">
-            {steps.map((step, index) => (
+            {howItWorksPageSteps.map((step, index) => (
               <ScrollAnimation key={index}>
                 <Card className="border-border hover:border-primary/30 transition-colors overflow-hidden">
                   <CardContent className="p-0">
@@ -364,7 +232,7 @@ const HowItWorksPage = () => {
           </ScrollAnimation>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {differences.map((diff, index) => (
+            {howItWorksDifferences.map((diff, index) => (
               <ScrollAnimation key={index}>
                 <Card className="h-full border-border hover:border-primary/30 transition-colors">
                   <CardContent className="p-6 text-center">

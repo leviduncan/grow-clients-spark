@@ -1,17 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check, Calendar, Users, DollarSign, Headphones } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import demoMax from "@/assets/demo-max.png";
 import VideoOverlay from "./VideoOverlay";
+import { floatingBadges, heroFeatures, heroHeader, heroCTA, heroBottomText } from "@/data";
 
 const Hero = () => {
   const location = useLocation();
-  const floatingBadges = [
-    { icon: Calendar, label: "Book Appointments", position: "top-7 left-0 -translate-x-4" },
-    { icon: Users, label: "Secure Leads", position: "top-8 right-0 translate-x-4" },
-    { icon: DollarSign, label: "Sales", position: "bottom-16 left-0 -translate-x-8" },
-    { icon: Headphones, label: "24/7 Support", position: "bottom-14 right-0 translate-x-8" },
-  ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center gradient-hero overflow-hidden pt-20 pb-12">
@@ -35,21 +30,19 @@ const Hero = () => {
 
             {/* Main Headline */}
             <div>
-              <h1 className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.9] text-foreground">
-                Never  <span className="text-primary">Miss </span>Another <br /><span className="text-primary">HVAC Call </span>Again
-              </h1>
+              <h1
+                className="font-bebas text-5xl sm:text-6xl md:text-7xl leading-[0.9] text-foreground"
+                dangerouslySetInnerHTML={{ __html: heroHeader[0].title }}
+              />
               {/* Description */}
-              <p className="font-inter text-l sm:text-xl  mt-3">
-                Your AI receptionist answers every call 24/7, books appointments, and handles emergencies while you focus on the work. No more missed revenue from after-hours calls.              </p>
+              <p className="font-inter text-l sm:text-xl mt-3">
+                {heroHeader[1].subtitle}
+              </p>
             </div>
 
             {/* Feature List */}
             <div className="space-y-3">
-              {[
-                "Responds to leads in under 60 seconds (before they call your competitor)",
-                "Routes emergencies to your on-call tech automatically",
-                "Books appointments 24/7, even at 2 AM on Sunday"
-              ].map((feature, idx) => (
+              {heroFeatures.map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-primary" />
@@ -67,7 +60,7 @@ const Hero = () => {
                 className="group"
               >
                 <Link to="/bookademo#bookademo" className="flex align-middle">
-                  SEE IT IN ACTION (FREE DEMO CALL)
+                  {heroCTA}
                   <ArrowRight className="my-1 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
@@ -78,7 +71,11 @@ const Hero = () => {
                 See If You're Eligible
               </Button> */}
             </div>
-            <p className="text-sm">Set up in 48 hours • No long-term contract • Cancel anytime</p>
+            <p className="text-sm">
+              {heroBottomText.map((bottomText, idx) => (
+                <span key={idx} className="block sm:inline">{bottomText}</span>
+              ))}
+            </p>
           </div>
 
           {/* Right - Max AI Agent Image */}

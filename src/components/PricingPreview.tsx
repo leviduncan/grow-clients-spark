@@ -3,18 +3,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, ArrowRight, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollAnimation from "./ScrollAnimation";
+import { pricingPreviewFeatures } from "@/data";
 
 const PricingPreview = () => {
-  const features = [
-    "Unlimited call answering (24/7/365)",
-    "Automatic appointment booking",
-    "CRM integration (ServiceTitan, Housecall Pro, etc.)",
-    "Emergency vs routine call routing",
-    "SMS notifications for every call",
-    "Call recordings & transcripts",
-    "Weekly performance reports",
-    "Setup & training included",
-  ];
+  const features = pricingPreviewFeatures;
 
   return (
     <section className="py-20 sm:py-32 bg-background">

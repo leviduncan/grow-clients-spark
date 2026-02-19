@@ -5,11 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   CheckCircle,
-  Phone,
-  Calendar,
-  Link2,
-  BarChart3,
-  HeadphonesIcon,
   ArrowRight,
   Shield,
   TrendingUp,
@@ -17,93 +12,9 @@ import {
   Calculator,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { pricingCategories, pricingFaqs } from "@/data";
 
 const Pricing = () => {
-  const pricingCategories = [
-    {
-      title: "Call Handling",
-      icon: Phone,
-      features: [
-        "Unlimited incoming calls (24/7/365)",
-        "Average 2-minute response time",
-        "Handles emergencies, appointments, and inquiries",
-        "Natural, human-like conversations",
-        "Spanish language support available",
-      ],
-    },
-    {
-      title: "Appointment Booking",
-      icon: Calendar,
-      features: [
-        "Direct calendar integration",
-        "Automatic appointment scheduling",
-        "SMS confirmations sent to customers",
-        "Emergency vs routine prioritization",
-        "No double-booking",
-      ],
-    },
-    {
-      title: "Integrations",
-      icon: Link2,
-      features: [
-        "ServiceTitan",
-        "Housecall Pro",
-        "Jobber",
-        "FieldEdge",
-        "Google Calendar",
-        "Most major HVAC software",
-      ],
-    },
-    {
-      title: "Reporting & Control",
-      icon: BarChart3,
-      features: [
-        "Real-time call notifications via SMS",
-        "Full call recordings & transcripts",
-        "Performance dashboard",
-        "Weekly summary reports",
-        "Call analytics & insights",
-      ],
-    },
-    {
-      title: "Support",
-      icon: HeadphonesIcon,
-      features: [
-        "Complete setup & training included",
-        "Ongoing optimization",
-        "Priority email & phone support",
-        "Script updates as you request them",
-      ],
-    },
-  ];
-
-  const faqs = [
-    {
-      q: "What happens if I need to pause service seasonally?",
-      a: "You can pause for up to 2 months per year. Useful for HVAC contractors with very slow seasons.",
-    },
-    {
-      q: "Do you charge per call or per minute?",
-      a: "No. Unlimited calls included. Answer 50 calls or 500 calls - same price.",
-    },
-    {
-      q: "What if I want to handle some calls myself?",
-      a: 'You can set up forwarding rules. For example: "Forward to my phone first, if no answer in 3 rings, go to AI."',
-    },
-    {
-      q: "Can I upgrade my script or features later?",
-      a: "Yes, anytime. We make script adjustments as your business evolves.",
-    },
-    {
-      q: "What's the cancellation policy?",
-      a: "Month-to-month. Cancel anytime with 30 days notice. We'll even help transition if you need.",
-    },
-    {
-      q: "Is there a setup fee?",
-      a: "Not right now. Complete setup and training included at no extra cost. (Normally $997)",
-    },
-  ];
-
   return (
     <div className="min-h-screen font-inter bg-background">
       <Header />
@@ -335,7 +246,7 @@ const Pricing = () => {
             </div>
 
             <div className="max-w-3xl mx-auto space-y-6">
-              {faqs.map((faq, index) => (
+              {pricingFaqs.map((faq, index) => (
                 <Card
                   key={index}
                   className="border-border hover:border-primary/30 transition-colors"

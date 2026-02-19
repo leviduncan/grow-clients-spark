@@ -3,38 +3,12 @@ import Footer from "@/components/Footer2";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  PhoneOff,
-  TrendingUp,
-  Target,
-  Building2,
-  FileX,
-  Award,
-} from "lucide-react";
+import { ArrowRight, PhoneOff, TrendingUp, Target } from "lucide-react";
 import { Link } from "react-router-dom";
+import { companyValues } from "@/data";
 
 const About = () => {
-  const values = [
-    {
-      icon: Building2,
-      title: "Built for Service Businesses, Not Enterprise Giants",
-      description:
-        "We focus exclusively on HVAC contractors. This isn't a generic solution - it's purpose-built for your industry.",
-    },
-    {
-      icon: FileX,
-      title: "No Long-Term Contracts or Hidden Fees",
-      description:
-        "We believe great service keeps customers, not legal contracts.",
-    },
-    {
-      icon: Award,
-      title: "Results-Focused, Not Feature-Focused",
-      description:
-        "We don't care about fancy tech buzzwords. We care about one thing: booking you more jobs.",
-    },
-  ];
+  const values = companyValues;
 
   return (
     <div className="min-h-screen font-inter bg-background">
