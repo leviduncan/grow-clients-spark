@@ -19,7 +19,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: rm -f package-lock.json && npm install
+        run: npm ci
 
       - name: Build Vite site
         run: npm run build
@@ -31,7 +31,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
-          source: "dist/*"
+          source: ./dist/
           target: "/srv/growclientsai"
 
       - name: Reload Caddy

@@ -1,25 +1,27 @@
+import Logo from "./Logo";
 import { Page, Button } from "./UI";
 
-export const Footer = ({ onPageChange }: { onPageChange: (page: Page) => void }) => {
+export const Footer = ({ onPageChange, isDarkMode }: { onPageChange: (page: Page) => void; isDarkMode: boolean }) => {
   return (
     <footer className="bg-primary dark:bg-dark-bg text-white py-16 px-4 md:px-8 border-t border-white/10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Brand */}
         <div className="col-span-1 md:col-span-1">
-          <div className="flex items-center gap-2 mb-6">
+          {/* <div className="flex items-center gap-2 mb-6">
             <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
               <span className="text-primary font-bold text-xl">G</span>
             </div>
             <span className="font-display font-bold text-xl tracking-tight">
               GrowClients<span className="text-accent">AI</span>
             </span>
-          </div>
+          </div> */}
+          <Logo onPageChange={onPageChange} isDarkMode={isDarkMode} />
           <p className="text-white/60 text-sm leading-relaxed mb-6">
             AI-powered voice agents that answer every call 24/7. Never miss another HVAC lead.
           </p>
           <div className="space-y-2 text-sm text-white/80">
             <p>info@growclientsai.com</p>
-            <p>(401) 992-8142</p>
+            <p>(484) 600-6010</p>
           </div>
         </div>
 

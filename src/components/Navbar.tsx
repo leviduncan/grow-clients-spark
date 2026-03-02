@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Sun, Moon, Button, Page } from "./UI";
+import Logo from "./Logo";
 
-export const Navbar = ({ 
-  currentPage, 
+export const Navbar = ({
+  currentPage,
   onPageChange,
   isDarkMode,
   toggleDarkMode
-}: { 
-  currentPage: Page, 
+}: {
+  currentPage: Page,
   onPageChange: (page: Page) => void,
   isDarkMode: boolean,
   toggleDarkMode: () => void
@@ -32,17 +33,7 @@ export const Navbar = ({
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 dark:bg-primary/80 backdrop-blur-lg shadow-md py-3' : 'bg-transparent py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         {/* Logo */}
-        <div 
-          className="flex items-center gap-2 cursor-pointer" 
-          onClick={() => onPageChange('home')}
-        >
-          <div className="w-8 h-8 bg-primary dark:bg-accent rounded-lg flex items-center justify-center">
-            <span className="text-white dark:text-primary font-bold text-xl">G</span>
-          </div>
-          <span className="font-display font-bold text-xl tracking-tight text-primary dark:text-white">
-            GrowClients<span className="text-secondary dark:text-accent">AI</span>
-          </span>
-        </div>
+        <Logo onPageChange={onPageChange} isDarkMode={isDarkMode} />
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
@@ -60,16 +51,16 @@ export const Navbar = ({
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <button 
+          <button
             onClick={toggleDarkMode}
             className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-text-secondary dark:text-dark-text-secondary"
             aria-label="Toggle dark mode"
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          
-          <Button 
-            variant="primary" 
+
+          <Button
+            variant="primary"
             className="hidden sm:flex py-2 px-4 text-sm"
             onClick={() => onPageChange('book-a-demo')}
           >
@@ -77,7 +68,7 @@ export const Navbar = ({
           </Button>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className="md:hidden p-2 text-primary dark:text-white"
             onClick={() => setIsMenuOpen(true)}
             aria-label="Open menu"
@@ -126,8 +117,8 @@ export const Navbar = ({
                   {link.label}
                 </button>
               ))}
-              <Button 
-                variant="primary" 
+              <Button
+                variant="primary"
                 className="w-full mt-4 text-xl py-4"
                 onClick={() => {
                   onPageChange('book-a-demo');

@@ -137,7 +137,7 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      <Footer onPageChange={handlePageChange} />
+      <Footer onPageChange={handlePageChange} isDarkMode='true' />
 
       {/* Floating Bottom CTA for Mobile */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 p-4 pointer-events-none">
