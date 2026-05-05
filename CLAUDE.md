@@ -150,3 +150,38 @@ Before editing them, grep for imports to confirm they're actually in use.
 - `hvac.png`, `plumber.png`, `electrician.png` — trade industry images
 - `Phone.png`, `Riley.png` — AI receptionist persona images (used in `Home.tsx`)
 - `logo-blk.png`, `logo-wht.png` — logo variants for light/dark mode
+
+
+### Technical Architecture
+
+**System Architecture:**
+```
+Incoming Call → Twilio → Vapi (AI Voice Agent)
+                              ↓
+                    [Dual Mode: Live / Demo]
+                              ↓
+                    n8n Webhook (end-of-call-report only)
+                              ↓
+              ┌───────────────┼───────────────┐
+              ↓               ↓               ↓
+        Google Sheets    Appointment      SMS Follow-up
+        (Call Log)       Booking          (Missed Call
+                         (Google Cal)      Text-Back)
+                              ↓
+                        Telegram Alert
+                        (to Darrin)
+```
+
+**Critical Technical Knowledge:**
+- **VAPI webhook architecture:** Server URL sends multiple event types throughout a call lifecycle. Only `end-of-call-report` contains complete data. Use an IF node in n8n to filter for this event type only.
+- **Duplicate webhook prevention:** Never configure both a VAPI Server URL and a custom tool to POST to the same n8n endpoint — this causes duplicate entries.
+- **A2P 10DLC:** Required for SMS campaigns. Registration process: business profile → brand → campaign → phone number assignment. Already drafted Privacy Policy and ToS.
+- **n8n MCP Server:** Available at `https://n8n.growclientsai.com/mcp-server/http` for programmatic workflow interaction.
+
+**When Darrin asks for technical help:**
+- Follow the **WAT framework**: Check for existing workflows/tools first, build new only when needed.
+- Produce production-ready code and configurations, not pseudocode or concepts.
+- Document edge cases, error handling, and failure modes in every solution.
+- If a solution involves paid API calls, flag the cost before running.
+
+---
