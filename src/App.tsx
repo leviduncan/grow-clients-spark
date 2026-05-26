@@ -2,16 +2,7 @@ const SONIKA_X_URL = "https://x.com/trysonika";
 
 export default function App() {
   return (
-    <div className="relative isolate min-h-screen flex flex-col bg-white text-black antialiased overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-40 -left-40 -z-10 h-125 w-125 md:h-180 md:w-180 rounded-full bg-[#00bf63] opacity-[0.20] blur-[140px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-40 -right-40 -z-10 h-125 w-125 md:h-180 md:w-180 rounded-full bg-[#00bf63] opacity-[0.30] blur-[140px]"
-      />
-
+    <div className="min-h-screen flex flex-col bg-white text-black antialiased">
       <header className="w-full px-6 py-6 md:px-10 md:py-8">
         <a href="/" aria-label="GrowClientsAI home" className="inline-block">
           <img
@@ -26,19 +17,20 @@ export default function App() {
 
       <main className="flex-1 flex items-center justify-center px-6 md:px-10">
         <section className="w-full max-w-3xl mx-auto text-center py-10 md:py-16">
-          <p className="text-xs md:text-sm uppercase tracking-[0.18em] text-neutral-500 mb-5 border border-green-300 p-2 rounded-full w-2/3 mx-auto bg-opacity-[0.05] bg-green-100">
+          <p className="text-xs md:text-sm uppercase tracking-[0.2em] text-neutral-500 mb-5">
             An update from Darrin Duncan
           </p>
 
           <h1 className="font-semibold tracking-tight text-4xl sm:text-5xl md:text-6xl leading-[1.05] text-black">
-            GrowClientsAI is becoming Sonika.
+            <span>GrowClientsAI is</span>{" "}
+            <span className="md:block">becoming Sonika.</span>
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-neutral-600 leading-snug">
             Voice infrastructure for marketing agencies. Same engine. Bigger market.
           </p>
 
-          <p className="mt-8 mx-auto max-w-[60ch] text-base text-neutral-700 leading-relaxed">
+          <p className="mt-12 mx-auto max-w-[60ch] text-base text-neutral-700 leading-relaxed">
             We started by building AI voice agents for HVAC contractors. The
             technology worked &mdash; calls answered, jobs booked, revenue
             recovered. Now we&rsquo;re packaging that engine into a platform
@@ -51,7 +43,7 @@ export default function App() {
               href={SONIKA_X_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3.5 text-base font-medium text-white transition-colors duration-150 hover:bg-[#10B981] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10B981] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3.5 text-base font-medium text-white transition-colors duration-150 hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Follow the build on X
               <span aria-hidden="true" className="ml-2">&rarr;</span>
@@ -65,7 +57,7 @@ export default function App() {
           Darrin Duncan &middot; Allentown, PA &middot;{" "}
           <a
             href="mailto:darrin@growclientsai.com"
-            className="hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10B981] focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-sm"
+            className="hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-sm"
           >
             darrin@growclientsai.com
           </a>
