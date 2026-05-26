@@ -1,20 +1,15 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# GrowClientsAI
 
-# Run and deploy your AI Studio app
+Transition page for GrowClientsAI → Sonika. Built with Vite + React, deployed via GitHub Actions to Caddy.
 
-This contains everything you need to run your app locally.
+## Local
 
-View your app in AI Studio: https://ai.studio/apps/9402e5df-98f8-4367-8d19-f75f505fc3d2
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # outputs dist/
+```
 
-## Run Locally
+## Deploy
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds `dist/`, SFTPs it to `/srv/growclientsai`, and reloads Caddy.
