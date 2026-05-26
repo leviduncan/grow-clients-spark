@@ -2,7 +2,16 @@ const SONIKA_X_URL = "https://x.com/trysonika";
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black antialiased">
+    <div className="relative isolate min-h-screen flex flex-col bg-white text-black antialiased overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 -left-40 -z-10 h-125 w-125 md:h-180 md:w-180 rounded-full bg-[#00bf63] opacity-[0.20] blur-[140px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-40 -right-40 -z-10 h-125 w-125 md:h-180 md:w-180 rounded-full bg-[#00bf63] opacity-[0.30] blur-[140px]"
+      />
+
       <header className="w-full px-6 py-6 md:px-10 md:py-8">
         <a href="/" aria-label="GrowClientsAI home" className="inline-block">
           <img
@@ -17,7 +26,7 @@ export default function App() {
 
       <main className="flex-1 flex items-center justify-center px-6 md:px-10">
         <section className="w-full max-w-3xl mx-auto text-center py-10 md:py-16">
-          <p className="text-xs md:text-sm uppercase tracking-[0.18em] text-neutral-500 mb-5">
+          <p className="text-xs md:text-sm uppercase tracking-[0.18em] text-neutral-500 mb-5 border border-green-300 p-2 rounded-full w-2/3 mx-auto bg-opacity-[0.05] bg-green-100">
             An update from Darrin Duncan
           </p>
 
