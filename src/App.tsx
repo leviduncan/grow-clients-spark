@@ -51,7 +51,7 @@ export default function App() {
               href={SONIKA_X_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md bg-black px-6 py-3.5 text-base font-medium text-white transition-colors duration-150 hover:bg-[#10B981] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10B981] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3.5 text-base font-medium text-white transition-colors duration-150 hover:bg-[#10B981] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#10B981] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Follow the build on X
               <span aria-hidden="true" className="ml-2">&rarr;</span>
