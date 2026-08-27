@@ -1,0 +1,191 @@
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLayoutEffect, type RefObject } from 'react';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Archivo Black is a heavy face and shifts layout when it swaps in.
+// Without this, every ScrollTrigger start position is measured against
+// the fallback font's metrics and fires at the wrong scroll offset.
+if (typeof document !== 'undefined' && 'fonts' in document) {
+  document.fonts.ready.then(() => ScrollTrigger.refresh());
+}
+
+export { gsap, ScrollTrigger };
+
+/**
+ * Single source of truth for the motion preference. Every animation
+ * helper below branches on this and falls back to the *end state*
+ * instantly -- never to a slower version of the same animation.
+ */
+export const prefersReducedMotion = (): boolean =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/**
+ * Scoped GSAP setup tied to a component's lifetime. Selectors inside
+ * `setup` resolve within `scope`, and everything is reverted on unmount
+ * so no ScrollTrigger outlives its section.
+ */
+export function useGsap(
+  scope: RefObject<HTMLElement | null>,
+  setup: (reduced: boolean) => void,
+  deps: unknown[] = [],
+): void {
+  useLayoutEffect(() => {
+    const el = scope.current;
+    if (!el) return;
+    const ctx = gsap.context(() => setup(prefersReducedMotion()), el);
+    return () => ctx.revert();
+  }, deps);
+}
+
+/** Staggered fade-up on scroll entry. Does not replay on scroll-back. */
+export function revealOnScroll(
+  targets: gsap.TweenTarget,
+  opts: {
+    trigger?: Element | string;
+    stagger?: number;
+    y?: number;
+    delay?: number;
+    duration?: number;
+  } = {},
+): void {
+  if (prefersReducedMotion()) {
+    gsap.set(targets, { opacity: 1, y: 0, clearProps: 'transform' });
+    return;
+  }
+
+  gsap.from(targets, {
+    opacity: 0,
+    y: opts.y ?? 32,
+    duration: opts.duration ?? 0.7,
+    ease: 'power2.out',
+    stagger: opts.stagger ?? 0.08,
+    delay: opts.delay ?? 0,
+    scrollTrigger: {
+      trigger: opts.trigger ?? (targets as Element),
+      start: 'top 85%',
+      once: true,
+    },
+  });
+}
+
+/** Fade-up on mount, for above-the-fold content that needs no trigger. */
+export function revealOnLoad(
+  targets: gsap.TweenTarget,
+  opts: { stagger?: number; y?: number; delay?: number } = {},
+): void {
+  if (prefersReducedMotion()) {
+    gsap.set(targets, { opacity: 1, y: 0, clearProps: 'transform' });
+    return;
+  }
+
+  gsap.from(targets, {
+    opacity: 0,
+    y: opts.y ?? 40,
+    duration: 0.9,
+    ease: 'power3.out',
+    stagger: opts.stagger ?? 0.1,
+    delay: opts.delay ?? 0.1,
+  });
+}
+
+/**
+ * Tweens a proxy object and writes the rounded value to textContent on
+ * each tick. Reduced motion jumps straight to the final value.
+ */
+export function countUp(
+  el: HTMLElement,
+  to: number,
+  opts: { duration?: number; prefix?: string; suffix?: string } = {},
+): void {
+  const format = (v: number) =>
+    `${opts.prefix ?? ''}${Math.round(v).toLocaleString('en-US')}${opts.suffix ?? ''}`;
+
+  if (prefersReducedMotion()) {
+    el.textContent = format(to);
+    return;
+  }
+
+  const proxy = { v: 0 };
+  el.textContent = format(0);
+
+  gsap.to(proxy, {
+    v: to,
+    duration: opts.duration ?? 1.8,
+    ease: 'power2.out',
+    onUpdate: () => {
+      el.textContent = format(proxy.v);
+    },
+    scrollTrigger: { trigger: el, start: 'top 80%', once: true },
+  });
+}
+
+/**
+ * Infinite horizontal loop. `track` must already contain its content
+ * duplicated exactly once -- the -50% translate then lands seamlessly
+ * on the start of the copy. Returns the tween so callers can wire
+ * pause-on-hover; returns null when motion is reduced.
+ */
+export function marquee(
+  track: HTMLElement,
+  opts: { duration?: number } = {},
+): gsap.core.Tween | null {
+  if (prefersReducedMotion()) return null;
+
+  return gsap.to(track, {
+    xPercent: -50,
+    duration: opts.duration ?? 28,
+    ease: 'none',
+    repeat: -1,
+  });
+}
+
+/** Horizontal bar fill, scaled from the left edge. Trigger-once, not scrubbed. */
+export function progressBar(el: HTMLElement, pct: number): void {
+  gsap.set(el, { transformOrigin: 'left center' });
+
+  if (prefersReducedMotion()) {
+    gsap.set(el, { scaleX: pct / 100 });
+    return;
+  }
+
+  gsap.fromTo(
+    el,
+    { scaleX: 0 },
+    {
+      scaleX: pct / 100,
+      duration: 1.2,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+    },
+  );
+}
+
+/**
+ * Splits an element's text into per-word spans so a stagger can act on
+ * them. Returns the created spans. Wrapping each word in an
+ * overflow-hidden parent keeps the y-translate from bleeding upward.
+ */
+export function splitWords(el: HTMLElement): HTMLElement[] {
+  const words = (el.textContent ?? '').trim().split(/\s+/);
+  el.textContent = '';
+
+  return words.map((word, i) => {
+    const mask = document.createElement('span');
+    mask.style.display = 'inline-block';
+    mask.style.overflow = 'hidden';
+    mask.style.verticalAlign = 'top';
+
+    const inner = document.createElement('span');
+    inner.style.display = 'inline-block';
+    inner.textContent = word;
+
+    mask.appendChild(inner);
+    el.appendChild(mask);
+    if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+
+    return inner;
+  });
+}

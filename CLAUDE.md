@@ -1,187 +1,130 @@
-# CLAUDE.md — Grow Clients Spark
+# CLAUDE.md — GrowClientsAI
 
 ## Project Overview
-AI receptionist / lead-gen SaaS landing site for HVAC contractors and other service businesses. The site showcases an AI voice assistant that answers calls, books appointments, and captures leads 24/7.
+Marketing site for **GrowClientsAI** — Darrin Duncan's web design and build service for
+local service businesses (contractors, spas/salons, clinics, small retail).
 
 **Live URL:** growclientsai.com
+
+> The site was previously an AI-receptionist SaaS pitch for HVAC contractors. That entire
+> codebase was deleted in the v3 rebuild. If you find references to AI receptionists, VAPI,
+> call routing, or `$397/month`, they are stale — the product is web design services now.
 
 ---
 
 ## Tech Stack
-- **Framework:** React 19 + TypeScript
-- **Build tool:** Vite
-- **Styling:** Tailwind CSS v4 + shadcn/ui components (copied into `src/components/ui/`)
-- **Routing:** Custom hash-based router in `App.tsx` (no `react-router-dom` — see Routing section)
-- **Animation:** Framer Motion v12 (`motion` package, imported from `motion/react`)
-- **Icons:** lucide-react
-- **Fonts:** Bebas Neue (headings), Inter (body)
+- **React 19 + TypeScript**, built with **Vite 6**
+- **Tailwind CSS v4** — CSS-first, configured entirely in `@theme` in `src/index.css`
+- **GSAP 3 + ScrollTrigger** — the only animation library
+- **Fonts:** Archivo Black (display), Inter (body), via Google Fonts
+
+There is **no** `tailwind.config.ts`, no shadcn/ui, no Radix, no Framer Motion, no router.
+Each of those was removed deliberately — see Decisions below.
 
 ---
 
-## Routing
+## Structure
 
-`App.tsx` uses a **custom hash-based router** — there is no `react-router-dom` in this project.
-A `currentPage` state variable drives a `switch` statement, and `window.location.hash` keeps
-the URL in sync. All navigation calls `handlePageChange(page: Page)`, which sets state,
-updates the hash, and scrolls to top.
-
-The `Page` type is defined in `src/components/UI.tsx`:
-```ts
-export type Page = 'home' | 'how-it-works' | 'pricing' | 'book-a-demo' | 'privacy' | 'terms';
+```
+index.html            Static shell, SEO/OG meta, font preconnect
+src/
+  main.tsx            React root
+  App.tsx             Section order — this is the whole page
+  index.css           @theme design tokens + base layer + reduced-motion kill switch
+  data/content.ts     ALL copy. Single source of truth.
+  lib/gsap.ts         GSAP registration + animation primitives
+  components/Nav.tsx  Fixed header, mobile sheet
+  sections/           Hero, Marquee, Services, About, Work, Process, Contact, Footer
+public/               favicon, logos, robots.txt — copied to dist/ verbatim
 ```
 
-| Hash / page value  | Component rendered                                      |
-|--------------------|---------------------------------------------------------|
-| `home` (default)   | `src/components/Home.tsx`                               |
-| `how-it-works`     | `src/components/HowItWorks.tsx`                         |
-| `pricing`          | `src/components/Pricing.tsx`                            |
-| `book-a-demo`      | `src/components/BookADemo.tsx`                          |
-| `privacy`          | `src/components/Legal.tsx` (prop `type="privacy"`)      |
-| `terms`            | `src/components/Legal.tsx` (prop `type="terms"`)        |
-| _(anything else)_  | `src/components/NotFound.tsx`                           |
-
----
-
-## Active Components (`src/components/`)
-
-### Layout / Shell
-- `Navbar.tsx` — top nav bar with dark mode toggle (imported by `App.tsx`)
-- `Footer.tsx` — main footer (uses `footerLinks`, `socialLinks`)
-- `Footer2.tsx` — alternate footer variant
-- `Logo.tsx` — logo component
-- `UI.tsx` — shared primitive components (`Button`, `Section`, `Badge`, `Card`) and the `Page` type
-- `ScrollAnimation.tsx` — scroll-triggered fade-in wrapper
-- `VideoOverlay.tsx` — video player modal overlay
-- `CTA.tsx` — reusable CTA section (props: title1, title2, sub, cta)
-
-### Page Components (wired in `App.tsx`)
-- `Home.tsx` — homepage; renders `Hero`, `DemoBar`, and several inline sections
-  (Problem, Solution, How It Works preview, Pricing preview, Final CTA are all **inlined**,
-  not separate component imports)
-- `HowItWorks.tsx` — full "How It Works" page
-- `Pricing.tsx` — full pricing page
-- `BookADemo.tsx` — demo booking page
-- `Legal.tsx` — renders Privacy Policy or Terms of Service based on a `type` prop
-- `NotFound.tsx` — 404 fallback
-
-### Sub-components (used within page components)
-- `Hero.tsx` — above-the-fold hero (imported by `Home.tsx`)
-- `DemoBar.tsx` — live demo phone number bar (imported by `Home.tsx`)
-- `LeadForm.tsx` — lead capture form (used in `BookADemo.tsx`)
-
-### UI Primitives (shadcn/ui — do not modify)
-Located in `src/components/ui/`
+**It is a single page.** Navigation is anchor links (`#services`, `#about`, `#work`,
+`#process`, `#contact`). There is no router and no client-side routing of any kind.
 
 ---
 
 ## How to make copy changes
 
-**`src/data.ts` is the file to edit** for structured content: pricing features, FAQ lists,
-step definitions, call examples, footer links, and demo talking points. Find the named export
-and change it there.
+**`src/data/content.ts` is the only file to edit.** Every string the site renders comes
+from there — headlines, tier copy, project blurbs, process steps, footer links. Sections
+render whatever the data gives them; none of them hardcode copy.
 
-| What you want to change | Export to edit in `data.ts` |
-|---|---|
-| Pricing features / FAQs | `pricingCategories`, `pricingFaqs` |
-| How It Works steps | `howItWorksPageSteps` |
-| Demo phone number | `demoTalkingPointsCTA`, `footer2Phone` |
-| Homepage FAQs | `homeFaqs` |
-| Footer links | `footerLinks`, `socialLinks` |
+Copy originates from the Notion doc *"GrowClientsAI — Website Copy (Phase 9)"*.
 
-**Exception — `Home.tsx` hardcodes its own content inline.** The Problem section, Solution
-section, Pricing preview, and Final CTA on the homepage do not read from `data.ts`. Copy
-changes to those sections must be made directly in `Home.tsx`. Don't import from `data.ts`
-for new Home sections unless you also migrate the existing inline content — don't mix both.
+### Placeholder convention
+Anything Darrin still has to supply is marked `pending: true` in the data and renders with a
+visible **TBC** chip. This is deliberate — a placeholder must not be able to reach production
+looking like real content. Currently pending: hero stat figures, About progress-bar scales,
+project screenshots, and the contact email/phone.
 
 ---
 
-## data.ts Export Map
+## Design tokens — "Slate & Ember"
 
-| Export | Used by |
-|---|---|
-| `navLinks` | `Navbar.tsx` |
-| `floatingBadges`, `heroFeatures`, `heroCTA`, `heroBottomText` | `Hero.tsx` |
-| `theProblem`, `theProblemHeader`, `theProblemHowMuch` | `TheProblem.tsx` _(see Gotchas)_ |
-| `solutionSteps`, `solutionStepsHeader` | `TheSolution.tsx` _(see Gotchas)_ |
-| `howItWorksSteps`, `howItWorksStepsHeader` | `HowItWorks.tsx` |
-| `demoTalkingPoints`, `demoTalkingPointsHeader`, `demoTalkingPointsCTA` | `Demo.tsx` _(see Gotchas)_ |
-| `pricingPreviewFeatures` | `PricingPreview.tsx` _(see Gotchas)_ |
-| `homeFaqs` | `FAQs.tsx` |
-| `footerLinks`, `socialLinks` | `Footer.tsx` |
-| `footer2Phone` | `Footer2.tsx` |
-| `solutionsOfferings` | `src/pages/ServicesPage.tsx` _(legacy — not a live route)_ |
-| `demos` | `src/pages/Demos.tsx` _(legacy — not a live route)_ |
-| `companyValues` | `src/pages/About.tsx` _(legacy — not a live route)_ |
-| `pricingCategories`, `pricingFaqs` | `Pricing.tsx` |
-| `howItWorksPageSteps`, `howItWorksDifferences`, `callExamples` | `src/pages/HowItWorksPage.tsx` _(legacy)_ |
-| `demoExpectations` | `BookADemo.tsx` |
+Defined in `@theme` in `src/index.css`. **Never write raw hex in a component** — use the
+token utilities (`bg-ink`, `text-ember`, `border-slate-100`, …).
+
+| Token | Value | Use |
+|---|---|---|
+| `ink` | `#101826` | Primary dark background |
+| `ink-soft` | `#1A2436` | Cards on dark |
+| `ember` | `#FF7A29` | Accent — CTAs, highlights |
+| `ember-dim` | `#C95F1D` | Ember hover/pressed |
+| `paper` | `#F5F3EE` | Light section background |
+| `paper-card` | `#FFFFFF` | Cards on light |
+| `slate` | `#4A5568` | Secondary text on light |
+| `slate-100` | `#E7E5DE` | Hairline borders on light |
+
+Sections alternate ink → ember (marquee) → ink → paper → paper → ink → paper for contrast.
 
 ---
 
-## Gotchas
+## Animation
 
-### `src/pages/` — legacy directory, do not edit
+All GSAP goes through `src/lib/gsap.ts`. **Do not import `gsap` directly in a section** —
+use the helpers, which all carry the reduced-motion guard:
 
-A `src/pages/` directory exists with files matching every old route: `Index.tsx`,
-`HowItWorksPage.tsx`, `About.tsx`, `Demos.tsx`, `ServicesPage.tsx`, `Pricing.tsx`,
-`BookADemo.tsx`, `Contact.tsx`, `Privacy.tsx`, `Terms.tsx`, `ThankYou.tsx`.
+- `useGsap(scope, setup)` — scoped `gsap.context`, auto-reverted on unmount
+- `revealOnScroll` / `revealOnLoad` — staggered fade-up, `once: true` (no replay on scroll-back)
+- `countUp` — proxy-object tween writing to `textContent`
+- `marquee` — infinite `xPercent: -50` loop; content must be duplicated exactly once
+- `progressBar` — `scaleX` from `transformOrigin: left`
+- `splitWords` — wraps words in masked spans for the hero stagger
 
-**None of these are wired up in `App.tsx`.** They are from a previous React Router-based
-architecture. The live routing and all active page rendering is in `src/components/`.
-Do not edit `src/pages/` files — changes there will not appear on the site.
-
-### `Header.tsx` — legacy nav, superseded by `Navbar.tsx`
-
-`src/components/Header.tsx` exists but `App.tsx` imports `Navbar` from `./components/Navbar`.
-`Header.tsx` is not active.
-
-### Standalone section components may be unused
-
-`TheProblem.tsx`, `TheSolution.tsx`, `Demo.tsx`, `PricingPreview.tsx`, and `FinalCTA.tsx`
-exist in `src/components/` but their content has been inlined into `Home.tsx` directly.
-Before editing them, grep for imports to confirm they're actually in use.
+`prefers-reduced-motion` is handled in two places: every helper above falls back to the
+**end state instantly**, and `src/index.css` carries a CSS-level kill switch for transitions.
+Both are required — neither alone covers everything.
 
 ---
 
-## Assets (`src/assets/`)
+## Deploy — read before pushing
 
-- `demo-max.png`, `demo-chloe.png`, `demo-shelley.png` — AI persona photos
-- `ai-automation.png`, `team-collaboration.png`, `phone-mockup-dashboard.png` — service section images
-- `hvac.png`, `plumber.png`, `electrician.png` — trade industry images
-- `Phone.png`, `Riley.png` — AI receptionist persona images (used in `Home.tsx`)
-- `logo-blk.png`, `logo-wht.png` — logo variants for light/dark mode
+`.github/workflows/deploy.yml` triggers on **push to `main`**: builds, then SCPs `./dist/`
+to `/srv/growclientsai` on Darrin's server and reloads Caddy.
 
+**Pushing to `main` IS deploying to production.** There is no preview or staging environment.
+Work on a branch.
 
-### Technical Architecture
+Because the site is served as plain static files by Caddy:
+- `vite.config.ts` sets `base: './'` so asset paths are relative and work from any directory.
+- Anchor navigation only — path-based routing would need a Caddy `try_files` rewrite that
+  this repo does not control.
+- No backend. Nothing may depend on a server at runtime.
 
-**System Architecture:**
-```
-Incoming Call → Twilio → Vapi (AI Voice Agent)
-                              ↓
-                    [Dual Mode: Live / Demo]
-                              ↓
-                    n8n Webhook (end-of-call-report only)
-                              ↓
-              ┌───────────────┼───────────────┐
-              ↓               ↓               ↓
-        Google Sheets    Appointment      SMS Follow-up
-        (Call Log)       Booking          (Missed Call
-                         (Google Cal)      Text-Back)
-                              ↓
-                        Telegram Alert
-                        (to Darrin)
-```
-
-**Critical Technical Knowledge:**
-- **VAPI webhook architecture:** Server URL sends multiple event types throughout a call lifecycle. Only `end-of-call-report` contains complete data. Use an IF node in n8n to filter for this event type only.
-- **Duplicate webhook prevention:** Never configure both a VAPI Server URL and a custom tool to POST to the same n8n endpoint — this causes duplicate entries.
-- **A2P 10DLC:** Required for SMS campaigns. Registration process: business profile → brand → campaign → phone number assignment. Already drafted Privacy Policy and ToS.
-- **n8n MCP Server:** Available at `https://n8n.growclientsai.com/mcp-server/http` for programmatic workflow interaction.
-
-**When Darrin asks for technical help:**
-- Follow the **WAT framework**: Check for existing workflows/tools first, build new only when needed.
-- Produce production-ready code and configurations, not pseudocode or concepts.
-- Document edge cases, error handling, and failure modes in every solution.
-- If a solution involves paid API calls, flag the cost before running.
+CI runs **Node 18** and deletes `package-lock.json` before `npm install`, so dependencies
+float to latest on every deploy.
 
 ---
+
+## Decisions worth not re-litigating
+
+- **Tailwind v4 is CSS-first.** A `tailwind.config.ts` is only read if `src/index.css` has an
+  `@config` directive. The old repo had a config file with no directive, so its entire theme
+  was silently ignored for months. Don't add one back.
+- **GSAP only.** Framer Motion was removed. Don't add a second animation library.
+- **No shadcn/ui.** The old repo had 49 primitives importing ~20 `@radix-ui` packages that
+  were never in `package.json`. They only "worked" because nothing imported them.
+- **No testimonials section.** Requests are out to Kevin (StarrMark Solutions) and Wandi
+  (All For His Glory Worship). Build it when real quotes arrive; never ship placeholder quotes.
+- **Concept work is labeled.** Cedar & Sage Spa carries a "Concept project" badge. Never
+  present it as a real client engagement.
