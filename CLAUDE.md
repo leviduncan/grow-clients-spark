@@ -285,8 +285,11 @@ Because the site is served as plain static files by Caddy:
   this repo does not control.
 - No backend. Nothing may depend on a server at runtime.
 
-CI runs **Node 18** and deletes `package-lock.json` before `npm install`, so dependencies
-float to latest on every deploy.
+CI runs **Node 20** and installs with `npm ci`, so `package-lock.json` is authoritative and
+the deploy is reproducible. It used to delete the lockfile and `npm install`, floating every
+dependency on every deploy; don't reintroduce that. It also means **the lockfile must be
+committed in step with `package.json`** or the deploy fails at the install step rather than
+the build.
 
 ---
 
