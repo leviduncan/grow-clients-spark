@@ -320,6 +320,39 @@ use the helpers, which all carry the reduced-motion guard:
 **end state instantly**, and `src/index.css` carries a CSS-level kill switch for transitions.
 Both are required - neither alone covers everything.
 
+### Reveals use `fromTo`, never `from`
+
+This one has already cost a live bug, so do not "simplify" it back.
+
+A `gsap.from` tween reads the element's **current** value as its destination. If one is
+killed mid-flight and another is created over the same target - a reverted `gsap.context`
+racing a re-invoked effect is the usual way in - the second tween captures the stranded
+mid-tween value as its end state, animates to it, and *completes* there. The content is then
+permanently stuck part-faded, the tween reports success, and nothing logs an error.
+
+That is exactly how the testimonial form shipped stuck at `opacity: 0.4416` with
+`translateY(13.4px)`. Those are the same number: `y` was 24, and `24 x (1 - 0.4416) = 13.4`.
+Two properties agreeing that precisely is the signature of a completed tween with a corrupted
+target, not an interrupted one - worth recognising, because it sends you looking at
+ScrollTrigger `start`/`end` values that have nothing to do with it (`revealOnLoad` has no
+ScrollTrigger at all).
+
+Stating the end state explicitly makes the whole failure mode impossible.
+
+### Reveals carry a watchdog
+
+`guaranteeRestingState` in `src/lib/gsap.ts` sets the end state outright if a tween has not
+landed by its own end time plus a margin, and disarms the moment the tween completes
+normally. A reveal is decorative; what it reveals is not, and a form that a failed animation
+can leave invisible is not a cosmetic bug.
+
+Scroll reveals arm on `onStart`, not on creation, because they can legitimately sit unstarted
+for minutes until the user scrolls to them. Arming on creation would fire the watchdog early
+and skip the animation entirely.
+
+Note the baseline is safe by default: content is visible until GSAP sets `opacity: 0`, so a
+GSAP failure *before* the tween is created cannot hide anything.
+
 ### Card hover
 
 Cards use the `card-grow` utility (or `card-grow-lift`, which adds a 4px rise, on the pricing

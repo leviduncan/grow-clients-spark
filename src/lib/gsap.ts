@@ -40,6 +40,47 @@ export function useGsap(
   }, deps);
 }
 
+/**
+ * Forces the resting state if a reveal has not landed when it should have.
+ *
+ * A reveal is decorative; what it reveals is not. Anything that stops a
+ * tween part-way leaves real content part-faded, and on a form that means
+ * unusable content in production. So every reveal carries a watchdog that
+ * sets the end state outright, cancelled the moment the tween finishes
+ * normally. In the healthy case it costs one cleared timer.
+ *
+ * `armOnStart` is for scroll-triggered reveals, which may sit unstarted for
+ * minutes before the user scrolls to them. Those arm when they actually
+ * begin, so the watchdog never fires early and skips the animation.
+ */
+function guaranteeRestingState(
+  tween: gsap.core.Tween,
+  { armOnStart = false }: { armOnStart?: boolean } = {},
+): void {
+  if (typeof window === 'undefined') return;
+
+  let timer = 0;
+  const disarm = () => {
+    if (timer) window.clearTimeout(timer);
+    timer = 0;
+  };
+
+  const arm = () => {
+    disarm();
+    // The tween's own end time, plus a margin for a slow frame.
+    const ms = (tween.totalDuration() + (armOnStart ? 0 : tween.delay())) * 1000 + 400;
+    timer = window.setTimeout(() => {
+      if (tween.progress() >= 1) return;
+      const live = tween.targets<Element>().filter((el) => el?.isConnected);
+      if (live.length) gsap.set(live, { opacity: 1, y: 0, clearProps: 'transform' });
+    }, ms);
+  };
+
+  tween.eventCallback('onComplete', disarm);
+  if (armOnStart) tween.eventCallback('onStart', arm);
+  else arm();
+}
+
 /** Staggered fade-up on scroll entry. Does not replay on scroll-back. */
 export function revealOnScroll(
   targets: gsap.TweenTarget,
@@ -56,24 +97,37 @@ export function revealOnScroll(
     return;
   }
 
-  gsap.from(targets, {
-    opacity: 0,
-    y: opts.y ?? 32,
-    duration: opts.duration ?? 0.7,
-    ease: 'power2.out',
-    stagger: opts.stagger ?? 0.08,
-    delay: opts.delay ?? 0,
-    // Hand `transform` back to CSS once the reveal lands. GSAP otherwise
-    // leaves `transform: translate(0px, 0px)` inline, and an inline style
-    // outranks the stylesheet, which would silently kill the .card-grow
-    // hover on every card this animates.
-    clearProps: 'transform',
-    scrollTrigger: {
-      trigger: opts.trigger ?? (targets as Element),
-      start: 'top 85%',
-      once: true,
+  // fromTo, never from. A `from` tween reads the element's CURRENT value as
+  // its destination, so if one is killed mid-flight and another is created
+  // over the same target -- a reverted gsap.context racing a re-invoked
+  // effect is the usual way -- the second captures the stranded mid-tween
+  // value as its end state, animates to it, and completes there. The result
+  // is content permanently stuck part-faded with no error anywhere. Stating
+  // the end state explicitly makes that impossible.
+  const tween = gsap.fromTo(
+    targets,
+    { opacity: 0, y: opts.y ?? 32 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: opts.duration ?? 0.7,
+      ease: 'power2.out',
+      stagger: opts.stagger ?? 0.08,
+      delay: opts.delay ?? 0,
+      // Hand `transform` back to CSS once the reveal lands. GSAP otherwise
+      // leaves `transform: translate(0px, 0px)` inline, and an inline style
+      // outranks the stylesheet, which would silently kill the .card-grow
+      // hover on every card this animates.
+      clearProps: 'transform',
+      scrollTrigger: {
+        trigger: opts.trigger ?? (targets as Element),
+        start: 'top 85%',
+        once: true,
+      },
     },
-  });
+  );
+
+  guaranteeRestingState(tween, { armOnStart: true });
 }
 
 /** Fade-up on mount, for above-the-fold content that needs no trigger. */
@@ -86,15 +140,24 @@ export function revealOnLoad(
     return;
   }
 
-  gsap.from(targets, {
-    opacity: 0,
-    y: opts.y ?? 40,
-    duration: 0.9,
-    ease: 'power3.out',
-    stagger: opts.stagger ?? 0.1,
-    delay: opts.delay ?? 0.1,
-    clearProps: 'transform',
-  });
+  // fromTo, not from: see the note in revealOnScroll. This is the helper the
+  // testimonial form uses, and a form stranded at opacity 0.44 is not a
+  // cosmetic bug.
+  const tween = gsap.fromTo(
+    targets,
+    { opacity: 0, y: opts.y ?? 40 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      stagger: opts.stagger ?? 0.1,
+      delay: opts.delay ?? 0.1,
+      clearProps: 'transform',
+    },
+  );
+
+  guaranteeRestingState(tween);
 }
 
 /**

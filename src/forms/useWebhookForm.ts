@@ -1,4 +1,8 @@
-import { useCallback, useRef, useState, type FormEvent } from 'react';
+// SubmitEvent, not FormEvent: @types/react 19 deprecates FormEvent ("doesn't
+// actually exist") and types the <form onSubmit> prop as SubmitEventHandler.
+// Imported from react, so this is React's synthetic SubmitEvent and not the
+// DOM global of the same name.
+import { useCallback, useRef, useState, type SubmitEvent } from 'react';
 import { HONEYPOT_NAME } from './fields';
 
 export type SubmitState = 'idle' | 'sending' | 'error';
@@ -33,7 +37,7 @@ export function useWebhookForm({
   const openedAt = useRef(Date.now());
 
   const onSubmit = useCallback(
-    async (e: FormEvent<HTMLFormElement>) => {
+    async (e: SubmitEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (state === 'sending') return;
 
