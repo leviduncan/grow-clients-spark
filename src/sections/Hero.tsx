@@ -5,6 +5,12 @@ import { hero, heroStats } from '@/data/content';
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
 
+  /* A stat with no real figure behind it is not shown at all, rather than
+     shown with a TBC chip: this sits above the fold on a live marketing
+     site, where a visible placeholder costs more than a missing one. Fill
+     the value in and drop `pending` in content.ts and the row returns. */
+  const stats = heroStats.filter((stat) => !stat.pending);
+
   useGsap(root, (reduced) => {
     const lines = gsap.utils.toArray<HTMLElement>('[data-hero-line]');
     const words = lines.flatMap((line) => splitWords(line));
@@ -39,35 +45,39 @@ export default function Hero() {
     <section
       id="top"
       ref={root}
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-ink pb-16 pt-32 md:pb-24 md:pt-40"
+      className="theme-fade relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-band pb-16 pt-32 md:pb-24 md:pt-40"
     >
       <Backdrop />
 
       <div className="relative mx-auto w-full max-w-7xl px-5 md:px-8">
-        <h1 className="font-display uppercase leading-[0.9] tracking-[-0.02em] text-white">
-          <span className="sr-only">
-            {hero.line1} {hero.line2}
-          </span>
-          <span
-            aria-hidden="true"
-            data-hero-line
-            className="text-outline block text-[clamp(2.5rem,8.5vw,6.5rem)]"
-          >
-            {hero.line1}
-          </span>
-          <span
-            aria-hidden="true"
-            data-hero-line
-            className="block text-[clamp(2.5rem,8.5vw,6.5rem)]"
-          >
-            {hero.line2}
-          </span>
+        <h1 className="font-display uppercase leading-[0.9] tracking-[-0.02em] text-content">
+          <span className="sr-only">{hero.lines.map((l) => l.text).join(' ')}</span>
+
+          {/* Sized off the longest line, not the viewport: at >=1280 the
+              max-w-7xl measure is 1216px and "WEBSITES THAT" runs ~9x its
+              font size, so 8.25rem fills it with a little to spare. The vw
+              term is held below the cap's own slope so 768 (where the
+              measure is only 704px) keeps real margin: at 9.75vw it cleared
+              by 2px, which the wider Arial Black fallback would overrun.
+              Raising either number wraps a line and breaks the split. */}
+          {hero.lines.map((line) => (
+            <span
+              key={line.text}
+              aria-hidden="true"
+              data-hero-line
+              className={`block text-[clamp(2.5rem,9.25vw,8.25rem)] ${
+                line.outline ? 'text-outline' : ''
+              }`}
+            >
+              {line.text}
+            </span>
+          ))}
         </h1>
 
         <div className="mt-8 grid gap-10 md:mt-12 md:grid-cols-2 md:gap-16">
           <p
             data-hero-fade
-            className="max-w-xl text-lg leading-relaxed text-white/70 md:text-xl"
+            className="max-w-xl text-lg leading-relaxed text-muted md:text-xl"
           >
             {hero.sub}
           </p>
@@ -75,7 +85,7 @@ export default function Hero() {
           <div data-hero-fade className="flex flex-col items-start gap-4">
             <a
               href={hero.ctaHref}
-              className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-ember px-8 text-base font-semibold text-ink transition-colors hover:bg-ember-dim"
+              className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-ember px-8 text-base font-semibold text-on-ember transition-colors hover:bg-ember-dim"
             >
               {hero.cta}
               <svg
@@ -94,36 +104,33 @@ export default function Hero() {
                 <path d="m13 6 6 6-6 6" />
               </svg>
             </a>
-            <p className="max-w-sm text-sm leading-relaxed text-white/50">
+            <p className="max-w-sm text-sm leading-relaxed text-faint">
               {hero.support}
             </p>
           </div>
         </div>
 
-        <dl
-          data-hero-fade
-          className="mt-14 grid grid-cols-1 gap-8 border-t border-white/10 pt-10 sm:grid-cols-3 md:mt-20"
-        >
-          {heroStats.map((stat) => (
-            <div key={stat.label}>
-              <dd className="flex items-baseline gap-2">
-                <span
-                  data-count={stat.value}
-                  data-suffix={stat.suffix ?? ''}
-                  className="font-display text-4xl text-white md:text-5xl"
-                >
-                  0
-                </span>
-                {stat.pending && (
-                  <span className="rounded-full border border-ember/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-ember">
-                    TBC
+        {stats.length > 0 && (
+          <dl
+            data-hero-fade
+            className="mt-14 grid grid-cols-1 gap-8 border-t border-hairline pt-10 sm:grid-cols-3 md:mt-20"
+          >
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <dd>
+                  <span
+                    data-count={stat.value}
+                    data-suffix={stat.suffix ?? ''}
+                    className="font-display text-4xl text-content md:text-5xl"
+                  >
+                    0
                   </span>
-                )}
-              </dd>
-              <dt className="mt-2 text-sm text-white/50">{stat.label}</dt>
-            </div>
-          ))}
-        </dl>
+                </dd>
+                <dt className="mt-2 text-sm text-faint">{stat.label}</dt>
+              </div>
+            ))}
+          </dl>
+        )}
       </div>
     </section>
   );
@@ -133,6 +140,9 @@ export default function Hero() {
  * Abstract composition rather than a photo: a solo operator has no team
  * shot to show, and a stock face would misrepresent the business.
  * Swap in a real device mockup here once a client screenshot exists.
+ *
+ * Every layer is theme-aware: the dot grid inks itself from --content,
+ * and the bottom fade resolves to whatever the hero band currently is.
  */
 function Backdrop() {
   const still = prefersReducedMotion();
@@ -140,10 +150,10 @@ function Backdrop() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
       <div
-        className="absolute inset-0 opacity-[0.16]"
+        className="absolute inset-0 opacity-[0.12]"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0)',
+            'radial-gradient(circle at 1px 1px, var(--content) 1px, transparent 0)',
           backgroundSize: '32px 32px',
         }}
       />
@@ -163,7 +173,7 @@ function Backdrop() {
         <circle cx="200" cy="200" r="42" stroke="currentColor" strokeWidth="1" />
       </svg>
 
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-band to-transparent" />
     </div>
   );
 }

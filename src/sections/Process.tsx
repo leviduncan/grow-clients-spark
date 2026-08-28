@@ -11,18 +11,18 @@ export default function Process() {
   });
 
   return (
-    <section id="process" ref={root} className="bg-ink py-20 md:py-28 lg:py-32">
+    <section id="process" ref={root} className="theme-fade bg-band-veil py-20 md:py-28 lg:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="max-w-2xl">
           <p
             data-process-head
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-ember"
+            className="text-xs font-semibold uppercase tracking-[0.2em] text-ember-text"
           >
             {process.eyebrow}
           </p>
           <h2
             data-process-head
-            className="mt-4 font-display text-3xl uppercase leading-[1.05] text-white sm:text-4xl lg:text-5xl"
+            className="mt-4 font-display text-3xl uppercase leading-[1.05] text-content sm:text-4xl lg:text-5xl"
           >
             {process.heading}
           </h2>
@@ -30,15 +30,19 @@ export default function Process() {
 
         <ol
           data-step-grid
-          className="mt-12 grid gap-px overflow-hidden rounded-2xl bg-white/10 md:mt-16 md:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid gap-5 md:mt-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-6"
         >
           {steps.map((step) => (
-            <li key={step.n} data-step className="flex flex-col bg-ink-soft p-7 md:p-8">
-              <span className="font-display text-4xl text-ember md:text-5xl">{step.n}</span>
-              <h3 className="mt-5 font-display text-xl uppercase text-white md:text-2xl">
+            <li
+              key={step.n}
+              data-step
+              className="flex flex-col rounded-2xl bg-card p-7 card-grow ring-1 ring-hairline md:p-8"
+            >
+              <span className="font-display text-4xl text-ember-text md:text-5xl">{step.n}</span>
+              <h3 className="mt-5 font-display text-xl uppercase text-content md:text-2xl">
                 {step.name}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/60">{step.detail}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{step.detail}</p>
             </li>
           ))}
         </ol>

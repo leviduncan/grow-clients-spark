@@ -7,3 +7,8 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Full-resolution screenshot masters. Kept on disk for regenerating the
+# optimised variants in src/assets/work/, deliberately not committed:
+# 5.3 MB that would be SCP'd on every deploy for no runtime benefit.
+design-src/

@@ -11,19 +11,19 @@ export default function Services() {
   });
 
   return (
-    <section id="services" ref={root} className="bg-ink py-20 md:py-28 lg:py-32">
+    <section id="services" ref={root} className="theme-fade bg-band-veil py-20 md:py-28 lg:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
             <p
               data-service-head
-              className="text-xs font-semibold uppercase tracking-[0.2em] text-ember"
+              className="text-xs font-semibold uppercase tracking-[0.2em] text-ember-text"
             >
               {services.eyebrow}
             </p>
             <h2
               data-service-head
-              className="mt-4 font-display text-3xl uppercase leading-[1.05] text-white sm:text-4xl lg:text-5xl"
+              className="mt-4 font-display text-3xl uppercase leading-[1.05] text-content sm:text-4xl lg:text-5xl"
             >
               {services.heading}
             </h2>
@@ -32,7 +32,7 @@ export default function Services() {
           <a
             data-service-head
             href={services.linkHref}
-            className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white/70 transition-colors hover:text-ember"
+            className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-muted transition-colors hover:text-ember-text"
           >
             {services.linkLabel}
             <svg
@@ -63,16 +63,16 @@ export default function Services() {
             <article
               key={tier.id}
               data-service-card
-              className={`flex flex-col rounded-2xl p-7 transition-transform duration-300 hover:-translate-y-1 md:p-8 ${
+              className={`flex flex-col rounded-2xl p-7 card-grow-lift md:p-8 ${
                 tier.featured
-                  ? 'bg-ember text-ink'
-                  : 'bg-ink-soft text-white ring-1 ring-white/10'
+                  ? 'bg-ember text-on-ember'
+                  : 'bg-card text-content ring-1 ring-hairline'
               }`}
             >
               <div className="flex items-start justify-between gap-4">
                 <h3 className="font-display text-2xl uppercase md:text-3xl">{tier.name}</h3>
                 {tier.featured && (
-                  <span className="shrink-0 rounded-full bg-ink/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest">
+                  <span className="shrink-0 rounded-full bg-on-ember/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest">
                     Most common
                   </span>
                 )}
@@ -80,7 +80,7 @@ export default function Services() {
 
               <p
                 className={`mt-4 text-base leading-relaxed ${
-                  tier.featured ? 'text-ink/80' : 'text-white/70'
+                  tier.featured ? 'text-on-ember' : 'text-muted'
                 }`}
               >
                 {tier.outcome}
@@ -88,7 +88,9 @@ export default function Services() {
 
               <p
                 className={`mt-6 border-t pt-6 text-sm leading-relaxed ${
-                  tier.featured ? 'border-ink/20 text-ink/75' : 'border-white/10 text-white/55'
+                  tier.featured
+                    ? 'border-on-ember/20 text-on-ember/90'
+                    : 'border-hairline text-muted'
                 }`}
               >
                 {tier.includes}
@@ -97,7 +99,7 @@ export default function Services() {
               <div className="mt-auto flex items-end justify-between gap-4 pt-8">
                 <p
                   className={`max-w-[16rem] text-xs leading-relaxed ${
-                    tier.featured ? 'text-ink/65' : 'text-white/45'
+                    tier.featured ? 'text-on-ember/85' : 'text-faint'
                   }`}
                 >
                   <span className="mb-1 block font-semibold uppercase tracking-widest">For</span>
@@ -107,10 +109,10 @@ export default function Services() {
                 <a
                   href="#contact"
                   aria-label={`Ask about the ${tier.name} tier`}
-                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-colors ${
+                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-opacity hover:opacity-85 ${
                     tier.featured
-                      ? 'bg-ink text-ember hover:bg-ink-soft'
-                      : 'bg-ember text-ink hover:bg-ember-dim'
+                      ? 'bg-on-ember text-ember'
+                      : 'bg-ember text-on-ember'
                   }`}
                 >
                   <svg

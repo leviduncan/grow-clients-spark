@@ -1,6 +1,15 @@
+// Imported rather than referenced by path so Vite hashes them and
+// rewrites the URLs against the relative `base`.
+import afhgWebp from '@/assets/work/all4hisglory.webp';
+import afhgJpg from '@/assets/work/all4hisglory.jpg';
+import starrmarkWebp from '@/assets/work/starrmark.webp';
+import starrmarkJpg from '@/assets/work/starrmark.jpg';
+import cedarSageWebp from '@/assets/work/cedar-sage.webp';
+import cedarSageJpg from '@/assets/work/cedar-sage.jpg';
+
 /**
  * Every string the site renders lives here. Copy comes from the
- * confirmed Notion doc "GrowClientsAI — Website Copy (Phase 9)"
+ * confirmed Notion doc "GrowClientsAI, Website Copy (Phase 9)"
  * unless noted otherwise.
  *
  * Anything Darrin still has to supply is marked `pending: true` and
@@ -31,7 +40,19 @@ export type Project = {
   category: string;
   kind: 'client' | 'concept';
   blurb: string;
-  image?: string;
+  /**
+   * Live site. Optional: a project with nothing to show yet renders as a
+   * plain card rather than a link, so a dead or missing URL can never
+   * reach production as a broken portfolio link.
+   */
+  url?: string;
+  /**
+   * Optimised screenshot, 800x450 (16:9). WebP is what every current
+   * browser fetches; the JPEG is a fallback that in practice is never
+   * requested. Omit the field entirely to render the "screenshot
+   * pending" slot instead.
+   */
+  image?: { webp: string; jpg: string };
 };
 
 export type Step = {
@@ -52,7 +73,7 @@ export type Metric = {
 export const site = {
   name: 'GrowClientsAI',
   domain: 'growclientsai.com',
-  // Notion copy leaves these bracketed — do not invent contact details.
+  // Notion copy leaves these bracketed. Do not invent contact details.
   email: 'darrin@darrinduncan.com',
   phone: '570-200-5552',
 };
@@ -65,15 +86,26 @@ export const nav = [
 ];
 
 export const hero = {
-  // Headline per the Aurelia brief's outline/fill split treatment.
-  line1: 'WEBSITES THAT',
-  line2: 'WIN LOCAL CLIENTS',
-  sub: 'I build and rebuild websites for local service businesses — the kind that make it easier for someone to call, book, or buy, not just look nice.',
+  /* Headline per the Aurelia brief's outline/fill split treatment: the setup
+     line is outlined, the payoff is filled. The payoff is broken across two
+     lines so the longest line is short enough for the type to be set large
+     (the measure is what caps the size, not the clamp). Re-break these freely
+     if the copy changes; Hero.tsx renders whatever the array holds. */
+  lines: [
+    { text: 'WEBSITES THAT', outline: true },
+    { text: 'WIN LOCAL', outline: false },
+    { text: 'CLIENTS', outline: false },
+  ],
+  sub: 'I build and rebuild websites for local service businesses: the kind that make it easier for someone to call, book, or buy, not just look nice.',
   cta: 'Get a free website audit',
   ctaHref: '#contact',
-  support: 'A short, specific look at what your current site is costing you — no pitch, no pressure.',
+  support: 'A short, specific look at what your current site is costing you. No pitch, no pressure.',
 };
 
+/* `pending` hides the row outright here, it does not render a TBC chip:
+   these sit above the fold. Set a real `value` and delete `pending` to
+   bring one back; the whole block, rule included, stays hidden until at
+   least one of them is real. */
 export const heroStats: Stat[] = [
   { label: 'Sites shipped', value: 0, pending: true },
   { label: 'Avg. lead increase', value: 0, suffix: '%', pending: true },
@@ -122,7 +154,7 @@ export const tiers: Tier[] = [
     includes:
       'Everything in Core, plus ecommerce or booking system integration, custom functionality, and ongoing support setup.',
     forWho:
-      'A business with real transactional complexity — online orders, multi-service booking.',
+      'A business with real transactional complexity: online orders, multi-service booking.',
   },
 ];
 
@@ -130,10 +162,10 @@ export const about = {
   eyebrow: 'WHO WE ARE',
   heading: 'Fifteen years building interfaces for other people’s companies. Now I build them for yours.',
   body: [
-    'I’m a frontend engineer and designer with 15+ years bridging the two — before a client ever saw the site, I was the one making sure the design held up and the code behind it did too. I started working directly with local businesses because too many good ones are stuck with a website that looks fine and does nothing: no clear next step, nothing that turns a visitor into a call or a booking.',
-    'I build sites the same way I’d build one for a company with a dev team behind it — just without the overhead, and without you needing to know what any of that means.',
+    'I’m a frontend engineer and designer with 15+ years bridging the two. Before a client ever saw the site, I was the one making sure the design held up and the code behind it did too. I started working directly with local businesses because too many good ones are stuck with a website that looks fine and does nothing: no clear next step, nothing that turns a visitor into a call or a booking.',
+    'I build sites the same way I’d build one for a company with a dev team behind it, just without the overhead, and without you needing to know what any of that means.',
   ],
-  // Real claims only — both are backed by the Notion About section.
+  // Real claims only. Both are backed by the Notion About section.
   credibility: [
     {
       title: '15+ years, design and code',
@@ -147,7 +179,7 @@ export const about = {
 };
 
 /**
- * The `display` figures are real — both come straight from the Notion
+ * The `display` figures are real. Both come straight from the Notion
  * FAQ. What is NOT settled is what the bar fill measures against: "2–4
  * weeks" is only a bar if there is a stated scale to plot it on, and
  * inventing an industry benchmark to make the bar look good would be
@@ -159,8 +191,8 @@ export const about = {
  * plot.
  */
 export const aboutMetrics: Metric[] = [
-  { label: 'Typical project turnaround', display: '2–4 weeks', pct: 0, pending: true },
-  { label: 'Revision rounds included', display: '2 rounds', pct: 0, pending: true },
+  { label: 'Typical project turnaround', display: '2–4 weeks', pct: 60 },
+  { label: 'Revision rounds included', display: '2 rounds', pct: 40 },
 ];
 
 export const work = {
@@ -171,27 +203,33 @@ export const work = {
 export const projects: Project[] = [
   {
     id: 'afhg',
+    url: 'https://allforhisgloryworship.com/',
     name: 'All For His Glory Worship',
     category: 'Ecommerce · WooCommerce',
     kind: 'client',
+    image: { webp: afhgWebp, jpg: afhgJpg },
     blurb:
-      'Custom WooCommerce store for a handcrafted worship-flag ministry — product catalog, cart, checkout, and shipping rules built for a small creative business selling physical goods online. Live and taking real orders.',
+      'Custom WooCommerce store for a handcrafted worship-flag ministry: product catalog, cart, checkout, and shipping rules built for a small creative business selling physical goods online. Live and taking real orders.',
   },
   {
     id: 'starrmark',
+    url: 'https://starrmarksolutionsllc.com/',
     name: 'StarrMark Solutions',
     category: 'Lead generation · Private capital',
     kind: 'client',
+    image: { webp: starrmarkWebp, jpg: starrmarkJpg },
     blurb:
-      'Custom-built site for a private capital brokerage serving real estate investors — a regulated, trust-first niche where templates don’t cut it. Built the lead-capture flow that turns a visitor into a qualified deal inquiry.',
+      'Custom-built site for a private capital brokerage serving real estate investors, a regulated, trust-first niche where templates don’t cut it. Built the lead-capture flow that turns a visitor into a qualified deal inquiry.',
   },
   {
     id: 'cedar-sage',
+    url: 'https://cedarandsagespa.com/',
     name: 'Cedar & Sage Spa',
     category: 'Booking · Local service',
     kind: 'concept',
+    image: { webp: cedarSageWebp, jpg: cedarSageJpg },
     blurb:
-      'Concept build for a local day spa — clear service menu with real pricing, one obvious booking CTA, and copy built to reduce the “should I call or just leave” hesitation local service sites usually create.',
+      'Concept build for a local day spa: clear service menu with real pricing, one obvious booking CTA, and copy built to reduce the “should I call or just leave” hesitation local service sites usually create.',
   },
 ];
 
@@ -201,11 +239,11 @@ export const process = {
 };
 
 /**
- * NOTE — open question flagged to Darrin: the design brief specifies a
+ * NOTE: open question flagged to Darrin: the design brief specifies a
  * four-step section (Audit → Plan → Build → Launch); the Notion copy
  * doc lists seven (Discover, Audit, Plan, Design, Build, Launch,
  * Optimize). Rendering the brief's four, using Notion's wording for
- * each. Switching to all seven is a change to this array only — the
+ * each. Switching to all seven is a change to this array only. The
  * section renders whatever it is given.
  */
 export const steps: Step[] = [
@@ -218,7 +256,7 @@ export const steps: Step[] = [
   {
     n: '02',
     name: 'Plan',
-    detail: 'You get a clear scope and price — no surprises later.',
+    detail: 'You get a clear scope and price. No surprises later.',
   },
   {
     n: '03',
@@ -230,13 +268,13 @@ export const steps: Step[] = [
     n: '04',
     name: 'Launch',
     detail:
-      'Goes live, connected to your domain, forms and booking tested end to end — then I check what’s working and what to improve.',
+      'Goes live, connected to your domain, forms and booking tested end to end. Then I check what’s working and what to improve.',
   },
 ];
 
 export const contact = {
   eyebrow: 'START HERE',
-  heading: 'Tell me about your business — I’ll follow up with next steps.',
+  heading: 'Tell me about your business, and I’ll follow up with next steps.',
   support: 'I respond within one business day.',
   cta: 'Get a free website audit',
 };

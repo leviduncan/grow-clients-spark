@@ -8,26 +8,26 @@ export default function About() {
   useGsap(root, () => {
     revealOnScroll('[data-about-reveal]', { trigger: root.current!, stagger: 0.1 });
 
-    // Trigger-once throughout this section — never mixed with scrub.
+    // Trigger-once throughout this section. Never mixed with scrub.
     gsap.utils.toArray<HTMLElement>('[data-bar]').forEach((el) => {
       progressBar(el, Number(el.dataset.bar ?? 0));
     });
   });
 
   return (
-    <section id="about" ref={root} className="bg-paper py-20 md:py-28 lg:py-32">
+    <section id="about" ref={root} className="theme-fade bg-base-veil py-20 md:py-28 lg:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <p
               data-about-reveal
-              className="text-xs font-semibold uppercase tracking-[0.2em] text-ember-dim"
+              className="text-xs font-semibold uppercase tracking-[0.2em] text-ember-text"
             >
               {about.eyebrow}
             </p>
             <h2
               data-about-reveal
-              className="mt-4 font-display text-3xl uppercase leading-[1.05] text-ink sm:text-4xl lg:text-[2.75rem]"
+              className="mt-4 font-display text-3xl uppercase leading-[1.05] text-content sm:text-4xl lg:text-[2.75rem]"
             >
               {about.heading}
             </h2>
@@ -36,7 +36,7 @@ export default function About() {
               <p
                 key={para.slice(0, 24)}
                 data-about-reveal
-                className="mt-6 text-base leading-relaxed text-slate md:text-lg"
+                className="mt-6 text-base leading-relaxed text-muted md:text-lg"
               >
                 {para}
               </p>
@@ -49,10 +49,10 @@ export default function About() {
                 <li
                   key={item.title}
                   data-about-reveal
-                  className="rounded-xl border border-slate-100 bg-paper-card p-6"
+                  className="rounded-xl border border-hairline card-grow bg-card p-6"
                 >
                   <div className="flex items-start gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ember/12 text-ember-dim">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ember/12 text-ember-text">
                       <svg
                         width="20"
                         height="20"
@@ -68,31 +68,34 @@ export default function About() {
                       </svg>
                     </span>
                     <div>
-                      <h3 className="font-display text-lg uppercase text-ink">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-slate">{item.detail}</p>
+                      <h3 className="font-display text-lg uppercase text-content">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{item.detail}</p>
                     </div>
                   </div>
                 </li>
               ))}
             </ul>
 
-            <div data-about-reveal className="rounded-xl border border-slate-100 bg-paper-card p-6">
+            <div
+              data-about-reveal
+              className="rounded-xl border border-hairline card-grow bg-card p-6"
+            >
               <ul className="flex flex-col gap-6">
                 {aboutMetrics.map((metric) => (
                   <li key={metric.label}>
                     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                      <span className="text-sm font-medium text-ink">{metric.label}</span>
+                      <span className="text-sm font-medium text-content">{metric.label}</span>
                       <span className="flex items-center gap-2">
-                        <span className="font-display text-lg text-ink">{metric.display}</span>
+                        <span className="font-display text-lg text-content">{metric.display}</span>
                         {metric.pending && (
-                          <span className="rounded-full border border-ember-dim/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-ember-dim">
+                          <span className="rounded-full border border-ember/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-ember-text">
                             Scale TBC
                           </span>
                         )}
                       </span>
                     </div>
 
-                    <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
+                    <div className="mt-3 h-2 overflow-hidden rounded-full bg-hairline">
                       <div
                         data-bar={metric.pending ? 100 : metric.pct}
                         className={`h-full w-full rounded-full ${
@@ -102,7 +105,7 @@ export default function About() {
                           metric.pending
                             ? {
                                 backgroundImage:
-                                  'repeating-linear-gradient(135deg, var(--color-slate) 0 6px, transparent 6px 12px)',
+                                  'repeating-linear-gradient(135deg, var(--muted) 0 6px, transparent 6px 12px)',
                               }
                             : undefined
                         }

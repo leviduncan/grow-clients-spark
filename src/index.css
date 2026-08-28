@@ -2,25 +2,136 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------
-   Design tokens — "Slate & Ember"
-   Tailwind v4 is CSS-first: these @theme entries ARE the config.
-   There is deliberately no tailwind.config.ts — v4 would not read
-   one without an @config directive, which is how the previous
-   build silently ignored its own theme file.
+   Design tokens: "Slate & Ember", light + dark
+
+   Two layers on purpose:
+   1. Plain CSS variables below, redefined per theme. These are what
+      actually change at runtime.
+   2. @theme inline, which maps Tailwind's colour utilities onto those
+      variables by REFERENCE rather than inlining their values. Without
+      `inline`, Tailwind would bake the light values into every utility
+      and the dark theme would never apply.
+
+   Theme resolution order: no attribute = follow the OS; an explicit
+   data-theme on <html> always wins. See src/lib/theme.ts.
    --------------------------------------------------------------- */
-@theme {
+
+:root {
+  /* Brand accent: identical in both themes, it is the constant. */
+  --ember: #FF7A29;
+  --ember-dim: #C95F1D;
+  --on-ember: #101826;
+
+  /* Scrim over photography: always dark, so white text stays legible
+     on top of an image regardless of the page theme. */
+  --scrim: #101826;
+}
+
+/* --- Light ---------------------------------------------------- */
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --band: #FFFFFF;
+  --base: #F5F3EE;
+  --card: #FFFFFF;
+  --feature: #101826;
+  --on-feature: #F3F1EC;
+
+  --content: #101826;
+  --muted: #4A5568;
+  --faint: #5F6875;
+  --hairline: #E4E0D7;
+
+  /* Ember needs to darken on light grounds to stay readable as text. */
+  --ember-text: #C24F0F;
+
+  /* Paper-texture veil. Every section except the hero paints its normal
+     colour at this alpha over Bg-1.jpg. Tune the grain in one place here:
+     lower alpha = more texture. Bg-1.jpg carries 7.1 luma levels of grain,
+     so composited grain is 7.1 x (1 - alpha): ~3.0 levels at this value,
+     against ~1.1 at the 0.85 it started on.
+
+     Lowering this also pulls both surfaces toward the texture's own mean
+     (226.7), which narrows the band/base gap that separates adjacent
+     sections: 8.5 luma levels at 0.85, 6.6 at 0.66, 5.8 here. Much below
+     this and that separation goes, and --base would need deepening to
+     compensate. */
+  --veil-alpha: 0.58;
+  --band-veil: rgb(255 255 255 / var(--veil-alpha));
+  --base-veil: rgb(245 243 238 / var(--veil-alpha));
+}
+
+/* --- Dark (system preference, no explicit choice) -------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --band: #0C1320;
+    --base: #131C2B;
+    --card: #1A2436;
+    --feature: #1F2A3D;
+    --on-feature: #F3F1EC;
+
+    --content: #F3F1EC;
+    --muted: #9BA6B5;
+    --faint: #8793A4;
+    --hairline: #26303F;
+
+    --ember-text: #FF7A29;
+
+    /* No texture in dark mode: veils collapse to the flat surfaces. */
+    --veil-alpha: 1;
+    --band-veil: #0C1320;
+    --base-veil: #131C2B;
+  }
+}
+
+/* --- Dark (explicit choice) ----------------------------------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --band: #0C1320;
+  --base: #131C2B;
+  --card: #1A2436;
+  --feature: #1F2A3D;
+  --on-feature: #F3F1EC;
+
+  --content: #F3F1EC;
+  --muted: #9BA6B5;
+  --faint: #8793A4;
+  --hairline: #26303F;
+
+  --ember-text: #FF7A29;
+
+  /* No texture in dark mode: veils collapse to the flat surfaces. */
+  --veil-alpha: 1;
+  --band-veil: #0C1320;
+  --base-veil: #131C2B;
+}
+
+@theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Archivo Black", "Arial Black", "Helvetica Neue", Impact, sans-serif;
 
-  --color-ink: #101826;
-  --color-ink-soft: #1A2436;
-  --color-ember: #FF7A29;
-  --color-ember-dim: #C95F1D;
-  --color-paper: #F5F3EE;
-  --color-paper-card: #FFFFFF;
-  --color-slate: #4A5568;
-  --color-slate-100: #E7E5DE;
-  --color-white: #FFFFFF;
+  --color-band: var(--band);
+  --color-base: var(--base);
+  --color-band-veil: var(--band-veil);
+  --color-base-veil: var(--base-veil);
+  --color-card: var(--card);
+  --color-feature: var(--feature);
+  --color-on-feature: var(--on-feature);
+
+  --color-content: var(--content);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-hairline: var(--hairline);
+
+  --color-ember: var(--ember);
+  --color-ember-dim: var(--ember-dim);
+  --color-ember-text: var(--ember-text);
+  --color-on-ember: var(--on-ember);
+  --color-scrim: var(--scrim);
 }
 
 @layer base {
@@ -32,8 +143,40 @@
   }
 
   body {
-    @apply bg-paper text-ink font-sans antialiased;
+    @apply bg-base text-content font-sans antialiased;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Paper texture behind the whole page, light mode only.
+     - `fixed` so the grain stays put while the page scrolls, rather than
+       sliding with it (a moving grain reads as a pattern, not paper).
+     - z-index -1 paints it above the body background but below every
+       section, so the veiled sections let it through and the hero, which
+       stays fully opaque, hides it completely.
+     - Referenced from src/assets so Vite hashes it and rewrites the URL
+       against the relative `base`. A public/ asset would need a
+       root-absolute URL and break that. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url('./assets/Bg-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body::before {
+      display: none;
+    }
+  }
+
+  :root[data-theme="dark"] body::before {
+    display: none;
   }
 
   h1, h2, h3 {
@@ -46,24 +189,24 @@
     text-wrap: pretty;
   }
 
-  /* Visible focus for keyboard users on both grounds */
   :focus-visible {
-    outline: 3px solid var(--color-ember);
+    outline: 3px solid var(--ember);
     outline-offset: 3px;
     border-radius: 2px;
   }
 }
 
 @layer utilities {
-  /* Outline/fill split treatment for the oversized hero headline */
+  /* Outline/fill split treatment for the oversized hero headline.
+     Stroke follows the text colour so it works on either ground. */
   .text-outline {
     color: transparent;
-    -webkit-text-stroke: 2px var(--color-white);
+    -webkit-text-stroke: 2px var(--content);
   }
 
   .text-outline-ember {
     color: transparent;
-    -webkit-text-stroke: 2px var(--color-ember);
+    -webkit-text-stroke: 2px var(--ember);
   }
 
   @media (min-width: 768px) {
@@ -73,15 +216,60 @@
 
   /* Browsers without -webkit-text-stroke get solid text, not invisible text */
   @supports not (-webkit-text-stroke: 1px black) {
-    .text-outline { color: var(--color-white); }
-    .text-outline-ember { color: var(--color-ember); }
+    .text-outline { color: var(--content); }
+    .text-outline-ember { color: var(--ember); }
+  }
+
+  /* Section surfaces swap their painted colour with the theme, so give
+     them the same easing as the body rather than snapping. */
+  .theme-fade {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Card hover. Defined once so the amount is tunable in one place and
+     so prefers-reduced-motion can switch it off cleanly at the bottom of
+     this file. `card-grow-lift` adds the small rise the pricing tiers
+     already had; everything else just grows. */
+  .card-grow,
+  .card-grow-lift {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .card-grow:hover {
+    transform: scale(1.02);
+  }
+
+  .card-grow-lift:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  /* Stretched card link. The anchor wraps only the project title, so the
+     accessible name stays short and there is one tab stop per card, but its
+     ::after covers the whole article so a click lands anywhere on it. The
+     focus ring has to move to that overlay too: left on the anchor it would
+     draw a box around the title alone, which is not what gets clicked.
+     Requires `relative` on the card. */
+  .card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+  }
+
+  .card-link:focus-visible {
+    outline: none;
+  }
+
+  .card-link:focus-visible::after {
+    outline: 3px solid var(--ember);
+    outline-offset: 4px;
   }
 }
 
 /* ---------------------------------------------------------------
    Reduced motion: CSS-level kill switch. GSAP timelines carry their
-   own matchMedia guard in src/lib/gsap.ts -- this covers everything
-   driven by CSS transitions/animations.
+   own matchMedia guard in src/lib/gsap.ts.
    --------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -92,5 +280,13 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* A card that resizes under the cursor is movement, not just an
+     animation: killing the transition alone would leave it snapping to a
+     new size. Drop the transform entirely instead. */
+  .card-grow:hover,
+  .card-grow-lift:hover {
+    transform: none;
   }
 }

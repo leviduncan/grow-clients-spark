@@ -18,13 +18,24 @@ export default function Marquee() {
   return (
     <div
       ref={root}
-      className="relative -mt-6 overflow-hidden bg-ink py-10 md:-mt-8 md:py-14"
+      className="theme-fade relative -mt-6 overflow-hidden bg-band-veil py-14 md:-mt-8 md:py-20"
       onMouseEnter={pause}
       onMouseLeave={resume}
       onFocusCapture={pause}
       onBlurCapture={resume}
     >
-      <div className="w-[115%] -translate-x-[7.5%] -rotate-3 bg-ember py-4 md:py-5">
+      {/* The hero is the one fully opaque section; everything below it
+          paints at --veil-alpha over the paper texture. That leaves a hard
+          ~4-level step right at this boundary, which reads as a faint line
+          across a large flat white area. Fading the opaque colour out over
+          the first 112px removes the edge. In dark mode the two colours
+          are identical, so this is a no-op. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-band to-transparent"
+      />
+
+      <div className="relative w-[115%] -translate-x-[7.5%] -rotate-3 bg-ember py-3 md:py-4">
         <div ref={track} className="flex w-max">
           <TagRow />
           <TagRow duplicate />
@@ -44,19 +55,19 @@ function TagRow({ duplicate = false }: { duplicate?: boolean }) {
     >
       {marqueeTags.map((tag) => (
         <li key={tag} className="flex items-center">
-          <span className="whitespace-nowrap px-6 font-display text-lg uppercase tracking-tight text-ink md:px-8 md:text-2xl">
+          <span className="whitespace-nowrap px-8 font-display text-[75px] uppercase leading-none tracking-tight text-on-ember md:px-10">
             {tag}
           </span>
           <svg
-            width="14"
-            height="14"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             aria-hidden="true"
-            className="shrink-0 text-ink/50"
+            className="shrink-0 text-on-ember/45"
           >
             <path d="M12 3v18" />
             <path d="M3 12h18" />

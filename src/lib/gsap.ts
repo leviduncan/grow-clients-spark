@@ -63,6 +63,11 @@ export function revealOnScroll(
     ease: 'power2.out',
     stagger: opts.stagger ?? 0.08,
     delay: opts.delay ?? 0,
+    // Hand `transform` back to CSS once the reveal lands. GSAP otherwise
+    // leaves `transform: translate(0px, 0px)` inline, and an inline style
+    // outranks the stylesheet, which would silently kill the .card-grow
+    // hover on every card this animates.
+    clearProps: 'transform',
     scrollTrigger: {
       trigger: opts.trigger ?? (targets as Element),
       start: 'top 85%',
@@ -88,6 +93,7 @@ export function revealOnLoad(
     ease: 'power3.out',
     stagger: opts.stagger ?? 0.1,
     delay: opts.delay ?? 0.1,
+    clearProps: 'transform',
   });
 }
 

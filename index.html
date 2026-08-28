@@ -4,27 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>GrowClientsAI — Websites That Win Local Clients</title>
+    <title>GrowClientsAI | Websites That Win Local Clients</title>
     <meta
       name="description"
-      content="I build and rebuild websites for local service businesses — the kind that make it easier for someone to call, book, or buy, not just look nice."
+      content="I build and rebuild websites for local service businesses: the kind that make it easier for someone to call, book, or buy, not just look nice."
     />
     <link rel="canonical" href="https://growclientsai.com/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://growclientsai.com/" />
-    <meta property="og:title" content="GrowClientsAI — Websites That Win Local Clients" />
+    <meta property="og:title" content="GrowClientsAI | Websites That Win Local Clients" />
     <meta
       property="og:description"
       content="Websites for local service businesses that make it easier for someone to call, book, or buy."
     />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" href="./favicon.png" type="image/png" />
-    <meta name="theme-color" content="#101826" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0C1320" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!--
+      Applies the stored theme before first paint. Must stay blocking and
+      inline: deferring it means the page paints light, then snaps to dark.
+      Key must match THEME_KEY in src/lib/theme.ts.
+    -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('gcai-theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

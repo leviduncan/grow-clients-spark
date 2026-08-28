@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { nav, site } from '@/data/content';
+import { useTheme } from '@/lib/theme';
+import Logo from '@/components/Logo';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -30,17 +33,28 @@ export default function Nav() {
 
   return (
     <header
+      /* Three states, not two. The mobile sheet below paints an opaque
+         bg-band, so the bar has to go opaque with it or the seam between
+         them shows; the glass is only for the scrolled desktop bar. */
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled || open ? 'bg-ink/95 backdrop-blur-md' : 'bg-transparent'
+        open
+          ? 'bg-band'
+          : scrolled
+            ? 'bg-band/65 backdrop-blur-xl backdrop-saturate-150'
+            : 'bg-transparent'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8 md:py-5">
         <a
           href="#top"
-          className="font-display text-lg tracking-tight text-white md:text-xl"
-          aria-label={`${site.name} — back to top`}
+          className="text-content"
+          aria-label={`${site.name}, back to top`}
         >
-          GROWCLIENTS<span className="text-ember">AI</span>
+          {/* Only lg gets the large mark. From md the nav links are shown
+              and the bar is full: at 768 the links, toggle and CTA already
+              take ~494px of the 704px measure, so anything past ~190px of
+              logo collides with "Services". */}
+          <Logo className="h-[15px] w-auto lg:h-[26px]" />
         </a>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
@@ -48,58 +62,65 @@ export default function Nav() {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-white/75 transition-colors hover:text-white"
+              className="text-sm font-medium text-muted transition-colors hover:text-content"
             >
               {item.label}
             </a>
           ))}
+
+          <ThemeToggle theme={theme} onToggle={toggle} />
+
           <a
             href="#contact"
-            className="rounded-full bg-ember px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-ember-dim"
+            className="rounded-full bg-ember px-5 py-3 text-sm font-semibold text-on-ember transition-colors hover:bg-ember-dim"
           >
             Free audit
           </a>
         </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          className="flex h-11 w-11 items-center justify-center text-white md:hidden"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle theme={theme} onToggle={toggle} />
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            className="flex h-11 w-11 items-center justify-center text-content"
           >
-            {open ? (
-              <>
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </>
-            ) : (
-              <>
-                <path d="M4 7h16" />
-                <path d="M4 12h16" />
-                <path d="M4 17h16" />
-              </>
-            )}
-          </svg>
-        </button>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              {open ? (
+                <>
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </>
+              ) : (
+                <>
+                  <path d="M4 7h16" />
+                  <path d="M4 12h16" />
+                  <path d="M4 17h16" />
+                </>
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {open && (
         <nav
           id="mobile-nav"
           aria-label="Primary mobile"
-          className="border-t border-white/10 bg-ink px-5 pb-8 pt-4 md:hidden"
+          className="border-t border-hairline bg-band px-5 pb-8 pt-4 md:hidden"
         >
           <ul className="flex flex-col">
             {nav.map((item) => (
@@ -107,7 +128,7 @@ export default function Nav() {
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex min-h-13 items-center border-b border-white/10 font-display text-xl text-white"
+                  className="flex min-h-13 items-center border-b border-hairline font-display text-xl text-content"
                 >
                   {item.label}
                 </a>
@@ -117,12 +138,54 @@ export default function Nav() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-6 flex min-h-13 items-center justify-center rounded-full bg-ember px-6 font-semibold text-ink"
+            className="mt-6 flex min-h-13 items-center justify-center rounded-full bg-ember px-6 font-semibold text-on-ember"
           >
             Get a free website audit
           </a>
         </nav>
       )}
     </header>
+  );
+}
+
+function ThemeToggle({ theme, onToggle }: { theme: string; onToggle: () => void }) {
+  const dark = theme === 'dark';
+
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
+      title={dark ? 'Switch to light theme' : 'Switch to dark theme'}
+      className="flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:text-content"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        {dark ? (
+          <>
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </>
+        ) : (
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        )}
+      </svg>
+    </button>
   );
 }
