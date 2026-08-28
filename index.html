@@ -46,6 +46,33 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      No-JS fallback only. React replaces nothing here: #root is empty and
+      this sits outside it, so it renders only when scripting is off. It
+      exists because the markup this replaced was doing that job, badly, as
+      a stale holding page. Keep it short and keep it true to
+      src/data/content.ts; it is not a second copy of the site.
+    -->
+    <noscript>
+      <div class="mx-auto max-w-2xl px-5 py-16">
+        <h1 class="font-display text-3xl uppercase leading-[1.1] text-content">
+          Websites that win local clients
+        </h1>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          I build and rebuild websites for local service businesses: the kind that make it
+          easier for someone to call, book, or buy, not just look nice.
+        </p>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-content">
+          Darrin Duncan, GrowClientsAI.
+          <a href="mailto:darrin@darrinduncan.com" class="underline underline-offset-2"
+            >darrin@darrinduncan.com</a
+          >
+          or <a href="tel:+15702005552" class="underline underline-offset-2">570-200-5552</a>.
+        </p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
