@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Client form pages. Unlisted links Darrin sends directly, not part of the
+# site. Each one also carries a noindex meta, which is what actually keeps
+# it out of the index: this only stops the crawl.
+Disallow: /testimonial/
+
 Sitemap: https://growclientsai.com/sitemap.xml

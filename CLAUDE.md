@@ -28,20 +28,29 @@ Each of those was removed deliberately - see Decisions below.
 
 ```
 index.html            Static shell, SEO/OG meta, font preconnect
+testimonial/          Unlisted client form (see Client forms below)
+  index.html
+  thanks/index.html
 src/
   main.tsx            React root
   App.tsx             Section order - this is the whole page
   index.css           @theme design tokens + base layer + reduced-motion kill switch
-  data/content.ts     ALL copy. Single source of truth.
+  data/content.ts     ALL marketing copy. Single source of truth.
+  data/forms.ts       ALL form copy + the n8n webhook URLs
   lib/gsap.ts         GSAP registration + animation primitives
   components/Nav.tsx  Fixed header, mobile sheet
   components/Logo.tsx Wordmark, as outline paths
+  components/ThemeToggle.tsx  Light/dark switch, self-contained
   sections/           Hero, Marquee, Services, About, Work, Process, Contact, Footer
+  forms/              Shell, controls, submit hook, and the form pages
 public/               favicon.svg, apple-touch-icon.png, robots.txt - copied to dist/ verbatim
 ```
 
-**It is a single page.** Navigation is anchor links (`#services`, `#about`, `#work`,
-`#process`, `#contact`). There is no router and no client-side routing of any kind.
+**The marketing site is a single page.** Navigation is anchor links (`#services`,
+`#about`, `#work`, `#process`, `#contact`). There is no router and no client-side routing
+of any kind. The form pages under `testimonial/` are separate *documents*, not routes:
+each is its own Vite entry building to `dist/<dir>/index.html`, which Caddy's
+`file_server` serves for a directory request. That is why they need no rewrite rule.
 
 ---
 
@@ -239,6 +248,59 @@ re-check before lowering the alpha further.
 - **No em-dashes in anything that renders** (src/data/content.ts, component strings, index.html meta). Use a colon when the clause enumerates, a full stop when it
   restates, a comma for a plain appositive. En-dashes in numeric ranges (`2–4 weeks`,
   `5–8 pages`) are fine and intentional.
+
+---
+
+## Client forms - unlisted, do not link them
+
+`testimonial/` is the first of several forms Darrin sends to a client **directly**, by
+email, once their project ships. It is not part of the marketing site.
+
+- **Never add a form to `nav` in `content.ts`, to the footer columns, or to the sitemap.**
+  This is a standing instruction, not an oversight. `robots.txt` disallows `/testimonial/`
+  and both pages carry `noindex, nofollow`; the meta is what actually keeps them out of an
+  index, the robots rule only stops the crawl.
+- Copy lives in `src/data/forms.ts`, the same way `content.ts` works for the main page.
+  The n8n webhook URLs live there too.
+- The pages share the real design tokens, the theme system and the anti-flash script, so
+  they are the same site. They deliberately do **not** use `<Nav />`: there are no section
+  anchors to reach from them, and pushing a "Free audit" CTA at someone who has already
+  paid reads badly.
+
+**To add a form:** a copy block in `src/data/forms.ts`, a component in `src/forms/`, an
+entry file, `<dir>/index.html` + `<dir>/thanks/index.html`, and both registered in
+`build.rollupOptions.input` in `vite.config.ts`. Listing any input there replaces Vite's
+default, so `index.html` must stay in that map or the whole site stops building.
+
+### How a submission travels
+
+The build is static with no backend, so the browser posts JSON straight to n8n, and on a
+2xx it redirects to the thank-you page. Consequences worth knowing:
+
+- **The n8n Webhook node needs "Allowed Origins (CORS)" set** to `https://growclientsai.com`.
+  A cross-origin POST with a JSON content type triggers a preflight `OPTIONS`; without that
+  option the browser rejects the response and the client sees the error state even though
+  the workflow may have run. Use the production `/webhook/` path, not `/webhook-test/`,
+  which only answers while the n8n canvas is listening.
+- **Nothing in the payload is trustworthy.** Validate in the workflow. `meta.elapsedMs` is
+  time-on-page and is the useful spam signal: a five-question form completed in three
+  seconds is a bot. That check is deliberately *not* done in the browser, where a wrong
+  guess would silently bin a real client's testimonial with no record of it.
+- The honeypot (`hp-website`) is the one client-side drop. It is named that, rather than
+  `website`, because password managers autofill on recognised tokens and would get a real
+  client binned.
+- Fields are **uncontrolled**. A failed post therefore leaves every answer sitting in the
+  DOM as typed, so "try again" is one click and not a retype. Do not convert them to
+  controlled inputs without restoring that behaviour.
+
+### `text-base` is not a font size in this repo
+
+`@theme` defines `--color-base`, so Tailwind resolves `text-base` to `color: var(--base)`
+and sets **no font size at all**. It is currently harmless only because `.text-content` and
+`.text-muted` sort after `.text-base` in the output and win. Use `text-[1rem]` when you
+mean 16px. Several `sections/` files still carry the old `text-base`; they render correctly
+today, but a change in class ordering would paint that text in the page's own background
+colour.
 
 ---
 

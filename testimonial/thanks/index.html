@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Thank you | GrowClientsAI</title>
+    <meta name="description" content="Your testimonial came through. Thank you." />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F3EE" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131C2B" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Key must match THEME_KEY in src/lib/theme.ts. See index.html. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('gcai-theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/forms/entry-testimonial-thanks.tsx"></script>
+  </body>
+</html>

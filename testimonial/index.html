@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Unlisted. Darrin sends this link to one client after their project
+      ships, so it stays out of the index and out of the nav. robots.txt
+      disallows it as well; this meta is what keeps it out of engines that
+      reached the URL some other way, e.g. a crawler following the link out
+      of an email.
+    -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Share your experience | GrowClientsAI</title>
+    <meta
+      name="description"
+      content="A few short questions about the site I built you, in your own words."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Share your experience | GrowClientsAI" />
+    <meta
+      property="og:description"
+      content="Five minutes, in your own words: a few questions about how the project went."
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F3EE" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131C2B" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!--
+      Applies the stored theme before first paint. Must stay blocking and
+      inline: deferring it means the page paints light, then snaps to dark.
+      Key must match THEME_KEY in src/lib/theme.ts.
+    -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('gcai-theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/forms/entry-testimonial.tsx"></script>
+  </body>
+</html>

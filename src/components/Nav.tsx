@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { nav, site } from '@/data/content';
-import { useTheme } from '@/lib/theme';
 import Logo from '@/components/Logo';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -68,7 +67,7 @@ export default function Nav() {
             </a>
           ))}
 
-          <ThemeToggle theme={theme} onToggle={toggle} />
+          <ThemeToggle />
 
           <a
             href="#contact"
@@ -79,7 +78,7 @@ export default function Nav() {
         </nav>
 
         <div className="flex items-center gap-1 md:hidden">
-          <ThemeToggle theme={theme} onToggle={toggle} />
+          <ThemeToggle />
 
           <button
             type="button"
@@ -145,47 +144,5 @@ export default function Nav() {
         </nav>
       )}
     </header>
-  );
-}
-
-function ThemeToggle({ theme, onToggle }: { theme: string; onToggle: () => void }) {
-  const dark = theme === 'dark';
-
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
-      title={dark ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:text-content"
-    >
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        {dark ? (
-          <>
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2" />
-            <path d="M12 20v2" />
-            <path d="m4.93 4.93 1.41 1.41" />
-            <path d="m17.66 17.66 1.41 1.41" />
-            <path d="M2 12h2" />
-            <path d="M20 12h2" />
-            <path d="m6.34 17.66-1.41 1.41" />
-            <path d="m19.07 4.93-1.41 1.41" />
-          </>
-        ) : (
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-        )}
-      </svg>
-    </button>
   );
 }

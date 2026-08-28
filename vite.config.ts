@@ -16,5 +16,23 @@ export default defineConfig({
   build: {
     target: 'es2020',
     assetsInlineLimit: 4096,
+    rollupOptions: {
+      /*
+        Multi-page build. The marketing site is still one page with anchor
+        navigation; these extra entries are the unlisted client forms, which
+        are separate documents rather than routes precisely because there is
+        no router and no Caddy rewrite to lean on. Each one builds to
+        dist/<dir>/index.html, which Caddy's file_server serves for a
+        directory request, so /testimonial works with no server config.
+
+        `index.html` has to be listed explicitly: naming any input at all
+        replaces Vite's default, and leaving it out would drop the site.
+      */
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        testimonial: path.resolve(__dirname, 'testimonial/index.html'),
+        testimonialThanks: path.resolve(__dirname, 'testimonial/thanks/index.html'),
+      },
+    },
   },
 });
