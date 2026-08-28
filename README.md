@@ -1,11 +1,11 @@
 # GrowClientsAI
 
-Marketing site for GrowClientsAI: Darrin Duncan's web design and build service for local
-service businesses. Built with Vite + React + Tailwind v4, deployed via GitHub Actions to
-Caddy.
+Marketing site for GrowClientsAI, a web design and build service for local service
+businesses. Single page, React 19 + Vite 6 + Tailwind v4, deployed via GitHub Actions
+to Caddy. See [CLAUDE.md](CLAUDE.md) for architecture and conventions.
 
-A single anchor-navigated page, plus the unlisted client forms under `testimonial/`. See
-[CLAUDE.md](CLAUDE.md) for the design tokens, the copy conventions, and the deploy rules.
+Anchor navigation only, plus the unlisted client forms under `testimonial/`. Those are
+separate documents, not routes, and are deliberately not linked from the site.
 
 ## Local
 
