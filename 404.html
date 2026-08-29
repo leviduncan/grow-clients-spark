@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      REQUIRED, and the one place this repo breaks its own relative-path
+      rule. Caddy serves this single file for any unmatched path, so a
+      request to /some/deep/path would resolve Vite's relative
+      "./assets/index.css" against /some/deep/, and the page would load
+      unstyled with no JavaScript.
+
+      <base href="/"> re-points every relative URL in the document at the
+      site root, which keeps Vite's own output untouched and working. It
+      does mean this page alone assumes it is served from the domain root.
+      That is inherent: a 404 is defined by the server's error routing, not
+      by where the bundle happens to sit.
+    -->
+    <base href="/" />
+
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Page not found | GrowClientsAI</title>
+    <meta name="description" content="That page does not exist, or it moved." />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F3EE" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131C2B" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Key must match THEME_KEY in src/lib/theme.ts. See index.html. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('gcai-theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/pages/entry-404.tsx"></script>
+  </body>
+</html>

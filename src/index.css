@@ -220,6 +220,35 @@
     .text-outline-ember { color: var(--ember); }
   }
 
+  /* Oversized display numerals that fade out, for the 404.
+     Both stops are tokens, so it inverts with the theme for free: a bright
+     cream fading into the dark ground, or slate fading into the paper.
+     Fading to `transparent` rather than to a literal colour is what makes
+     that work without a per-theme override.
+
+     Declared solid first and enhanced inside @supports: `color:
+     transparent` without a working background-clip is invisible text, not
+     degraded text. Same guard as .text-outline above. */
+  .text-fade-out {
+    color: var(--content);
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .text-fade-out {
+      background-image: linear-gradient(
+        155deg,
+        var(--content) 0%,
+        var(--content) 20%,
+        var(--ember) 58%,
+        transparent 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
   /* Section surfaces swap their painted colour with the theme, so give
      them the same easing as the body rather than snapping. */
   .theme-fade {

@@ -355,6 +355,18 @@ export const contact = {
   ctaHref: CTA_HREF,
 };
 
+/**
+ * 404. Served by Caddy's `handle_errors` for any unmatched path, so it can
+ * be reached from any URL depth. See 404.html for why that forces a
+ * `<base>` tag.
+ */
+export const notFound = {
+  code: '404',
+  heading: 'Page not found.',
+  body: 'This page doesn’t exist, or it moved. Either way it isn’t your fault. The homepage will get you where you were going.',
+  cta: 'Back to homepage',
+};
+
 export const footer = {
   // Giant outline-text background element.
   outlineText: 'GROW CLIENTS AI',

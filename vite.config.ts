@@ -34,6 +34,7 @@ export default defineConfig({
         testimonialThanks: path.resolve(__dirname, 'testimonial/thanks/index.html'),
         getStarted: path.resolve(__dirname, 'get-started/index.html'),
         getStartedThanks: path.resolve(__dirname, 'get-started/thanks/index.html'),
+        notFound: path.resolve(__dirname, '404.html'),
       },
     },
   },
