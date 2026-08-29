@@ -73,9 +73,27 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Legal line. The policies sit beside the copyright rather than in
+            a footer column: they are the small print, and giving them a
+            column heading would weight them like a section of the site.
+            Relative hrefs with the trailing slash, same as CTA_HREF. */}
         <div className="mt-16 flex flex-col gap-4 border-t border-hairline py-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-faint">
-            © {year} {site.name}. All rights reserved.
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-faint">
+            <span>
+              © {year} {site.name}. All rights reserved.
+            </span>
+            <span aria-hidden="true" className="text-hairline">
+              ·
+            </span>
+            <a href="./privacy/" className="transition-colors hover:text-ember-text">
+              Privacy Policy
+            </a>
+            <span aria-hidden="true" className="text-hairline">
+              ·
+            </span>
+            <a href="./terms/" className="transition-colors hover:text-ember-text">
+              Terms of Service
+            </a>
           </p>
           <p className="text-xs text-faint">{site.domain}</p>
         </div>

@@ -35,6 +35,8 @@ export default defineConfig({
         getStarted: path.resolve(__dirname, 'get-started/index.html'),
         getStartedThanks: path.resolve(__dirname, 'get-started/thanks/index.html'),
         card: path.resolve(__dirname, 'card/index.html'),
+        privacy: path.resolve(__dirname, 'privacy/index.html'),
+        terms: path.resolve(__dirname, 'terms/index.html'),
         notFound: path.resolve(__dirname, '404.html'),
       },
     },

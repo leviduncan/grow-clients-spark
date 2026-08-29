@@ -32,6 +32,8 @@ testimonial/          Unlisted client form (see Client forms below)
   index.html
   thanks/index.html
 card/index.html       Unlisted digital business card (see /card/ below)
+privacy/index.html    Privacy Policy (public, linked in the footer)
+terms/index.html      Terms of Service (public, linked in the footer)
 src/
   main.tsx            React root
   App.tsx             Section order - this is the whole page
@@ -39,6 +41,7 @@ src/
   data/content.ts     ALL marketing copy. Single source of truth.
   data/forms.ts       ALL form copy + the n8n webhook URLs
   data/card.ts        ALL /card/ copy + the vCard contact fields
+  data/legal.ts       Privacy Policy + Terms of Service, as structured copy
   lib/gsap.ts         GSAP registration + animation primitives
   lib/vcard.ts        vCard 3.0 builder + download, used only by /card/
   components/Nav.tsx  Fixed header, mobile sheet
@@ -47,6 +50,7 @@ src/
   sections/           Hero, Marquee, Services, About, Work, Process, Contact, Footer
   forms/              Shell, controls, submit hook, and the form pages
   card/               The business card page, its entry, and the save button
+  legal/              One renderer + two entries for /privacy/ and /terms/
 public/               favicon.svg, apple-touch-icon.png, robots.txt - copied to dist/ verbatim
 ```
 
@@ -257,11 +261,25 @@ re-check before lowering the alpha further.
 ## Theming
 
 - `src/lib/theme.ts` owns the state. `useTheme()` returns `{ theme, setTheme, toggle }`.
-- No stored choice → the page follows the OS and keeps tracking it live. The first explicit
-  toggle pins the choice to `localStorage` under `gcai-theme` and stops OS tracking.
-- An inline blocking script in `index.html` applies the stored theme **before first paint**.
+- **Dark is the default.** No stored choice → dark, and the OS preference is deliberately
+  not consulted. The first explicit toggle pins the choice to `localStorage` under
+  `gcai-theme`, and from then on that is what every page uses. This used to follow the OS
+  live; it no longer does, and `readSystem()` is gone rather than left unused.
+- An inline blocking script in every entry HTML applies the theme **before first paint**.
   It must stay inline and blocking, or the page flashes light before switching. Its storage
   key is duplicated there deliberately - keep it in sync with `THEME_KEY`.
+- That script **always sets `data-theme`**, rather than only setting it when a choice is
+  stored. Leaving the attribute off hands the decision to `prefers-color-scheme` in
+  `index.css`, which would paint an OS-light visitor the light site and defeat the default.
+  Only a stored `'light'` opts out. **There are nine copies of this script**, one per entry
+  document; change one and change all nine.
+- `prefers-color-scheme` still exists in `index.css` purely as the fallback for the
+  theoretical case where that script has not run. Nothing in `theme.ts` reads it.
+- `<meta name="theme-color">` is a **single dark value per page**, no longer a light/dark
+  media pair, since dark is what nearly every visitor sees. Known cosmetic gap: a visitor
+  who toggles to light keeps dark browser chrome until reload. Fixing it properly means
+  syncing the meta at runtime from `setTheme`, which is worth doing only if it ever bothers
+  anyone.
 - Tokens are plain CSS variables redefined per theme, exposed to Tailwind via **`@theme
   inline`**. The `inline` keyword is load-bearing: without it Tailwind bakes the light values
   into every utility and dark mode silently does nothing.
@@ -412,6 +430,36 @@ genuinely unavailable without scripting, so it does not pretend to offer them.
 Currently pending: a social profile link, `pending: true` in `card.ts` and therefore
 **hidden, not chipped**. A visible "TBC" on a card handed to a stranger reads as
 unfinished rather than as honest.
+
+---
+
+## `/privacy/` and `/terms/`
+
+Public, indexable, canonical, linked from the footer of the marketing page. Two more Vite
+entries rendering one component, `src/legal/LegalPage.tsx`, over two data objects in
+`src/data/legal.ts`.
+
+**`src/data/legal.ts` is the source of truth.** The site is a static build with no router
+and no Markdown renderer, so `privacy-policy.md` and `terms-of-service.md` in the repo root
+are drafts, not pages: nothing reads them and they are not committed. Editing one changes
+nothing on the site. Amend `legal.ts`.
+
+- **No Markdown parser, on purpose.** A dependency for two documents that change once a
+  year is not worth it. `inline()` in `LegalPage.tsx` splits on `**` and bolds the odd
+  pieces, which is the whole of the Markdown support and is meant to stay that way. If a
+  document ever needs more than bold, hand-write the JSX rather than growing that function.
+- **The contact email is read off `site`.** Both source drafts carried a literal
+  `[contact email]` placeholder, and a legal page telling someone to write to a bracketed
+  placeholder is worse than having no page at all.
+- The `<noscript>` on each page does **not** restate the policy. Duplicating it into the
+  HTML would be a second copy to drift; it points at the email instead and offers to send
+  the document.
+
+**Open conflict, unresolved:** Privacy §5 reserves the right to "lightly edit" a
+testimonial "for clarity or length". The Decisions section below, the `testimonials` block
+in `content.ts`, and the promise made to clients in `forms.ts` all say testimonials are
+quoted verbatim or not at all. Both cannot stand. This is flagged in a comment on that
+section in `legal.ts` and is Darrin's call to make, not a thing to quietly patch.
 
 ---
 

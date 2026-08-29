@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      PUBLIC, like /get-started/ and /privacy/. Linked from the footer of
+      every page. Do not copy the noindex block from testimonial/index.html
+      or card/index.html into this file.
+    -->
+    <title>Terms of Service | GrowClientsAI</title>
+    <meta
+      name="description"
+      content="The terms that govern use of growclientsai.com, operated by GrowClientsAI."
+    />
+    <link rel="canonical" href="https://growclientsai.com/terms/" />
+
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <!-- Dark is the default now, so this is the surface most visitors see. -->
+    <meta name="theme-color" content="#131C2B" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Key must match THEME_KEY in src/lib/theme.ts. See index.html. -->
+    <script>
+      (function () {
+        var t = null;
+        try {
+          t = localStorage.getItem('gcai-theme');
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <noscript>
+      <div class="mx-auto max-w-2xl px-5 py-16">
+        <h1 class="font-display text-3xl leading-[1.1] text-content">Terms of Service</h1>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          This page needs JavaScript to render. For a copy of these terms, email
+          <a href="mailto:info@growclientsai.com" class="underline underline-offset-2"
+            >info@growclientsai.com</a
+          >
+          and we will send it to you.
+        </p>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/legal/entry-terms.tsx"></script>
+  </body>
+</html>

@@ -28,8 +28,8 @@
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F3EE" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131C2B" />
+    <!-- Dark is the default now, so this is the surface most visitors see. -->
+    <meta name="theme-color" content="#131C2B" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,12 +37,11 @@
     <!-- Key must match THEME_KEY in src/lib/theme.ts. See index.html. -->
     <script>
       (function () {
+        var t = null;
         try {
-          var t = localStorage.getItem('gcai-theme');
-          if (t === 'light' || t === 'dark') {
-            document.documentElement.setAttribute('data-theme', t);
-          }
+          t = localStorage.getItem('gcai-theme');
         } catch (e) {}
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
       })();
     </script>
   </head>
