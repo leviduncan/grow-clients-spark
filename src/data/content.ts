@@ -268,16 +268,24 @@ export const testimonials = {
   heading: 'What it’s like on the other side of a project.',
 };
 
-export const testimonialQuotes: Testimonial[] = [
-  {
-    id: 'sarahs-bakery',
-    quote:
-      'Our old site looked outdated and customers couldn’t find our hours or menu easily, so we needed something that showed off our pastries and made it easy to place custom cake orders online. Since the redesign, custom orders have basically doubled and people compliment the new look all the time. Darrin was patient with all my back and forth and made the whole thing painless. Don’t wait as long as I did, a good website pays for itself fast.',
-    name: 'Sarah',
-    business: 'Sarah’s Bakery',
-    featured: true,
-  },
-];
+/*
+  Empty until real quotes arrive. Invitations are out to two clients as of
+  2026-08-29; paste theirs in here when they land.
+
+  The section renders nothing at all while this is empty, so an empty array
+  is a valid shipped state, not a broken one. Add an entry like:
+
+    {
+      id: 'kevin-starrmark',
+      quote: 'Verbatim. Do not tighten or improve their words.',
+      name: 'Kevin',
+      business: 'StarrMark Solutions',
+      featured: true,
+    }
+
+  Leave `featured` off to keep a quote on record without showing it.
+*/
+export const testimonialQuotes: Testimonial[] = [];
 
 export const process = {
   eyebrow: 'HOW IT GOES',
