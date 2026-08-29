@@ -278,6 +278,19 @@ entry file, `<dir>/index.html` + `<dir>/thanks/index.html`, and both registered 
 `build.rollupOptions.input` in `vite.config.ts`. Listing any input there replaces Vite's
 default, so `index.html` must stay in that map or the whole site stops building.
 
+### Standing decisions for every form
+
+Darrin's calls, made once and not to be re-litigated per form. All three are already the
+default, so the work is in *not* breaking them:
+
+- **Every thank-you or completion page gets the confetti.** Three bursts, via `ThankYou`.
+  It is default-on precisely so a new form cannot forget it. `celebrate={false}` exists
+  only for a form where celebrating would read wrong (a complaint or cancellation flow);
+  it is not a styling preference, and confetti is never opt-in.
+- **Render the chrome through `FormShell`**, never a bespoke header. That is what keeps
+  the wordmark, the theme toggle and the footer identical across forms.
+- **Size the mark with `LOGO_SIZE`**, never a hand-picked height. See the Logo section.
+
 ### How a submission travels
 
 The build is static with no backend, so the browser posts JSON straight to n8n, and on a
