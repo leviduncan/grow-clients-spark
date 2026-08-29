@@ -73,9 +73,15 @@ export type Metric = {
 export const site = {
   name: 'GrowClientsAI',
   domain: 'growclientsai.com',
-  // Notion copy leaves these bracketed. Do not invent contact details.
-  email: 'darrin@darrinduncan.com',
-  phone: '570-200-5552',
+  /* Real details. Used by the footer, both form pages, the 404 and the
+     no-JS fallback in index.html. Never invent or guess these.
+
+     `phone` is stored in display form; Footer.tsx derives the tel: link
+     from it by stripping everything except digits and a leading +. Keeping
+     the +1 is therefore what makes the link dial correctly from a mobile
+     and from outside the US, rather than being cosmetic. */
+  email: 'info@growclientsai.com',
+  phone: '+1 656-218-6053',
 };
 
 export const nav = [

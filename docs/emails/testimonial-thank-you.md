@@ -17,7 +17,7 @@ Written to be read in ten seconds and to ask for nothing.
 - **Gate it behind the spam checks.** If `meta.elapsedMs` is implausibly low, or anything
   else in the workflow flags the submission, write it to Notion for review but do not send
   the email. Auto-replying to a forged address is how a domain gets a reputation problem.
-- `To:` `{{ $json.email }}`, `Reply-To:` `darrin@darrinduncan.com`.
+- `To:` `{{ $json.email }}`, `Reply-To:` `info@growclientsai.com`.
 - Send from a domain with SPF and DKIM aligned, or this lands in Promotions at best.
 
 ### Merge fields
@@ -76,8 +76,8 @@ Darrin
 --
 Darrin Duncan
 GrowClientsAI
-darrin@darrinduncan.com
-570-200-5552
+info@growclientsai.com
++1 656-218-6053
 growclientsai.com
 ```
 
@@ -140,10 +140,10 @@ system stack rather than a fallback nobody chose.
                   <td style="padding-top:20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#101826;">
                     <strong style="color:#101826;">Darrin Duncan</strong><br />
                     <span style="color:#4A5568;">GrowClientsAI</span><br />
-                    <a href="mailto:darrin@darrinduncan.com"
-                       style="color:#C24F0F;text-decoration:underline;">darrin@darrinduncan.com</a><br />
-                    <a href="tel:+15702005552"
-                       style="color:#C24F0F;text-decoration:underline;">570-200-5552</a><br />
+                    <a href="mailto:info@growclientsai.com"
+                       style="color:#C24F0F;text-decoration:underline;">info@growclientsai.com</a><br />
+                    <a href="tel:+16562186053"
+                       style="color:#C24F0F;text-decoration:underline;">+1 656-218-6053</a><br />
                     <a href="https://growclientsai.com/"
                        style="color:#C24F0F;text-decoration:underline;">growclientsai.com</a>
                   </td>
