@@ -290,23 +290,27 @@ export const testimonials = {
 };
 
 /*
-  Empty until real quotes arrive. Invitations are out to two clients as of
-  2026-08-29; paste theirs in here when they land.
+  Real quotes only, straight from /testimonial/. Verbatim: the text below is
+  exactly as submitted, with straight apostrophes converted to curly for
+  typographic consistency and nothing else touched.
 
-  The section renders nothing at all while this is empty, so an empty array
-  is a valid shipped state, not a broken one. Add an entry like:
+  Leave `featured` off to keep a quote on record without showing it. The
+  section renders at most MAX_FEATURED of the flagged ones and removes
+  itself entirely when none are flagged, so an empty array is a valid
+  shipped state.
 
-    {
-      id: 'kevin-starrmark',
-      quote: 'Verbatim. Do not tighten or improve their words.',
-      name: 'Kevin',
-      business: 'StarrMark Solutions',
-      featured: true,
-    }
-
-  Leave `featured` off to keep a quote on record without showing it.
+  Still outstanding: Wandi (All For His Glory Worship), invited 2026-08-29.
 */
-export const testimonialQuotes: Testimonial[] = [];
+export const testimonialQuotes: Testimonial[] = [
+  {
+    id: 'kevin-starrmark',
+    quote:
+      'I’ve worked with Darrin across three different versions of this company over nine years, and each time the business changed direction, he understood what was actually different, not just the logo and the copy, but who we were talking to and what we needed them to do. On this build we ran everything through Jira, with requirements as tickets and defects logged and tracked instead of dying in an email thread, so nothing sat in an inbox. When I flagged something it came back fast and came back right the first time, which let me stay in a stakeholder role instead of babysitting the build.',
+    name: 'Kevin Duncan',
+    business: 'StarrMark Solutions LLC',
+    featured: true,
+  },
+];
 
 export const process = {
   eyebrow: 'HOW IT GOES',
@@ -387,9 +391,3 @@ export const footer = {
   ],
 };
 
-/**
- * Testimonials are deliberately absent. Requests are out to Kevin
- * (StarrMark Solutions) and Wandi (All For His Glory Worship); the
- * section gets built when real quotes come back. Do not ship
- * placeholder testimonial cards.
- */

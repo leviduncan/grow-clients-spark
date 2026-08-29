@@ -427,7 +427,10 @@ the build.
 - **GSAP only.** Framer Motion was removed. Don't add a second animation library.
 - **No shadcn/ui.** The old repo had 49 primitives importing ~20 `@radix-ui` packages that
   were never in `package.json`. They only "worked" because nothing imported them.
-- **No testimonials section.** Requests are out to Kevin (StarrMark Solutions) and Wandi
-  (All For His Glory Worship). Build it when real quotes arrive; never ship placeholder quotes.
+- **Testimonials are real or absent.** The section exists and carries Kevin Duncan's quote
+  (StarrMark Solutions); Wandi (All For His Glory Worship) was invited 2026-08-29 and has
+  not come back yet. Never write, pad or "tidy" a quote, and never ship a placeholder one:
+  the section deletes itself when nothing is flagged `featured`, so an empty array is a
+  valid shipped state and there is never a reason to invent filler.
 - **Concept work is labeled.** Cedar & Sage Spa carries a "Concept project" badge. Never
   present it as a real client engagement.
