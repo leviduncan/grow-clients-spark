@@ -233,6 +233,81 @@ export function progressBar(el: HTMLElement, pct: number): void {
 }
 
 /**
+ * Celebratory confetti: a sequence of bursts fired from origins that walk
+ * across the page, so three bursts read as three explosions rather than one
+ * effect playing three times.
+ *
+ * Hand-rolled on GSAP rather than pulling in canvas-confetti. This repo is
+ * deliberately single-animation-library (see CLAUDE.md), and the whole
+ * effect is a few dozen transform tweens, which is not worth a dependency.
+ *
+ * `container` must be a pointer-events-none, aria-hidden overlay. This is
+ * decoration: it must never intercept a click or reach a screen reader.
+ *
+ * Reduced motion gets nothing at all, and returns before a single particle
+ * is created. A screenful of flying debris is the most motion-heavy thing
+ * on the site, and a gentler explosion is not a meaningful fallback for
+ * someone who asked for less movement.
+ */
+export function confettiBursts(
+  container: HTMLElement,
+  opts: { bursts?: number; perBurst?: number; gap?: number } = {},
+): void {
+  if (prefersReducedMotion()) return;
+
+  const bursts = opts.bursts ?? 3;
+  const perBurst = opts.perBurst ?? 44;
+  const gap = opts.gap ?? 0.55;
+
+  // Ember-led, with --content so a particle always contrasts against the
+  // page in either theme: --content is dark on light and light on dark.
+  const colors = ['var(--ember)', 'var(--ember)', 'var(--ember-dim)', 'var(--content)'];
+
+  const origins = [
+    { x: 50, y: 38 },
+    { x: 24, y: 46 },
+    { x: 76, y: 42 },
+  ];
+
+  const rand = (min: number, max: number) => min + Math.random() * (max - min);
+
+  for (let b = 0; b < bursts; b += 1) {
+    const origin = origins[b % origins.length];
+
+    for (let i = 0; i < perBurst; i += 1) {
+      const el = document.createElement('span');
+      const w = rand(6, 11);
+      el.style.cssText =
+        `position:absolute;left:${origin.x}%;top:${origin.y}%;` +
+        `width:${w}px;height:${w * rand(0.45, 1)}px;` +
+        `background:${colors[i % colors.length]};` +
+        `border-radius:${Math.random() < 0.35 ? '50%' : '1px'};`;
+      container.appendChild(el);
+
+      const angle = rand(0, Math.PI * 2);
+      const power = rand(90, 330);
+      const dur = rand(1.5, 2.4);
+
+      // Two sequential y tweens give the arc: thrown up fast on an out
+      // ease, then pulled down on an in ease. A single tween cannot do
+      // both halves.
+      gsap
+        .timeline({ delay: b * gap + rand(0, 0.08), onComplete: () => el.remove() })
+        .to(el, { x: Math.cos(angle) * power, duration: dur, ease: 'power1.out' }, 0)
+        .to(
+          el,
+          { y: -(Math.abs(Math.sin(angle)) * power * rand(0.5, 1) + rand(40, 120)),
+            duration: dur * 0.35, ease: 'power2.out' },
+          0,
+        )
+        .to(el, { y: rand(340, 720), duration: dur * 0.65, ease: 'power1.in' }, dur * 0.35)
+        .to(el, { rotation: rand(-720, 720), duration: dur, ease: 'none' }, 0)
+        .to(el, { opacity: 0, duration: dur * 0.35, ease: 'power1.in' }, dur * 0.65);
+    }
+  }
+}
+
+/**
  * Splits an element's text into per-word spans so a stagger can act on
  * them. Returns the created spans. Wrapping each word in an
  * overflow-hidden parent keeps the y-translate from bleeding upward.

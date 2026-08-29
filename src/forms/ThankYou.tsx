@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { revealOnLoad, useGsap } from '@/lib/gsap';
 import type { ThanksCopy } from '@/data/forms';
+import Confetti from './Confetti';
 
 /**
  * Generic confirmation page. Every form redirects to one of these on a 2xx
@@ -13,9 +14,12 @@ import type { ThanksCopy } from '@/data/forms';
 export default function ThankYou({
   copy,
   homeHref,
+  celebrate = true,
 }: {
   copy: ThanksCopy;
   homeHref: string;
+  /** Set false for a form where a celebration would read wrong. */
+  celebrate?: boolean;
 }) {
   const root = useRef<HTMLDivElement>(null);
 
@@ -25,6 +29,8 @@ export default function ThankYou({
 
   return (
     <div className="mx-auto w-full max-w-2xl px-5 pb-16 pt-6 md:px-8 md:pt-10" ref={root}>
+      {celebrate && <Confetti />}
+
       <span
         data-thanks-reveal
         aria-hidden="true"

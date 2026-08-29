@@ -321,6 +321,11 @@ use the helpers, which all carry the reduced-motion guard:
 - `marquee` - infinite `xPercent: -50` loop; content must be duplicated exactly once
 - `progressBar` - `scaleX` from `transformOrigin: left`
 - `splitWords` - wraps words in masked spans for the hero stagger
+- `confettiBursts` - sequential celebration bursts, used by the form thank-you pages
+  via `src/forms/Confetti.tsx`. Hand-rolled on GSAP rather than adding canvas-confetti;
+  see the GSAP-only rule below. Reduced motion gets **nothing**, not a gentler version:
+  a calmer explosion is not a fallback for someone who asked for less movement.
+  `ThankYou` takes `celebrate={false}` for a form where a celebration would read wrong.
 
 `prefers-reduced-motion` is handled in two places: every helper above falls back to the
 **end state instantly**, and `src/index.css` carries a CSS-level kill switch for transitions.
