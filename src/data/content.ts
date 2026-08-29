@@ -306,7 +306,7 @@ export const testimonialQuotes: Testimonial[] = [
     id: 'kevin-starrmark',
     quote:
       'I’ve worked with Darrin across three different versions of this company over nine years, and each time the business changed direction, he understood what was actually different, not just the logo and the copy, but who we were talking to and what we needed them to do. On this build we ran everything through Jira, with requirements as tickets and defects logged and tracked instead of dying in an email thread, so nothing sat in an inbox. When I flagged something it came back fast and came back right the first time, which let me stay in a stakeholder role instead of babysitting the build.',
-    name: 'Kevin Duncan',
+    name: 'Kevin',
     business: 'StarrMark Solutions LLC',
     featured: true,
   },
