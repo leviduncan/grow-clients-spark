@@ -85,6 +85,26 @@ export const nav = [
   { label: 'Process', href: '#process' },
 ];
 
+/**
+ * The single conversion path. Every primary CTA on the page points here:
+ * the nav button, the hero button and the closing block.
+ *
+ * Relative, and with the trailing slash, on purpose. Root-absolute
+ * (`/get-started/`) would work on the live domain but break the "dist works
+ * from any directory" guarantee that `base: './'` exists to provide, and
+ * Vite does not rewrite hand-written hrefs the way it rewrites assets.
+ * Dropping the slash costs a 308 redirect from Caddy on every click.
+ *
+ * Note the word "audit" is deliberately gone from all three. The page
+ * branches on whether the visitor already has a site, so "audit" would
+ * quietly tell the no-website half that the offer is not for them before
+ * they ever click.
+ */
+export const CTA_HREF = './get-started/';
+
+/** The nav's button. Kept here rather than hardcoded in Nav.tsx. */
+export const navCta = { label: 'Get Started', href: CTA_HREF };
+
 export const hero = {
   /* Headline per the Aurelia brief's outline/fill split treatment: the setup
      line is outlined, the payoff is filled. The payoff is broken across two
@@ -97,9 +117,10 @@ export const hero = {
     { text: 'CLIENTS', outline: false },
   ],
   sub: 'I build and rebuild websites for local service businesses: the kind that make it easier for someone to call, book, or buy, not just look nice.',
-  cta: 'Get a free website audit',
-  ctaHref: '#contact',
-  support: 'A short, specific look at what your current site is costing you. No pitch, no pressure.',
+  cta: 'Get a Free Website Review',
+  ctaHref: CTA_HREF,
+  support:
+    'A quick, honest look at what’s working and what’s not, whether you already have a site or you’re starting from zero. No pitch, no pressure.',
 };
 
 /* `pending` hides the row outright here, it does not render a TBC chip:
@@ -330,7 +351,8 @@ export const contact = {
   eyebrow: 'START HERE',
   heading: 'Tell me about your business, and I’ll follow up with next steps.',
   support: 'I respond within one business day.',
-  cta: 'Get a free website audit',
+  cta: 'Get a Free Website Review',
+  ctaHref: CTA_HREF,
 };
 
 export const footer = {

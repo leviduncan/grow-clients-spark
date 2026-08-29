@@ -49,8 +49,7 @@ export default function Contact() {
               className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
               <a
-                href={emailPending ? '#contact' : `mailto:${site.email}`}
-                aria-disabled={emailPending || undefined}
+                href={contact.ctaHref}
                 className="group inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-ember px-8 text-base font-semibold text-on-ember transition-colors hover:bg-ember-dim sm:w-auto"
               >
                 {contact.cta}

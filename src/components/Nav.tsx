@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { nav, site } from '@/data/content';
+import { nav, navCta, site } from '@/data/content';
 import Logo, { LOGO_SIZE_NAV } from '@/components/Logo';
 import ThemeToggle from '@/components/ThemeToggle';
 
@@ -68,10 +68,10 @@ export default function Nav() {
           <ThemeToggle />
 
           <a
-            href="#contact"
+            href={navCta.href}
             className="rounded-full bg-ember px-5 py-3 text-sm font-semibold text-on-ember transition-colors hover:bg-ember-dim"
           >
-            Free audit
+            {navCta.label}
           </a>
         </nav>
 
@@ -132,12 +132,15 @@ export default function Nav() {
               </li>
             ))}
           </ul>
+          {/* The nav CTA's mobile form. Same destination and label as the
+              desktop one: leaving this on #contact would make the mobile
+              sheet the only path still landing on the old mailto block. */}
           <a
-            href="#contact"
+            href={navCta.href}
             onClick={() => setOpen(false)}
             className="mt-6 flex min-h-13 items-center justify-center rounded-full bg-ember px-6 font-semibold text-on-ember"
           >
-            Get a free website audit
+            {navCta.label}
           </a>
         </nav>
       )}
