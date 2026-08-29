@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { revealOnScroll, useGsap } from '@/lib/gsap';
 import { footer, site } from '@/data/content';
-import Logo from '@/components/Logo';
+import Logo, { LOGO_SIZE } from '@/components/Logo';
 
 export default function Footer() {
   const root = useRef<HTMLElement>(null);
@@ -22,7 +22,7 @@ export default function Footer() {
               className="inline-block text-content"
               aria-label={`${site.name}, back to top`}
             >
-              <Logo className="h-6 w-auto md:h-7" />
+              <Logo className={LOGO_SIZE} />
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-faint">
               {footer.tagline}

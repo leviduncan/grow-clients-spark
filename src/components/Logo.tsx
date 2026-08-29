@@ -10,10 +10,37 @@
  * wraps it, and the accent uses the raw `--ember` fill (these are filled
  * shapes, not text, so `--ember-text` does not apply).
  *
- * Size it with a CSS height and let the width follow the viewBox:
- * `<Logo className="h-6 w-auto" />`. The mark is 12.1:1, so height x 12.1
- * is the width it will occupy.
+ * Size it with a CSS height and let the width follow the viewBox, and take
+ * that height from LOGO_SIZE below rather than picking one: the mark is
+ * 12.1:1, so height x 12.1 is the width it will occupy, and a mark sized by
+ * eye in one place will not match the same mark anywhere else.
  */
+
+/**
+ * The canonical mark size. Use this at every call site so the main page and
+ * every intake form carry an identically sized wordmark.
+ *
+ * It is a responsive scale rather than one number because the mark is
+ * 12.1:1: height x 12.1 is the width it occupies, so 15px is 181px wide and
+ * 26px is 315px. A single size big enough to read in a footer overflows a
+ * 320px phone header, where the mark sits beside the theme toggle.
+ *
+ * Adding a form? Use FormShell, which already applies this. Do not hand
+ * <Logo> a bespoke height.
+ */
+export const LOGO_SIZE = 'h-[15px] w-auto sm:h-[22px] md:h-[26px]';
+
+/**
+ * Nav-only variant. Same endpoints as LOGO_SIZE, so the mark matches
+ * everywhere else on a phone and on a desktop. It holds the small size
+ * until `lg` for one physical reason: from `md` the nav shows its links,
+ * and at 768 the links, theme toggle and CTA already take ~494px of the
+ * 704px measure, so anything past ~190px of mark collides with "Services".
+ *
+ * This is the only sanctioned exception. Everything else uses LOGO_SIZE.
+ */
+export const LOGO_SIZE_NAV = 'h-[15px] w-auto lg:h-[26px]';
+
 export default function Logo({ className = '' }: { className?: string }) {
   return (
     <svg

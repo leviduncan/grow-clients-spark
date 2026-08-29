@@ -196,10 +196,16 @@ legibility** - white on `ember` is 2.60:1, worse than any dark step.
 not `<text>`, so the mark is identical whether or not the Google Fonts request has
 landed, and it cannot reflow if the webfont changes.
 
-- **Size it with a CSS height only**: `<Logo className="h-7 w-auto" />`. The mark
-  is 12.1:1, so the width it occupies is height x 12.1. Setting a width instead
-  fights the viewBox. Note the mark has no ascenders above the cap line, so a given
-  CSS height yields noticeably larger letters than a font-size of the same number.
+- **Use `LOGO_SIZE`, exported from `Logo.tsx`. Do not hand `<Logo>` a bespoke height.**
+  One scale, one place, so the main page and every intake form match. `LOGO_SIZE_NAV`
+  is the single sanctioned exception: same endpoints, but it holds the small mark
+  until `lg` because of the nav collision described below.
+- **Size it with a CSS height only.** The mark is 12.1:1, so the width it occupies is
+  height x 12.1: 15px is 181px wide, 26px is 315px. That ratio is why the size is a
+  responsive scale and not one number, since a size large enough to read in the footer
+  overflows a 320px phone header where the mark sits beside the theme toggle. Setting a
+  width instead fights the viewBox. Note the mark has no ascenders above the cap line, so
+  a given CSS height yields noticeably larger letters than a font-size of the same number.
 - The wordmark takes `currentColor`, so it inherits from whatever wraps it
   (`text-content` in both the nav and the footer). The accent uses raw `--ember`
   rather than `--ember-text`: these are filled shapes, not text.

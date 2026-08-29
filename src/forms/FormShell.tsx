@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import ThemeToggle from '@/components/ThemeToggle';
-import Logo from '@/components/Logo';
+import Logo, { LOGO_SIZE } from '@/components/Logo';
 import { site } from '@/data/content';
 
 /**
@@ -28,7 +28,7 @@ export default function FormShell({
     <div className="flex min-h-screen flex-col">
       <header className="mx-auto flex w-full max-w-2xl items-center justify-between px-5 py-5 md:px-8 md:py-7">
         <a href={homeHref} className="text-content" aria-label={`${site.name} home`}>
-          <Logo className="h-[15px] w-auto sm:h-[19px]" />
+          <Logo className={LOGO_SIZE} />
         </a>
         <ThemeToggle className="-mr-3" />
       </header>

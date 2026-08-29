@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { nav, site } from '@/data/content';
-import Logo from '@/components/Logo';
+import Logo, { LOGO_SIZE_NAV } from '@/components/Logo';
 import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Nav() {
@@ -49,11 +49,9 @@ export default function Nav() {
           className="text-content"
           aria-label={`${site.name}, back to top`}
         >
-          {/* Only lg gets the large mark. From md the nav links are shown
-              and the bar is full: at 768 the links, toggle and CTA already
-              take ~494px of the 704px measure, so anything past ~190px of
-              logo collides with "Services". */}
-          <Logo className="h-[15px] w-auto lg:h-[26px]" />
+          {/* The one sanctioned deviation from LOGO_SIZE. Same endpoints,
+              but it holds the small mark until lg: see LOGO_SIZE_NAV. */}
+          <Logo className={LOGO_SIZE_NAV} />
         </a>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
