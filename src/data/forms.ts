@@ -29,7 +29,14 @@ export type ThanksCopy = {
   heading: string;
   body: string[];
   signoff: { lead: string; name: string; role: string };
-  referral: { heading: string; body: string; cta: string };
+  /**
+   * The dark closing block. Was called `referral` when the testimonial form
+   * was the only one; it is whatever the page should end on, which differs
+   * by form. A client who just sent a testimonial can be asked for a
+   * referral. A lead who just raised their hand should not be asked for
+   * anything at all.
+   */
+  closing: { heading: string; body: string; cta: string };
 };
 
 export type Field = {
@@ -53,7 +60,11 @@ export type Field = {
  */
 export const endpoints = {
   testimonial: 'https://n8n.growclientsai.com/webhook/testimonial',
+  leadIntake: 'https://n8n.growclientsai.com/webhook/lead-intake',
 };
+
+/** One option in a select. `value` is what the workflow receives. */
+export type Choice = { value: string; label: string };
 
 /* ---------------------------------------------------------------
    Testimonial request
@@ -143,6 +154,133 @@ export const testimonial = {
 };
 
 /* ---------------------------------------------------------------
+   Get started: free audit or consultation
+
+   The one PUBLIC form. Unlike the testimonial form this is meant to be
+   found, so /get-started/ is indexable and is not in robots.txt.
+   --------------------------------------------------------------- */
+
+export const AUDIT = 'Website Audit';
+export const NEW_SITE = 'New Website';
+
+export const getStarted = {
+  eyebrow: 'FREE AUDIT OR CONSULT',
+  heading: 'Let’s take a look.',
+  intro:
+    'Free, and there’s no pitch at the end of it. Tell me where you’re starting from and I’ll come back with something specific about your business, not a template.',
+
+  /* The branch. A radio group rather than buttons: it needs to announce as
+     one grouped question with a chosen state, and it needs to be reachable
+     with arrow keys. Two <button>s and a hidden input give none of that. */
+  branch: {
+    legend: 'Do you already have a website?',
+    options: [
+      {
+        value: AUDIT,
+        label: 'Yes, review it',
+        help: 'I’ll go through what you have and tell you what’s costing you calls.',
+      },
+      {
+        value: NEW_SITE,
+        label: 'No, I need one',
+        help: 'We’ll start from what the business actually needs the site to do.',
+      },
+    ],
+  },
+
+  aboutHeading: 'About you',
+  fields: [
+    { name: 'name', label: 'Your name', type: 'text', required: true, autoComplete: 'name' },
+    {
+      name: 'business',
+      label: 'Business name',
+      type: 'text',
+      placeholder: 'Optional',
+      autoComplete: 'organization',
+    },
+    { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
+    { name: 'phone', label: 'Phone', type: 'tel', placeholder: 'Optional', autoComplete: 'tel' },
+  ] as Field[],
+
+  detailsHeading: 'Your situation',
+
+  /* Both detail textareas are named `details`. Only one is ever rendered,
+     so the payload carries a single field and the workflow does not have to
+     know which branch produced it. */
+  audit: {
+    website: {
+      name: 'website',
+      label: 'Your website address',
+      type: 'text' as const,
+      placeholder: 'yourbusiness.com',
+      required: true,
+    },
+    details: {
+      name: 'details',
+      label: 'What’s bugging you about your site?',
+      help: 'Whatever made you fill this in. Slow, dated, no calls coming from it, you can’t edit it yourself.',
+      rows: 3,
+    } as Question,
+  },
+
+  newSite: {
+    details: {
+      name: 'details',
+      label: 'Tell me about the business, and what you’re hoping a site does for you.',
+      help: 'What you do, who you do it for, and what you’d want someone to do after they land on it.',
+      rows: 4,
+    } as Question,
+  },
+
+  source: {
+    name: 'source',
+    label: 'How did you hear about me?',
+    required: true,
+    placeholder: 'Select one',
+    options: [
+      { value: 'Face-to-face', label: 'Talked to Darrin in person' },
+      { value: 'Facebook', label: 'Facebook' },
+      { value: 'Instagram', label: 'Instagram' },
+      { value: 'Word of mouth / Referral', label: 'A friend or someone referred me' },
+      { value: 'Other', label: 'Other' },
+    ] as Choice[],
+  },
+
+  note: 'No cost and no obligation. If I don’t think I’m the right fit for what you need, I’ll tell you that instead of selling you something.',
+
+  submit: 'Send it over',
+  submitting: 'Sending',
+  error:
+    'That didn’t go through. Give it one more try, or email me directly and I’ll pick it up from there.',
+  /* Shown if they hit submit before choosing a branch. Native validation
+     covers this, but the message is worth owning. */
+  branchRequired: 'Choose one of the two options above first.',
+};
+
+export const getStartedThanks: ThanksCopy = {
+  eyebrow: 'RECEIVED',
+  heading: 'Got it. Talk soon.',
+  body: [
+    'Your details are with me, and I read these myself rather than routing them to anyone.',
+    'What happens next: I go through what you sent and come back with something specific. If you asked for a review, that means the actual things costing you calls on your current site, in plain language, not a checklist with a score on it. Expect to hear from me within one business day.',
+    'Nothing needed from you in the meantime.',
+  ],
+  signoff: {
+    lead: 'Talk shortly.',
+    name: 'Darrin Duncan',
+    role: 'GrowClientsAI',
+  },
+
+  /* No ask here. Someone who has just raised their hand should not be sold
+     to again on the confirmation screen, so this points at the work instead. */
+  closing: {
+    heading: 'While you wait',
+    body: 'If you want a sense of what this looks like finished, the recent work is worth two minutes.',
+    cta: 'See recent work',
+  },
+};
+
+/* ---------------------------------------------------------------
    Testimonial thank you
    --------------------------------------------------------------- */
 
@@ -162,7 +300,7 @@ export const testimonialThanks: ThanksCopy = {
 
   /* The soft ask. Last thing on the page, phrased so ignoring it costs
      nothing: this is a thank you, not a second request. */
-  referral: {
+  closing: {
     heading: 'One more thing, only if it’s easy',
     body: 'If you know someone limping along on a site that isn’t bringing them work, send them my way. That’s how most of my projects start.',
     cta: 'Back to growclientsai.com',

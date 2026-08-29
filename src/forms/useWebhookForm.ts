@@ -7,6 +7,14 @@ import { HONEYPOT_NAME } from './fields';
 
 export type SubmitState = 'idle' | 'sending' | 'error';
 
+/**
+ * Trim, and send an empty optional as null rather than "".
+ *
+ * Notion treats an empty string as a value and writes a blank property,
+ * where null can be skipped outright. Shared by every form's toPayload.
+ */
+export const blankToNull = (v: string | undefined) => (v?.trim() ? v.trim() : null);
+
 /** Abort a stalled request rather than sitting on "Sending" forever. */
 const TIMEOUT_MS = 15_000;
 

@@ -14,10 +14,13 @@ import Confetti from './Confetti';
 export default function ThankYou({
   copy,
   homeHref,
+  ctaHref,
   celebrate = true,
 }: {
   copy: ThanksCopy;
   homeHref: string;
+  /** Where the closing block's button goes. Defaults to the site root. */
+  ctaHref?: string;
   /** Set false for a form where a celebration would read wrong. */
   celebrate?: boolean;
 }) {
@@ -91,16 +94,16 @@ export default function ThankYou({
         />
 
         <div className="relative">
-          <h2 className="font-display text-xl text-on-feature">{copy.referral.heading}</h2>
+          <h2 className="font-display text-xl text-on-feature">{copy.closing.heading}</h2>
           <p className="mt-3 max-w-md text-sm leading-relaxed text-on-feature/70">
-            {copy.referral.body}
+            {copy.closing.body}
           </p>
 
           <a
-            href={homeHref}
+            href={ctaHref ?? homeHref}
             className="group mt-7 inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ember px-6 text-sm font-semibold text-on-ember transition-colors hover:bg-ember-dim"
           >
-            {copy.referral.cta}
+            {copy.closing.cta}
             <svg
               width="16"
               height="16"

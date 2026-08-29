@@ -123,6 +123,140 @@ export function TextAreaField({
   );
 }
 
+export function SelectField({
+  name,
+  label,
+  options,
+  placeholder,
+  required,
+}: {
+  name: string;
+  label: string;
+  options: { value: string; label: string }[];
+  placeholder?: string;
+  required?: boolean;
+}) {
+  return (
+    <div>
+      <Label htmlFor={name} required={required}>
+        {label}
+      </Label>
+      {/* appearance-none plus a drawn chevron: the native arrow is painted
+          by the OS and ignores the theme, so on a dark ground it renders as
+          a dark glyph on a dark control. pr-11 keeps long option text from
+          running under the chevron. */}
+      <div className="relative mt-2">
+        <select
+          id={name}
+          name={name}
+          required={required}
+          defaultValue=""
+          className={`${control} appearance-none pr-11`}
+        >
+          <option value="" disabled>
+            {placeholder ?? 'Select one'}
+          </option>
+          {options.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-faint"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * A required either/or, rendered as two large cards.
+ *
+ * Radios inside a fieldset, not buttons. The choice has to announce as one
+ * grouped question with a selected state and move under arrow keys, and it
+ * has to be able to fail native validation with a message pointing at the
+ * right place. Two <button>s writing to a hidden input give none of that,
+ * and a hidden input cannot receive focus when validation rejects it.
+ *
+ * The whole card is the label, so the hit target is the card rather than a
+ * 16px dot. The radio itself is visually hidden but still focusable, and
+ * the focus ring is drawn on the card via peer-focus-visible.
+ */
+export function ChoiceCards({
+  name,
+  legend,
+  options,
+  value,
+  onChange,
+}: {
+  name: string;
+  legend: string;
+  options: { value: string; label: string; help?: string }[];
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <fieldset>
+      <legend className="text-sm font-medium leading-snug text-content">
+        {legend}{' '}
+        <span aria-hidden="true" className="text-ember-text">
+          *
+        </span>
+        <span className="sr-only">(required)</span>
+      </legend>
+
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        {options.map((o) => {
+          const id = `${name}-${o.value.replace(/\W+/g, '-').toLowerCase()}`;
+          const selected = value === o.value;
+
+          return (
+            <div key={o.value} className="relative">
+              <input
+                type="radio"
+                id={id}
+                name={name}
+                value={o.value}
+                required
+                checked={selected}
+                onChange={() => onChange(o.value)}
+                className="peer sr-only"
+              />
+              <label
+                htmlFor={id}
+                className={`block cursor-pointer rounded-xl border p-4 transition-colors peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-offset-[3px] peer-focus-visible:outline-[var(--ember)] ${
+                  selected
+                    ? 'border-ember bg-ember/10'
+                    : 'border-hairline bg-card hover:border-muted/40'
+                }`}
+              >
+                <span className="block text-sm font-semibold text-content">{o.label}</span>
+                {o.help && (
+                  <span className="mt-1.5 block text-xs leading-relaxed text-faint">
+                    {o.help}
+                  </span>
+                )}
+              </label>
+            </div>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
 /**
  * Honeypot. Positioned off-screen rather than `display: none`, because the
  * cruder bots skip anything that is outright hidden but will happily fill a

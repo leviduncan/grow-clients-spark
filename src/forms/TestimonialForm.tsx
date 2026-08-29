@@ -3,18 +3,12 @@ import { revealOnLoad, useGsap } from '@/lib/gsap';
 import { site } from '@/data/content';
 import { endpoints, testimonial } from '@/data/forms';
 import { Honeypot, TextAreaField, TextField } from './fields';
-import { useWebhookForm } from './useWebhookForm';
+import { blankToNull, useWebhookForm } from './useWebhookForm';
 
 /**
  * Shape the workflow receives. Kept out of the component so its identity is
  * stable across renders and the submit handler is not rebuilt on each one.
- *
- * Empty optionals go over as null rather than "": Notion treats an empty
- * string as a value and would write a blank property, where null can be
- * skipped outright.
  */
-const blankToNull = (v: string | undefined) => (v?.trim() ? v.trim() : null);
-
 function toPayload(values: Record<string, string>) {
   return {
     form: 'testimonial',
