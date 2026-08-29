@@ -4,6 +4,7 @@ import Marquee from '@/sections/Marquee';
 import Services from '@/sections/Services';
 import About from '@/sections/About';
 import Work from '@/sections/Work';
+import Testimonials from '@/sections/Testimonials';
 import Process from '@/sections/Process';
 import Contact from '@/sections/Contact';
 import Footer from '@/sections/Footer';
@@ -26,6 +27,7 @@ export default function App() {
         <Services />
         <About />
         <Work />
+        <Testimonials />
         <Process />
         <Contact />
       </main>

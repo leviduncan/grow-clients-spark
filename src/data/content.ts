@@ -233,6 +233,41 @@ export const projects: Project[] = [
   },
 ];
 
+/**
+ * Client testimonials.
+ *
+ * These come from real people who filled in /testimonial/ and land in the
+ * Notion database. Two rules, both non-negotiable:
+ *
+ * 1. **Verbatim.** Never rewrite, tighten or "improve" someone's words.
+ *    Straight quotes may be converted to curly for typographic consistency,
+ *    and a cut may be marked with an ellipsis. Nothing else.
+ * 2. **Never invent one.** An empty array renders nothing at all: the
+ *    section removes itself. That is the correct state until a real quote
+ *    arrives, and it is why there is no placeholder here.
+ */
+export type Testimonial = {
+  id: string;
+  quote: string;
+  name: string;
+  business: string;
+};
+
+export const testimonials = {
+  eyebrow: 'IN THEIR WORDS',
+  heading: 'What it’s like on the other side of a project.',
+};
+
+export const testimonialQuotes: Testimonial[] = [
+  {
+    id: 'sarahs-bakery',
+    quote:
+      'Our old site looked outdated and customers couldn’t find our hours or menu easily, so we needed something that showed off our pastries and made it easy to place custom cake orders online. Since the redesign, custom orders have basically doubled and people compliment the new look all the time. Darrin was patient with all my back and forth and made the whole thing painless. Don’t wait as long as I did, a good website pays for itself fast.',
+    name: 'Sarah',
+    business: 'Sarah’s Bakery',
+  },
+];
+
 export const process = {
   eyebrow: 'HOW IT GOES',
   heading: 'Four steps, no mystery.',
