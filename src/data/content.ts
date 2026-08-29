@@ -251,6 +251,16 @@ export type Testimonial = {
   quote: string;
   name: string;
   business: string;
+  /**
+   * Whether this one shows on the site. Keep every quote you receive in the
+   * array below, flag the ones worth showing.
+   *
+   * The section renders at most MAX_FEATURED of them (see Testimonials.tsx),
+   * so the archive can grow indefinitely without the page growing with it.
+   * If more are flagged than fit, the extras are ignored, in array order, so
+   * put the strongest first.
+   */
+  featured?: boolean;
 };
 
 export const testimonials = {
@@ -265,6 +275,7 @@ export const testimonialQuotes: Testimonial[] = [
       'Our old site looked outdated and customers couldn’t find our hours or menu easily, so we needed something that showed off our pastries and made it easy to place custom cake orders online. Since the redesign, custom orders have basically doubled and people compliment the new look all the time. Darrin was patient with all my back and forth and made the whole thing painless. Don’t wait as long as I did, a good website pays for itself fast.',
     name: 'Sarah',
     business: 'Sarah’s Bakery',
+    featured: true,
   },
 ];
 

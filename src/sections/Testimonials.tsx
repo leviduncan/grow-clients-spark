@@ -3,9 +3,32 @@ import { revealOnScroll, useGsap } from '@/lib/gsap';
 import { testimonialQuotes, testimonials } from '@/data/content';
 
 /**
+ * How many quotes reach the page, however many are flagged `featured`.
+ *
+ * Three, and deliberately not a carousel. A testimonial's whole job is to be
+ * read by someone deciding whether to call. Anything parked behind an arrow
+ * mostly is not read, so eight quotes in a carousel deliver less proof than
+ * three sitting in the open, while adding interaction state, keyboard and
+ * screen-reader obligations, and a mobile swipe surface to get right.
+ *
+ * The answer to "I will have too many" is to curate, not to hide: the array
+ * in content.ts is the archive and keeps every quote, this is the shopfront.
+ * Raising this past 4 makes the section a wall of text that gets skimmed
+ * instead of read, which is the same failure by a different route.
+ */
+const MAX_FEATURED = 3;
+
+/** Keyed by how many are shown. Full literal strings so Tailwind sees them. */
+const GRID: Record<number, string> = {
+  1: 'max-w-4xl',
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-2 lg:grid-cols-3',
+};
+
+/**
  * Client quotes, straight from the /testimonial/ form.
  *
- * Renders nothing when there are no quotes: no heading, no empty state, no
+ * Renders nothing when nothing is featured: no heading, no empty state, no
  * "testimonials coming soon". A section that announces it has no social
  * proof is worse than no section, and it is what keeps the placeholder rule
  * in content.ts enforceable rather than aspirational.
@@ -20,11 +43,12 @@ export default function Testimonials() {
     revealOnScroll('[data-testimonial-reveal]', { trigger: root.current!, stagger: 0.1 });
   });
 
-  if (testimonialQuotes.length === 0) return null;
+  const shown = testimonialQuotes.filter((t) => t.featured).slice(0, MAX_FEATURED);
+  if (shown.length === 0) return null;
 
   // A lone quote gets the full measure and larger type. Two columns with one
   // card in them reads as a card that failed to load.
-  const solo = testimonialQuotes.length === 1;
+  const solo = shown.length === 1;
 
   return (
     <section
@@ -47,8 +71,14 @@ export default function Testimonials() {
           {testimonials.heading}
         </h2>
 
-        <div className={`mt-12 grid gap-6 ${solo ? 'max-w-4xl' : 'md:grid-cols-2'}`}>
-          {testimonialQuotes.map((t) => (
+        {/* Literal class strings, never built by concatenation: Tailwind
+            scans source statically, so `'lg:grid-cols-' + n` produces a
+            class it never generates and the grid silently stays one column.
+
+            1 takes the full measure, 2 split, 3 go to thirds from lg and
+            stay two-up at md so a third card is never orphaned mid-layout. */}
+        <div className={`mt-12 grid gap-6 ${GRID[shown.length] ?? GRID[3]}`}>
+          {shown.map((t) => (
             <figure
               key={t.id}
               data-testimonial-reveal
@@ -76,7 +106,9 @@ export default function Testimonials() {
               </blockquote>
 
               <figcaption className="mt-8 border-t border-hairline pt-6">
-                <span className="font-display text-base text-content">{t.name}</span>
+                {/* text-[1rem], not text-base: this repo defines a --color-base
+                    token, so `text-base` compiles to a colour and sets no size. */}
+                <span className="font-display text-[1rem] text-content">{t.name}</span>
                 <span className="mt-1 block text-sm text-faint">{t.business}</span>
               </figcaption>
             </figure>
