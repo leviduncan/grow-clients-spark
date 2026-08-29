@@ -25,6 +25,15 @@
   /* Scrim over photography: always dark, so white text stays legible
      on top of an image regardless of the page theme. */
   --scrim: #101826;
+
+  /* Sheet: the counterpart to --scrim, an always-light surface for content
+     that must not invert with the theme. The QR code on /card/ is the case
+     that needs it. A scanner expects dark modules on a light ground, and a
+     code rendered the other way up is decoder-dependent rather than
+     reliably readable, so this one panel has to stay light in dark mode.
+     The modules themselves are --scrim, so both ends of the pair move with
+     the palette rather than being loose hex. */
+  --sheet: #FFFFFF;
 }
 
 /* --- Light ---------------------------------------------------- */
@@ -147,6 +156,7 @@
   --color-ember-text: var(--ember-text);
   --color-on-ember: var(--on-ember);
   --color-scrim: var(--scrim);
+  --color-sheet: var(--sheet);
 }
 
 @layer base {

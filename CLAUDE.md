@@ -31,18 +31,22 @@ index.html            Static shell, SEO/OG meta, font preconnect
 testimonial/          Unlisted client form (see Client forms below)
   index.html
   thanks/index.html
+card/index.html       Unlisted digital business card (see /card/ below)
 src/
   main.tsx            React root
   App.tsx             Section order - this is the whole page
   index.css           @theme design tokens + base layer + reduced-motion kill switch
   data/content.ts     ALL marketing copy. Single source of truth.
   data/forms.ts       ALL form copy + the n8n webhook URLs
+  data/card.ts        ALL /card/ copy + the vCard contact fields
   lib/gsap.ts         GSAP registration + animation primitives
+  lib/vcard.ts        vCard 3.0 builder + download, used only by /card/
   components/Nav.tsx  Fixed header, mobile sheet
   components/Logo.tsx Wordmark, as outline paths
   components/ThemeToggle.tsx  Light/dark switch, self-contained
   sections/           Hero, Marquee, Services, About, Work, Process, Contact, Footer
   forms/              Shell, controls, submit hook, and the form pages
+  card/               The business card page, its entry, and the save button
 public/               favicon.svg, apple-touch-icon.png, robots.txt - copied to dist/ verbatim
 ```
 
@@ -148,6 +152,7 @@ never write `bg-ink` / `bg-paper`** - those are gone. Use the role tokens below.
 | `on-ember` | Text on an ember fill | `#101826` | `#101826` |
 | `on-feature` | Text on a `feature` block | `#F3F1EC` | `#F3F1EC` |
 | `scrim` | Overlay on imagery - always dark | `#101826` | `#101826` |
+| `sheet` | Always-light surface, the counterpart to `scrim` | `#FFFFFF` | `#FFFFFF` |
 
 **`lede` exists because there is no `dark:` variant here.** Theming works by redefining
 variables per mode, so any value that must differ between modes needs its own token rather
@@ -161,6 +166,11 @@ Two rules that are easy to get wrong:
   which is dark in both themes - there, use raw `ember`.
 - **`scrim`, not `feature`, for image overlays.** The Work hover caption is white over a
   gradient; that gradient must stay dark regardless of theme.
+- **`sheet` is the only light-in-dark-mode surface, and it has exactly one use.** The QR
+  panel on `/card/`. A scanner expects dark modules on a light ground, and an inverted
+  code is decoder-dependent rather than reliably readable, so that panel must not follow
+  the theme. Its modules are `scrim`, so the pair moves with the palette. Do not reach for
+  `sheet` to make something merely stand out.
 
 Every text/background pair is contrast-checked; all body text clears WCAG AA (4.5:1) and
 headings clear 3:1 in both themes.
@@ -327,6 +337,81 @@ and sets **no font size at all**. It is currently harmless only because `.text-c
 mean 16px. Several `sections/` files still carry the old `text-base`; they render correctly
 today, but a change in class ordering would paint that text in the page's own background
 colour.
+
+---
+
+## `/card/` - the digital business card
+
+A link Darrin texts, AirDrops or prints as a QR: someone taps it, saves his contact, and
+gets to the work. **Unlisted in the same sense the testimonial form is** - `noindex,
+nofollow` plus a `robots.txt` disallow. Never add it to `nav` in `content.ts`, to the
+footer columns, or to the sitemap. A thin name-and-number page competing with the homepage
+for his own name is a loss, not a win.
+
+It is **not a route**. Same arrangement as the forms: `card/index.html` is its own Vite
+entry, registered in `build.rollupOptions.input`, building to `dist/card/index.html`, which
+Caddy's `file_server` serves for a directory request. Chrome comes from `FormShell`, which
+despite the name is the shell for any standalone document, not just intake forms.
+
+Copy lives in **`src/data/card.ts`**. Phone and email are read off `site` in `content.ts`
+rather than restated, so changing a number in the one place the footer already reads from
+also changes what lands in someone's address book.
+
+### The vCard
+
+`src/lib/vcard.ts` builds the `.vcf` in the browser and hands it to a download. Built, not
+served as a static file, so the contact fields have one home rather than a committed copy
+that goes stale.
+
+- **Version 3.0, not 4.0.** 4.0 is the current spec; 3.0 is the one iOS Contacts, Android
+  and Outlook all import without argument. That is the only property that matters for a
+  file whose whole job is to open on a stranger's phone.
+- `tel:` and `mailto:` are **derived** from the display number, never stored alongside it.
+- `UID` is the card URL, so saving twice updates one contact instead of leaving two
+  Darrins in someone's phone. That happens for real when the link goes out in person and
+  again by text.
+- Escaping and 75-octet folding are implemented and nothing currently triggers either.
+  They are there so a longer title added later degrades into a valid file instead of a
+  malformed one, and `URL`/`UID` are deliberately exempt from escaping: they are URI-typed,
+  and running them through the TEXT escaper writes backslashes into an address that then
+  no longer resolves.
+- The blob URL is revoked on a **10s timer, not the next tick**. The next-tick shortcut
+  races Safari, which has not always finished reading the blob by then.
+
+### The QR code
+
+**Baked at build time, not generated at runtime.** The URL is a constant, so the code is a
+constant, and shipping an encoder to every visitor to re-derive the same 29x29 grid on
+every load buys nothing. `src/assets/card/card-qr.svg` is 1.5 KB, lands under the 4 KB
+`assetsInlineLimit` as a data URI, and renders with scripting off.
+
+Regenerate from `design-src/card-qr/` (gitignored, see its README). **`CARD_URL` in
+`src/data/card.ts` and `URL` in `gen.py` are the same string written twice and nothing
+compares them** - change one without regenerating and any printed code points at the old
+address, with no error anywhere. Same hazard as the theme key in `index.html`.
+
+### The headshot
+
+`src/assets/card/darrin.{webp,jpg}`, 400x400, master and regeneration commands in
+`design-src/headshot/` (gitignored). It is in `src/assets/`, not `public/`, for the reason
+the paper texture is: Vite hashes it and rewrites the URL against the relative `base`,
+where a `public/` asset would need a root-absolute URL.
+
+Rendered as a rounded square rather than a circle. The site's vocabulary is rounded
+rectangles, and the master is cropped tight enough over the top of his head that a circle
+cuts into it. The README covers why the canvas is extended before cropping and why
+mirroring the top strip is the wrong way to do it.
+
+### The no-JS fallback matters more here
+
+`card/index.html` carries a `<noscript>` block with the phone, email and site, all
+tappable. Every page on this site has the option; this is the one where a blank screen
+defeats the entire point of having handed someone the link. Save contact and the QR are
+genuinely unavailable without scripting, so it does not pretend to offer them.
+
+Currently pending: a social profile link, `pending: true` in `card.ts` and therefore
+**hidden, not chipped**. A visible "TBC" on a card handed to a stranger reads as
+unfinished rather than as honest.
 
 ---
 

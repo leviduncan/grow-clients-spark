@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      UNLISTED, like the client forms under /testimonial/. This is a link
+      Darrin texts, AirDrops or prints as a QR, so it wants no search
+      traffic: a thin name-and-number page competing with the homepage for
+      his own name is a loss, not a win. The noindex is what actually keeps
+      it out of an index; the robots.txt disallow only stops the crawl.
+
+      Do not add a canonical here and do not link it from the nav, the
+      footer or the sitemap.
+    -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Darrin Duncan | GrowClientsAI</title>
+    <meta
+      name="description"
+      content="Contact card for Darrin Duncan of GrowClientsAI. Websites for local service businesses."
+    />
+
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F5F3EE" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131C2B" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Key must match THEME_KEY in src/lib/theme.ts. See index.html. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('gcai-theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--
+      No-JS fallback. It matters more here than anywhere else on the site:
+      this page exists so that someone can reach Darrin, and a blank screen
+      on a phone with a blocked script is the one failure that defeats the
+      whole point of handing out the link. Both details are tappable and
+      neither needs the bundle.
+
+      Keep it true to `site` in src/data/content.ts. Save contact and the QR
+      are genuinely unavailable without scripting, so this does not pretend
+      to offer them.
+    -->
+    <noscript>
+      <div class="mx-auto max-w-md px-5 py-16">
+        <h1 class="font-display text-3xl leading-[1.1] text-content">Darrin Duncan</h1>
+        <p class="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-ember-text">
+          GrowClientsAI
+        </p>
+        <p class="mt-5 text-[1.0625rem] leading-relaxed text-muted">
+          Websites for local service businesses, built to turn a visitor into a call or a
+          booking.
+        </p>
+        <p class="mt-6 text-[1.0625rem] leading-relaxed text-content">
+          <a href="tel:+16562186053" class="underline underline-offset-2">+1 656-218-6053</a>
+          <br />
+          <a href="mailto:info@growclientsai.com" class="underline underline-offset-2"
+            >info@growclientsai.com</a
+          >
+          <br />
+          <a href="../" class="underline underline-offset-2">growclientsai.com</a>
+        </p>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/card/entry-card.tsx"></script>
+  </body>
+</html>
