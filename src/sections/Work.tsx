@@ -81,7 +81,7 @@ export default function Work() {
                 </div>
 
                 {project.kind === 'concept' && (
-                  <span className="absolute left-4 top-4 rounded-full bg-feature px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-on-feature">
+                  <span className="absolute left-4 top-4 rounded-full bg-ember px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-on-ember">
                     Concept project
                   </span>
                 )}

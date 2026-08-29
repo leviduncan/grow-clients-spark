@@ -43,6 +43,14 @@
   --faint: #5F6875;
   --hairline: #E4E0D7;
 
+  /* Lede: the large intro paragraph under a headline. Tracks `muted` on the
+     light ground, but goes full `content` in dark, where a mid-grey under a
+     big headline reads as switched-off rather than secondary. It exists as
+     its own token because this repo has no `dark:` variant: theming is done
+     by redefining variables per mode, so a value that differs between modes
+     needs a name. */
+  --lede: #4A5568;
+
   /* Ember needs to darken on light grounds to stay readable as text. */
   --ember-text: #C24F0F;
 
@@ -78,6 +86,9 @@
     --faint: #8793A4;
     --hairline: #26303F;
 
+    /* Full content weight in dark: see the light definition. */
+    --lede: #F3F1EC;
+
     --ember-text: #FF7A29;
 
     /* No texture in dark mode: veils collapse to the flat surfaces. */
@@ -102,6 +113,9 @@
   --faint: #8793A4;
   --hairline: #26303F;
 
+  /* Full content weight in dark: see the light definition. */
+  --lede: #F3F1EC;
+
   --ember-text: #FF7A29;
 
   /* No texture in dark mode: veils collapse to the flat surfaces. */
@@ -124,6 +138,7 @@
 
   --color-content: var(--content);
   --color-muted: var(--muted);
+  --color-lede: var(--lede);
   --color-faint: var(--faint);
   --color-hairline: var(--hairline);
 

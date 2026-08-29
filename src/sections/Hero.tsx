@@ -59,13 +59,23 @@ export default function Hero() {
               term is held below the cap's own slope so 768 (where the
               measure is only 704px) keeps real margin: at 9.75vw it cleared
               by 2px, which the wider Arial Black fallback would overrun.
-              Raising either number wraps a line and breaks the split. */}
+              Raising either number wraps a line and breaks the split.
+
+              The FLOOR is what phones get: 9.25vw only overtakes 2.75rem
+              above ~475px, so everything narrower sits on the floor. Raised
+              from 2.5rem, which is a mobile-only change by construction and
+              leaves the 768 and 1280 cases above completely untouched.
+
+              This is the value that wraps "WEBSITES THAT" if it goes too
+              far, and the margin at 360-390px is thin. If the headline ever
+              breaks onto an extra line on a phone, drop this back to
+              2.5rem: nothing else here needs to move. */}
           {hero.lines.map((line) => (
             <span
               key={line.text}
               aria-hidden="true"
               data-hero-line
-              className={`block text-[clamp(2.5rem,9.25vw,8.25rem)] ${
+              className={`block text-[clamp(2.75rem,9.25vw,8.25rem)] ${
                 line.outline ? 'text-outline' : ''
               }`}
             >
@@ -77,7 +87,7 @@ export default function Hero() {
         <div className="mt-8 grid gap-10 md:mt-12 md:grid-cols-2 md:gap-16">
           <p
             data-hero-fade
-            className="max-w-xl text-lg leading-relaxed text-muted md:text-xl"
+            className="max-w-xl text-lg leading-relaxed text-lede md:text-xl"
           >
             {hero.sub}
           </p>

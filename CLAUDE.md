@@ -137,9 +137,10 @@ never write `bg-ink` / `bg-paper`** - those are gone. Use the role tokens below.
 | `band` | Hero, Services, Process, Footer | `#FFFFFF` | `#0C1320` |
 | `base` | About, Work, Contact (and `body`) | `#F5F3EE` | `#131C2B` |
 | `card` | Cards on either surface | `#FFFFFF` | `#1A2436` |
-| `feature` | Always-dark blocks (contact CTA, concept badge) | `#101826` | `#1F2A3D` |
+| `feature` | Always-dark blocks (contact CTA, thank-you closing block) | `#101826` | `#1F2A3D` |
 | `content` | Primary text | `#101826` | `#F3F1EC` |
 | `muted` | Secondary text | `#4A5568` | `#9BA6B5` |
+| `lede` | Intro paragraph under a headline | `#4A5568` | `#F3F1EC` |
 | `faint` | Tertiary text | `#5F6875` | `#8793A4` |
 | `hairline` | Borders, rules, grid gaps | `#E4E0D7` | `#26303F` |
 | `ember` | Accent fills - identical in both | `#FF7A29` | `#FF7A29` |
@@ -147,6 +148,12 @@ never write `bg-ink` / `bg-paper`** - those are gone. Use the role tokens below.
 | `on-ember` | Text on an ember fill | `#101826` | `#101826` |
 | `on-feature` | Text on a `feature` block | `#F3F1EC` | `#F3F1EC` |
 | `scrim` | Overlay on imagery - always dark | `#101826` | `#101826` |
+
+**`lede` exists because there is no `dark:` variant here.** Theming works by redefining
+variables per mode, so any value that must differ between modes needs its own token rather
+than a variant. `lede` matches `muted` on the light ground and goes to full `content` in
+dark, where a mid-grey paragraph under a large headline reads as switched off rather than
+secondary. Reach for a new token, not a variant, the next time this comes up.
 
 Two rules that are easy to get wrong:
 - **`ember` vs `ember-text`.** `ember` is a fill. As *text* on a light ground it fails
